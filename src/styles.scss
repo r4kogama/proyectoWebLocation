@@ -42,12 +42,11 @@ img{
 .wrapper{
   width: 100%;
   height: 100%;
-  margin: 0 auto;
   padding: 10px 0px;
   overflow: auto;
   #header-main{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     flex-wrap: wrap;
     width: 100%;
@@ -81,7 +80,7 @@ img{
   flex-direction: column!important;
 }
 .mat-card {
-  opacity: 0.98;
+  opacity: 0.9;
 }
 /************
 *** RESET ***

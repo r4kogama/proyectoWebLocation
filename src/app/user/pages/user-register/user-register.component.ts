@@ -43,13 +43,8 @@ export class UserRegisterComponent implements OnInit {
       password : user.password.trim(),
       terms: user.terms == true ? 1 : 0
     }
-    try{
-       const id_user = await this._fireAuthService.register(this.newUser);
-       this._fireProfileService.createUser(this.newUser, id_user);
-       this._router.navigate(['/login'])
-    }catch(err){
-      console.log(err.message);
-      console.error(err);
-    }
+      const id_user = await this._fireAuthService.register(this.newUser);
+      this._fireProfileService.createUser(this.newUser, id_user);
+      this._router.navigate(['/login'])
   }
 }

@@ -1,6 +1,6 @@
 # proyectoWebLocation
 
-Proyecto final de curso front-end Angular
+Proyecto final de curso front-end Angular, al final de todo el documento esta disponible la apk para la descarga
 
 
 # Justificacion del proyecto
@@ -72,8 +72,6 @@ Navegacion en el dashboard a la seccion de edicion de perfil
 
 
 
-
-
 Navegacion en el dashboard a la seccion de historial de localizaciones in situ
 
 [locations](https://i.imgur.com/R8K4lTA.png)
@@ -87,17 +85,17 @@ Navegacion en el dashboard a la seccion de historial de localizaciones in situ
 ## Plataforma Firebase
 
 Todo el back-end esta gestionado con firebase
-[link to firebase](https://firebase.google.com/)
+![link to firebase](https://firebase.google.com/)
 
 ## Kanban de Historias de Usuario
 
 Creado en Trello
 
-[Link to trello](https://trello.com/b/8HnYf22w/proyecto-web-angular)
+![Link to trello](https://trello.com/b/8HnYf22w/proyecto-web-angular)
 
 ## Logo de la app
 
-Hylyf
+
 ![logo](https://i.imgur.com/ysNctfO.png)
 
 ## Team members
@@ -107,3 +105,8 @@ Consta de un solo de desarrollador que se encarga tanto del diseño, el desarrol
 ```javascript
   let developer = 'Raul garcia martinez'
 ```
+
+# APP mobile
+### Prodas encontrar la apk atraves de este link
+
+[link to 4shared](https://www.4shared.com/mobile/lyNqzuCyiq/app-Hylyf.html)

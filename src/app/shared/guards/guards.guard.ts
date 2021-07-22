@@ -1,15 +1,21 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { Observable } from 'rxjs';
+import {  CanLoad, Router } from '@angular/router';
+import { FireAuthService } from '../services/fire-auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class GuardsGuard implements CanActivate {
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return true;
+
+export class GuardsGuard implements CanLoad {
+  constructor(private _FirAauthService: FireAuthService,
+    private router: Router) { }
+  canLoad() {
+    if (this._FirAauthService.getToken()) {
+      return true;
+    } else {
+      this.router.navigate(['/login']);
+      return false;
+    }
   }
-  
+
 }

@@ -15,17 +15,10 @@ const routes: Routes = [
   {path:'login', component:UserLoginComponent},
   {path:'registro', component:UserRegisterComponent},
   {path:'geolocation', component:LocationComponent},
-  {path:'profile', component:ProfileComponent,
-  children:[
-    {path:'list',component:ListProfileComponent},
-    {path:'edit',component:FormEditComponent},
-    {path:'locations', component:HistoryLocationComponent},
-     ]
-  },
+  {path:'', loadChildren: () => import('./user-profile/user-profile.module').then(m => m.UserProfileModule)},
   {path:'**', component:HomeComponent},
 ];
-/* {path:'profile', loadChildren: () => import('./user-profile/user-profile.module').then(m => m.UserProfileModule)},
- */
+
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]

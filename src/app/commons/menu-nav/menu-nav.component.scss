@@ -2,12 +2,14 @@
 
 .menu ul{
   display: flex;
-  min-width: 400px;
+  min-width: 380px;
   width: 100%;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
   li{
     font-weight: 500;
+    display: flex;
     a{
       cursor: pointer;
       text-shadow: 1px 1px 0px white;

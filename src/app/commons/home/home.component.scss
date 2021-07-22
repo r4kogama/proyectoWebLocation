@@ -1,22 +1,24 @@
 @import '../../../scss/colors';
 
   .background-title{
-    background: url("../../../assets/undraw_My_current_location_re_whmt.svg") no-repeat;
-    background-size: contain;
-    background-position: 80% 0%;
-    height: 540px;
+    background: url("/assets/undraw_My_current_location_re_whmt.svg") no-repeat;
+    background-size: 85%;
+    background-position: 100% 37%;
+    height: 100%;
+    width: 100%;
+    max-width: 960px;
+    margin: 0 auto;
     #main-frame{
-      height: 100%;
       .title-page{
         height: 100%;
         width: 100%;
         max-width: 564px;
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: flex-start;
         align-items: center;
         text-align: justify;
-        padding: 0px 10px 60px 10%;
+        padding: 100px 30px 10px 8%;
         h1{
           font-size: 3.5em;
           font-weight: 800;
@@ -42,6 +44,7 @@
       }
       .service-utility{
         height: 100vh;
+        margin-top: 35%;
         .title-utility{
           text-align: center;
           padding: 20px 10px 20px 10px;
