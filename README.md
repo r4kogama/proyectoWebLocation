@@ -3,9 +3,9 @@
 Proyecto final de curso front-end Angular
 
 
-### Justificacion del proyecto
+# Justificacion del proyecto
 
-# De que trata?
+## De que trata?
 HYlyf que son las siglas de `Have you lost you friends?` la idea surge sobre la necesidad de solucionar un problema habitual de localizacion entre usuarios, en este caso entre grupo de usuarios cercanos entre si. 
 
 Dicha idea trata de proporcionar una aplicacion web donde los usuarios puedan geolocalizarse entre ellos. Es decir, generando un grupo cerrado de amigos, cada uno de ellos pueda mostrar su localizacion en el mapa, en un pequeño radio en el mapa, no se trata que sea global sino cercano.
@@ -84,23 +84,23 @@ Navegacion en el dashboard a la seccion de historial de localizaciones in situ
 - Material design
 - Ionic
 
-### Plataforma Firebase
+## Plataforma Firebase
 
 Todo el back-end esta gestionado con firebase
 [link to firebase](https://firebase.google.com/)
 
-### Kanban de Historias de Usuario
+## Kanban de Historias de Usuario
 
 Creado en Trello
 
 [Link to trello](https://trello.com/b/8HnYf22w/proyecto-web-angular)
 
-### Logo de la app
+## Logo de la app
 
 Hylyf
 ![logo](https://i.imgur.com/ysNctfO.png)
 
-# Team members
+## Team members
 
 Consta de un solo de desarrollador que se encarga tanto del diseño, el desarrollo front-end y la gestion del back-end.
 
