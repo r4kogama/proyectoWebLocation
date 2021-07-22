@@ -1,0 +1,57 @@
+@import '../../../scss/colors';
+
+  .background-title{
+    background: url("../../../assets/undraw_My_current_location_re_whmt.svg") no-repeat;
+    background-size: contain;
+    background-position: 80% 0%;
+    height: 540px;
+    #main-frame{
+      height: 100%;
+      .title-page{
+        height: 100%;
+        width: 100%;
+        max-width: 470px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: justify;
+        padding-bottom: 100px;
+        padding-left: 50px;
+        h1{
+          font-size: 3.5em;
+          font-weight: 800;
+          letter-spacing: 3px;
+          padding-bottom: 20px;
+          color: $rosado;
+          text-shadow: 2px 0px 1px $azul, 3px 1px 1px $amarillo
+        }
+        p{
+          font-size: 1.5em;
+          line-height: 35px;
+        }
+      }
+      .service-utility{
+        height: 100vh;
+        .title-utility{
+          text-align: center;
+          padding: 20px 10px 20px 10px;
+          margin: 50px 0px 40px 0px;
+          h2{
+            font-size: 2em;
+
+          }
+          p{
+            font-size: 1.2em;
+          }
+        }
+        .background-utility{
+          background: url('../../../assets/undraw_Traveling_re_weve.svg') no-repeat;
+          background-size: contain;
+          background-position: center;
+          height: 400px;
+        }
+      }
+    }
+  }
+

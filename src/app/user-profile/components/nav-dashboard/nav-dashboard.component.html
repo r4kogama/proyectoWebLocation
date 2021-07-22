@@ -1,0 +1,39 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav " fixedInViewport
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [opened]="(isHandset$ | async) === false">
+    <mat-toolbar>Dashboard<mat-icon aria-label="Side nav toggle icon">dashboard</mat-icon></mat-toolbar>
+    <mat-nav-list class="nav-list-dash">
+      <a mat-list-item [routerLink]="['/list']"><mat-icon aria-label="icon">account_circle</mat-icon>Cuenta</a>
+      <a mat-list-item [routerLink]="['/edit']"><mat-icon aria-label="icon">manage_accounts</mat-icon>Editar perfil</a>
+      <a mat-list-item [routerLink]="['/locations']"><mat-icon aria-label="icon">location_on</mat-icon>Localizaciones</a>
+      <a mat-list-item [routerLink]="['']"><mat-icon aria-label="icon">group_add</mat-icon>Crear grupo</a>
+      <a mat-list-item [routerLink]="['']"><mat-icon aria-label="icon">lock_open</mat-icon>Seguridad</a>
+      <a mat-list-item ><mat-icon aria-label="icon" (click)="logOut()">logout</mat-icon>Log out</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async">
+        <mat-icon aria-label="Side nav toggle icon">more_vert</mat-icon>
+      </button>
+      <span>Perfil</span>
+      <div class="box-photo">
+        <img src="../../../../assets/Creative-Tail-People-spy.svg" alt="photo profile">
+      </div>
+      <button type="button" mat-icon-button>
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+    </mat-toolbar>
+    <dashboard></dashboard>
+    <div class="grid-container">
+      <list-profile [dataListUser]='dataPersonal'></list-profile>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

@@ -1,0 +1,30 @@
+.card-content-user{
+  margin-top: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+  .box-photo{
+    width: 150px;
+    padding-top: 40px;
+  }
+  .content-info-card{
+    padding-left: 10%;
+    .list-info-user{
+      li{
+        display: flex;
+        padding: 10px 0px;
+        p{
+          padding-left: 30px;
+        }
+      }
+    }
+  }
+}
+.background-section{
+  background: url('../../../../assets/undraw_profile_image_re_ic2f.svg') no-repeat;
+  background-size: contain;
+  height: 80vh;
+  background-position: bottom;
+}
+

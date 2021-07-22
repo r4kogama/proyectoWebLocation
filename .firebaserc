@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "hylyf-app": {
+      "hosting": {
+        "HylyfWebApp": [
+          "hylyf-app"
+        ]
+      }
+    }
+  }
+}

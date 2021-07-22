@@ -1,0 +1,49 @@
+<div class="background-section">
+  <mat-card class="dashboard-card">
+    <mat-card-header>
+      <mat-card-title>
+        <h2>Editar Perfil</h2>
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="dashboard-card-content">
+      <div  class="form-update-account wrapper-update-form">
+        <form  [formGroup]="formGroupUpdate" class="form-containt" (ngSubmit)="submitUpdate()">
+            <p>
+              <mat-form-field class="box-form-field" appearance="outline">
+                  <mat-label>Name</mat-label>
+                  <input matInput type="text" placeholder="Introduce tu nombre" formControlName="name"  >
+        <!--             <mat-error *ngIf="formGroupUpdate.invalid && formGroupUpdate.dirty">{{getErrorform('eml')}}</mat-error>
+        -->
+              </mat-form-field>
+            </p>
+            <p>
+              <mat-form-field class="box-form-field" appearance="outline">
+                  <mat-label>Surname </mat-label>
+                  <input matInput  type="text" placeholder="Introduce tus apellidos" formControlName="surname" >
+        <!--             <mat-error *ngIf="formGroupUpdate.invalid && formGroupUpdate.dirty">{{getErrorform("name")}}</mat-error>-->
+              </mat-form-field>
+            </p>
+            <p>
+              <mat-form-field class="box-form-field" appearance="outline">
+                  <mat-label>Email</mat-label>
+                  <input matInput #regEmail type="email" placeholder="Introduce un email" formControlName="email" >
+                  <mat-icon matSuffix class="material-icons">email</mat-icon>
+        <!--             <mat-error *ngIf="formGroupUpdate.invalid && formGroupUpdate.dirty">{{getErrorform("sur")}}</mat-error>-->
+                  <mat-hint align="start">{{regEmail.value?.length || 0}}/50 letras</mat-hint>
+              </mat-form-field>
+            </p>
+            <div class="form-update-btn">
+                <div class="container-btn">
+                    <button type="submit" mat-raised-button
+                            class="btn-click">
+                            <span class="txt-btn">Registrarse</span>
+                            <mat-icon>send</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </form>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+</div>

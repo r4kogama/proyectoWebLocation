@@ -1,0 +1,32 @@
+<div class="background-section">
+  <mat-card class="dashboard-card">
+    <mat-card-header>
+      <mat-card-title>
+        <h2>Cuenta de usuario</h2>
+      </mat-card-title>
+    </mat-card-header>
+  </mat-card>
+  <mat-card class="card-content-user">
+    <mat-card-header>
+      <div class="box-photo">
+        <img mat-card-image src="../../../../assets/Creative-Tail-People-spy.svg" alt="photo user">
+      </div>
+    </mat-card-header>
+    <div class="content-info-card">
+      <mat-card-content >
+        <h2>Datos personales</h2>
+        <ul class="list-info-user">
+            <li>
+              <mat-icon  aria-label="icon">person_pin</mat-icon>
+              <p>{{dataListUser.name}}</p>
+            </li>
+            <li>
+              <mat-icon  aria-label="icon">mail</mat-icon>
+              <p>{{dataListUser.email}}</p>
+            </li>
+        </ul>
+      </mat-card-content>
+    </div>
+  </mat-card>
+
+</div>

@@ -1,0 +1,36 @@
+@import '../../../scss/colors';
+
+.menu ul{
+  display: flex;
+  min-width: 400px;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  li{
+    font-weight: 500;
+    a{
+      cursor: pointer;
+      text-shadow: 1px 1px 0px white;
+      &:hover{
+        border-bottom: 2px solid $rosado;
+      }
+    }
+  }
+  li:last-child{
+   a{
+    padding: 10px 20px;
+    border-radius: 1px;
+    border: 1px solid white;
+    background: $rosado;
+    color: white;
+    transition: all 300ms ease-in;
+    text-shadow: none;
+    &:hover{
+      border: 1px solid $rosado;
+      background: white;
+      color: $rosado;
+      transition: all 300ms ease-out;
+    }
+   }
+  }
+}

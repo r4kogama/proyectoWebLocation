@@ -1,0 +1,155 @@
+@import './scss/colors';
+//colores basicos
+$azul : #19D5FF;
+$rosado : #FF0063;
+$amarillo: #FFEA19;
+$carbon: #323036;
+
+/************
+*** body ***
+************/
+
+html {
+  body{
+      height: 100%;
+  }
+}
+*, :after, :before{
+  box-sizing: border-box!important;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-transition: width 1s, height 1s;
+  transition: width 1s, width 1s;
+  letter-spacing: 1px;
+  text-rendering: optimizelegibility;
+}
+body{
+  line-height: 1.5;
+  font-size: 14px!important;
+  font-family: 'Roboto', Helvetica, Arial, sans-serif;
+  min-width: 360px!important;
+  position: relative;
+  color: $carbon;
+}
+
+img{
+  width: 100%;
+}
+/************
+*** header ***
+************/
+.wrapper{
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 10px 0px;
+  #header-main{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 0px 10px;
+    margin: 20px 0px;
+  }
+}
+
+/************
+*** MATERIAL ***
+************/
+
+.mat-form-field{
+  width: 100%;
+}
+.mat-form-field-appearance-outline .mat-form-field-flex {
+  background: white;
+}
+
+.mat-toolbar.mat-primary {
+  background: $rosado;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+}
+.mat-toolbar-row, .mat-toolbar-single-row {
+  justify-content: space-between!important;
+}
+
+.mat-list-base .mat-list-item .mat-list-item-content, .mat-list-base .mat-list-option .mat-list-item-content {
+  flex-direction: column!important;
+}
+.mat-card {
+  opacity: 0.98;
+}
+/************
+*** RESET ***
+************/
+
+
+
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul,li {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+:before,:after{
+    margin: 0;
+    padding: 0;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+input:-internal-autofill-previewed, input:-internal-autofill-selected, textarea:-internal-autofill-previewed, textarea:-internal-autofill-selected, select:-internal-autofill-previewed, select:-internal-autofill-selected {
+	background: none !important;
+}
+::-webkit-input-placeholder {
+    color: rgb(0, 0, 0)!important;
+}
+
+a{
+  text-decoration: none;
+  color:inherit;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
