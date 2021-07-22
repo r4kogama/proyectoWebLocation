@@ -6,12 +6,12 @@ import { ListProfileComponent } from './components/list-profile/list-profile.com
 import { ProfileComponent } from './pages/profile/profile.component';
 
 const routes: Routes = [
-  {path:'profile',component:ProfileComponent,
+    {path:'',component:ProfileComponent,
   children:[
-    {path:'list',component:ListProfileComponent},
-    {path:'edit',component:FormEditComponent},
+    {path:'profile/list',component:ListProfileComponent},
+    {path:'profile/edit',component:FormEditComponent},
     {path:'locations', component:HistoryLocationComponent},
-    ]
+     ]
   },
   {path:'',redirectTo: 'profile',pathMatch:'full'},
 ];

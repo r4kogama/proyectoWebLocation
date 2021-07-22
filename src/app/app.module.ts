@@ -15,6 +15,7 @@ import { UserModule } from './user/user.module';
 import { UserProfileModule } from './user-profile/user-profile.module';
 import { GeolocationModule } from './geolocation/geolocation.module';
 import { CommonsModule } from './commons/commons.module';
+import { IonicModule } from '@ionic/angular';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { CommonsModule } from './commons/commons.module';
     CommonsModule,
     UserModule,
     UserProfileModule,
-    GeolocationModule
+    GeolocationModule,
+    IonicModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent],

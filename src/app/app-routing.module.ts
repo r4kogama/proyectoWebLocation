@@ -12,8 +12,7 @@ const routes: Routes = [
   {path:'login', component:UserLoginComponent},
   {path:'registro', component:UserRegisterComponent},
   {path:'geolocation', component:LocationComponent},
-  {path:'profile', component:ProfileComponent},
-  {path:'profile/:id', component:ProfileComponent},
+  {path:'profile', loadChildren: () => import('./user-profile/user-profile.module').then(m => m.UserProfileModule)},
   {path:'**', component:HomeComponent},
 ];
 

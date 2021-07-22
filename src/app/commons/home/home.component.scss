@@ -10,25 +10,34 @@
       .title-page{
         height: 100%;
         width: 100%;
-        max-width: 470px;
+        max-width: 564px;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         text-align: justify;
-        padding-bottom: 100px;
-        padding-left: 50px;
+        padding: 0px 10px 60px 10%;
         h1{
           font-size: 3.5em;
           font-weight: 800;
           letter-spacing: 3px;
-          padding-bottom: 20px;
+          padding-bottom: 35px;
           color: $rosado;
           text-shadow: 2px 0px 1px $azul, 3px 1px 1px $amarillo
         }
+        span{
+          font-style: italic;
+          font-weight: 800;
+          letter-spacing: 4px;
+        }
         p{
-          font-size: 1.5em;
+          font-size: 1.4em;
           line-height: 35px;
+          font-weight: 500;
+        }
+        p:last-child{
+          font-size: 1.3em;
+          margin-top: 20px;
         }
       }
       .service-utility{
