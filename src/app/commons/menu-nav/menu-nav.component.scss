@@ -22,13 +22,13 @@
     border-radius: 1px;
     border: 1px solid white;
     background: $rosado;
-    color: white;
+    color: white!important;
     transition: all 300ms ease-in;
     text-shadow: none;
     &:hover{
       border: 1px solid $rosado;
       background: white;
-      color: $rosado;
+      color: $rosado!important;
       transition: all 300ms ease-out;
     }
    }

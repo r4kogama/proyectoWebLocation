@@ -6,14 +6,16 @@ import { ListProfileComponent } from './components/list-profile/list-profile.com
 import { ProfileComponent } from './pages/profile/profile.component';
 
 const routes: Routes = [
-    {path:'',component:ProfileComponent,
+  {path:':id',component:ProfileComponent},
+  {path:'',redirectTo: 'profile',pathMatch:'full'},
+ /*    {path:'',component:ProfileComponent,
   children:[
     {path:'profile/list',component:ListProfileComponent},
     {path:'profile/edit',component:FormEditComponent},
     {path:'locations', component:HistoryLocationComponent},
      ]
   },
-  {path:'',redirectTo: 'profile',pathMatch:'full'},
+  {path:'',redirectTo: 'profile',pathMatch:'full'}, */
 ];
 
 @NgModule({
