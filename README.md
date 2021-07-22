@@ -85,13 +85,13 @@ Navegacion en el dashboard a la seccion de historial de localizaciones in situ
 ## Plataforma Firebase
 
 Todo el back-end esta gestionado con firebase
-![link to firebase](https://firebase.google.com/)
+[link to firebase](https://firebase.google.com/)
 
 ## Kanban de Historias de Usuario
 
 Creado en Trello
 
-![Link to trello](https://trello.com/b/8HnYf22w/proyecto-web-angular)
+[Link to trello](https://trello.com/b/8HnYf22w/proyecto-web-angular)
 
 ## Logo de la app
 
