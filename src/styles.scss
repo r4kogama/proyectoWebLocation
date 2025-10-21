@@ -1,6 +1,6 @@
 @import './scss/colors';
 //colores basicos
-$azul : #19D5FF;
+$azul : #1ad5ff;
 $rosado : #FF0063;
 $amarillo: #FFEA19;
 $carbon: #323036;
@@ -19,8 +19,8 @@ html {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -webkit-tap-highlight-color: transparent;
-  -webkit-transition: width 1s, height 1s;
-  transition: width 1s, width 1s;
+  -webkit-transition: width 500ms, height 500ms;
+  transition: width 500ms, width 500ms;
   letter-spacing: 1px;
   text-rendering: optimizelegibility;
 }
@@ -35,15 +35,20 @@ body{
 
 img{
   width: 100%;
+   border: 0;
+  display: block;
 }
 /************
 *** header ***
 ************/
+
+/****** BUTTON ***/
+
 .wrapper{
   width: 100%;
   height: 100%;
-  padding: 10px 0px;
   overflow: auto;
+  position: relative;
   #header-main{
     display: flex;
     justify-content: space-around;
@@ -53,17 +58,83 @@ img{
     padding: 0px 10px;
     margin: 20px 0px;
   }
+  .btn-animation{
+    width: 100%;
+    font-size: 1.3em;
+    padding: 5px 0px;
+    background: $rosado;
+    color: black;
+    cursor: pointer;
+    text-transform: uppercase;
+    position: relative;
+    transition: all 600ms ease-in;
+    overflow: hidden;
+    box-shadow: 7px 7px 0px #ff006252;
+    border-radius: 1px;
+    outline-width: 3px;
+    outline-color: #e60059;
+    outline-style: outset;
+    text-shadow: 1px 1px 0px white;
+    &:after{
+      content: '';
+      width: 100%;
+      height: 100%;
+      background: $azul;
+      position: absolute;
+      top: 0;
+      left: -105%;
+      z-index: -1;
+      transform: skew(-30deg);
+      transition: all 500ms cubic-bezier(0.68, -0.32, 0.4, 1.63);
+
+    }
+     &:hover:after{
+      left: -58%;
+      transition: all 500ms cubic-bezier(0.84, -0.49, 0.22, 1.5);  }
+    &::before{
+      content: '';
+      width: 100%;
+      height: 100%;
+      background: $amarillo;
+      z-index: -1;
+      transform: skew(-30deg);
+      position: absolute;
+      top: 0 ;
+      right: -105%;
+      transition: all 500ms cubic-bezier(0.68, -0.32, 0.4, 1.63);
+    }
+     &:hover:before{
+      right: -55%;
+      transition: all 500ms cubic-bezier(0.84, -0.49, 0.22, 1.5);  }
+    &:hover{
+      transition: all 600ms ease-in-out;
+      color: white;
+      text-shadow: 1px 1px 0px black;
+      box-shadow: 8px 8px 0px #ff00629c;
+      border-radius: 1px;
+      outline-width: 3px;
+      outline-color: #cc0551;
+      outline-style: outset;
+    }
+  }
 }
+
+
 
 /************
 *** MATERIAL ***
 ************/
+.active-link {
+  background-color: #79747433 !important;
+  color: $rosado !important;
+}
 
 .mat-form-field{
   width: 100%;
 }
 .mat-form-field-appearance-outline .mat-form-field-flex {
   background: white;
+  border-radius: 5px;
 }
 
 .mat-toolbar.mat-primary {

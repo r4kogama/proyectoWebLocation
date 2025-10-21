@@ -1,56 +1,57 @@
-<div class="wrapper">
-  <header id="header-main">
-    <app-header></app-header>
-    <app-menu-nav></app-menu-nav>
-  </header>
+<div class="back-svg">
   <div class="login-background">
-    <div class="containt-login">
-      <div class="containt-form-login title-info">
-        <div class="box-section-form">
-          <h2>Iniciar session</h2>
-          <form [formGroup]="formGroupLogin"  (ngSubmit)='submitLogin()'>
-              <p>
-                <mat-form-field appearance="outline">
-                    <mat-label>Email</mat-label>
-                    <input type="email" matInput   formControlName="email" placeholder="Introduce tu email">
-                </mat-form-field>
-              </p>
-              <p>
-                <mat-form-field appearance="outline">
-                  <mat-label>Password</mat-label>
-                  <input matInput [type]=" hide ? 'password' : 'text' " formControlName="password" placeholder="Introduce tu password"  ngModel   [(ngModel)]='pass'>
-                  <mat-error *ngIf="formGroupLogin.controls.password.untouched && formGroupLogin.controls.password.errors?.required">Error en el password</mat-error>
-                  <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                  </button>
-                </mat-form-field>
-              </p>
-              <span class="lost-pass">
-                  <mat-hint>
-                      Has olvidado la contraseña? Haz click <span><a [routerLink]="['/login']">aquí</a></span>
-                  </mat-hint>
-              </span>
-              <div class="box-btn-login">
-                <button type="submit" class="btn-login" mat-raised-button
-                [disabled]="formGroupLogin.untouched || formGroupLogin.controls.email.invalid">
-                Login</button>
-              </div>
-          </form>
-        </div>
-      </div>
-      <div class="content-btn-regist">
-        <div class="box-section-form">
-          <div class="info-register title-info">
-            <h2>Crear una cuenta</h2>
-            <p>Registrate y accede a tu perfil. Donde podrás crear grupos, ver tus locations y geolocalizarte a ti y a tus amigos.</p>
+    <div class="wrapper">
+    <header id="header-main">
+      <app-header></app-header>
+      <app-menu-nav></app-menu-nav>
+    </header>
+      <div class="containt-login">
+        <div class="containt-form-login title-info">
+          <div class="box-section-form">
+            <h2>Iniciar session</h2>
+            <form [formGroup]="formGroupLogin"  (ngSubmit)='submitLogin()'>
+                <p>
+                  <mat-form-field appearance="outline">
+                      <mat-label>Email</mat-label>
+                      <input type="email" matInput   formControlName="email" placeholder="Introduce tu email">
+                  </mat-form-field>
+                </p>
+                <p>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Password</mat-label>
+                    <input matInput [type]=" hide ? 'password' : 'text' " formControlName="password" placeholder="Introduce tu password"  ngModel   [(ngModel)]='pass'>
+                    <mat-error *ngIf="formGroupLogin.controls.password.untouched && formGroupLogin.controls.password.errors?.required">Error en el password</mat-error>
+                    <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                  </mat-form-field>
+                </p>
+                <span class="lost-pass">
+                    <mat-hint>
+                        Has olvidado la contraseña? Haz click <span><a [routerLink]="['/login']">aquí</a></span>
+                    </mat-hint>
+                </span>
+                <div class="box-btn-login">
+                  <button type="submit" class="btn-animation" mat-raised-button>Login</button>
+                </div>
+            </form>
           </div>
-          <div class="box-btn-register">
-            <a [routerLink]="['/registro']">
-               Registrarse
-            </a>
+        </div>
+        <div class="content-btn-regist">
+          <div class="box-section-form">
+            <div class="info-register title-info">
+              <h2>Crear una cuenta</h2>
+              <p>Registrate y accede a tu perfil. Donde podrás crear grupos, ver tus locations y geolocalizarte a ti y a tus amigos.</p>
+            </div>
+            <div class="box-btn-register">
+              <a [routerLink]="['/registro']">
+                 Registrarse
+              </a>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+<!-- [disabled]="formGroupLogin.untouched || formGroupLogin.controls.email.invalid" -->

@@ -1,69 +1,130 @@
 @import '../../../scss/colors';
 
+
+#main-frame{
+  background: url('/assets/blob-scatter-haikei.svg');
+  background-repeat: no-repeat;
+  background-size: 100%;
+  position: relative;
+  z-index: -1;
+  background-position: 100% -11%;
+}
   .background-title{
-    background: url('../../../assets/undraw_My_current_location_re_whmt.svg') no-repeat;
-    background-size: 85%;
-    background-position: 100% 37%;
-    height: 100%;
+    background: url('/assets/undraw_My_current_location_re_whmt.svg') no-repeat;
+    background-size: 90%;
+    background-position: 101% 10%;
+    height: 100vh;
     width: 100%;
     max-width: 960px;
     margin: 0 auto;
-    #main-frame{
-      .title-page{
-        height: 100%;
+    #content-main{
+      position: relative;
+      height: 100%;
+      .content-blob{
+        position: absolute;
+        z-index: -1;
+        top: -10%;
+        left: -30%;
         width: 100%;
-        max-width: 564px;
+        min-width: 500px;
+        filter: drop-shadow(2px 1px 0px #323036);
+      }
+      .title-page{
+        width: 100%;
+        max-width: 460px;
+        position: sticky;
+        top: 0;
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
         align-items: center;
         text-align: justify;
-        padding: 100px 30px 10px 8%;
+        padding: 100px 5% 66px 5%;
         h1{
           font-size: 3.5em;
           font-weight: 800;
           letter-spacing: 3px;
           padding-bottom: 35px;
           color: $rosado;
-          text-shadow: 2px 0px 1px $azul, 3px 1px 1px $amarillo
+          text-shadow: 2px 1px 0px $azul,
+           4px 2px 0px $amarillo,
+           6px 3px 0px white;
         }
-        span{
+        h2{
           font-style: italic;
           font-weight: 800;
           letter-spacing: 4px;
+          text-shadow: 2px 2px 0px white;
         }
         p{
           font-size: 1.4em;
           line-height: 35px;
           font-weight: 500;
-        }
-        p:last-child{
-          font-size: 1.3em;
           margin-top: 20px;
-        }
-      }
-      .service-utility{
-        height: 100vh;
-        margin-top: 35%;
-        .title-utility{
-          text-align: center;
-          padding: 20px 10px 20px 10px;
-          margin: 50px 0px 40px 0px;
-          h2{
-            font-size: 2em;
-
-          }
-          p{
-            font-size: 1.2em;
-          }
-        }
-        .background-utility{
-          background: url('../../../assets/undraw_Traveling_re_weve.svg') no-repeat;
-          background-size: contain;
-          background-position: center;
-          height: 400px;
+          text-shadow: 1px 1px 0px white;
         }
       }
     }
   }
+.content-wrap-utility{
+  position: relative;
+  .service-utility{
+    height: 100vh;
+    margin-top: 125px;
+    .title-utility{
+      position: relative;
+      text-align: center;
+      padding: 40px 10px 40px 10px;
+      margin: 0px 0px 40px 0px;
+      z-index: 100;
+      color: white;
+      text-shadow: 2px 2px 0px $carbon;
+      .background-down{
+        width: 100%;
+        background: url('/assets/wave-section-utility.svg') no-repeat;
+        background-position: 100% 65%;
+        background-size: 100%;
+        z-index: -1;
+        position: absolute;
+        left: -1px;
+        top: 0;
+        bottom: 0;
+        overflow: hidden;
+        filter: drop-shadow(2px 1px 0px #323036);
+        &:after{
+          content: url('/assets/wave-section-reverse.svg');
+          position: absolute;
+          width: 102vw;
+          top: 0;
+          bottom: 0;
+          opacity: 0.9;
+          left: 0;
+          mix-blend-mode: luminosity;
+        }
+      }
+      h2{
+        font-size: 2em;
+      }
+      p{
+        font-size: 1.2em;
+      }
+    }
+    .background-utility{
+      background: url('/assets/undraw_Traveling_re_weve.svg') no-repeat;
+      background-size: contain;
+      background-position: center;
+      height: 400px;
+      filter: drop-shadow(2px 1px 0px #323036);
+    }
+  }
 
+}
+
+.content-wave{
+  position: absolute;
+  top: -40px;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(2px 1px 0px #323036);
+}

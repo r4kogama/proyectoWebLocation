@@ -1,0 +1,105 @@
+@import '../../../scss/colors';
+
+
+#wrapper-footer{
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  .background-footer{
+    width: 100%;
+    background: url('../../../assets/layered-peaks-haikei.svg') no-repeat;
+    background-size: cover;
+    background-position: 100% 85%;
+    .footer-main{
+      padding: 100px 20px;
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      width: 100%;
+      margin: 65px 0px 0px 0px;
+      text-shadow: 2px 2px 0px $carbon;
+      .content-left{
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        flex-wrap: wrap;
+        .box-logo{
+          padding: 30px 45px 25px 45px;
+          display: flex;
+          align-self: flex-start;
+        }
+        .menu-footer{
+          font-weight: 500;
+          font-size: 1.2em;
+          padding: 0px 68px;
+          ul{
+            li{
+              padding:  10px 0px;
+              a{
+                color: white!important;
+                transition: all 300ms ease-in;
+
+                &:hover{
+                  color: $carbon!important;
+                  text-shadow: 2px 2px 0px White;
+                  transition: all 300ms ease-in-out;
+                }
+              }
+            }
+          }
+        }
+      }
+      .content-right{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: column;
+        color: white;
+        text-align: center;
+        max-width: 360px;
+        padding:50px 10px 0px 10px;
+        .social-media{
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding-top: 10px;
+          li{
+            width: 50px;
+            padding: 0px 10px;
+          }
+        }
+      }
+    }
+  }
+  #sub-footer{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 20px 10px;
+    font-size: .8em;
+    color: white;
+    background: $rosado;
+    .copyright{
+      display: flex;
+      align-items: center;
+      p:last-child{
+        padding-left: 40px;
+      }
+    }
+    .copy-list{
+      display: flex;
+        li{
+          padding: 0px 10px;
+          a{
+            color: white!important;
+            &:hover{
+              color: black!important;
+            }
+          }
+        }
+        li:last-child{
+          padding-right: 0px;
+        }
+    }
+  }
+}

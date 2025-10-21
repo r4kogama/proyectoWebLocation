@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { UserLoginComponent } from '../user/pages/user-login/user-login.component';
 import { FormEditComponent } from './components/form-edit/form-edit.component';
 import { HistoryLocationComponent } from './components/history-location/history-location.component';
 import { ListProfileComponent } from './components/list-profile/list-profile.component';
@@ -13,6 +14,8 @@ const routes: Routes = [
     {path:'locations', component:HistoryLocationComponent},
      ]
   },
+  {path:'**',component:UserLoginComponent},
+  {path:'', redirectTo:'login',pathMatch:'full'},
 ];
 
 @NgModule({

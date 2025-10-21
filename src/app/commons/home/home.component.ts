@@ -1,3 +1,4 @@
+import { BreakpointObserver, Breakpoints, BreakpointState  } from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(public breakpointObserver: BreakpointObserver) { }
 
   ngOnInit(): void {
+    this.breakpointObserver
+    .observe([Breakpoints.XSmall,Breakpoints.HandsetPortrait])
+    .subscribe((state: BreakpointState) =>{
+      if(state.matches){
+        console.log('version mobil')
+
+      }else{
+        console.log('version desktop')
+      }
+    })
   }
 
 }

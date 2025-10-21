@@ -1,1 +1,53 @@
-<p>footer works!</p>
+<div id="wrapper-footer">
+  <div class="background-footer">
+    <section class="footer-main">
+      <div class="content-left">
+        <div class="box-logo">
+          <a  class="logo" [routerLink]="['/home']">
+            <img src="./assets/logoHylyf.png" alt="logo">
+          </a>
+        </div>
+        <nav class="menu-footer">
+          <ul>
+            <li><a [routerLink]="['/geolocation']">Geolocation</a></li>
+            <li><a [routerLink]="['']">About</a></li>
+            <li><a [routerLink]="['']">Faqs</a></li>
+            <li><a [routerLink]="['']">Contact us</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="content-right">
+        <h2>Contact web</h2>
+        <p>Puedes seguirnos en nuestras social media o descargarte la App</p>
+        <ul class="social-media">
+          <li>
+            <a href="#"><img src="../../../assets/icons8-google-play.svg" alt="google play"></a>
+          </li>
+          <li>
+            <a href="#"><img src="../../../assets/icons8-app-store.svg" alt="app store"></a>
+          </li>
+          <li>
+            <a href="#"><img src="../../../assets/icons8-whatsapp.svg" alt="whatsapp"></a>
+          </li>
+          <li>
+            <a href="#"><img src="../../../assets/icons8-facebook-circled.svg" alt="facebook"></a>
+          </li>
+          <li>
+            <a href="#"><img src="../../../assets/icons8-instagram-logo.svg" alt="instagram"></a>
+          </li>
+        </ul>
+      </div>
+    </section>
+  </div>
+  <section id="sub-footer">
+    <div class="copyright">
+      <p>© Hylyf 2021. All rights reserved.</p>
+      <p>Design by <strong>Gama</strong></p>
+    </div>
+    <ul class="copy-list">
+      <li><a href="#">Status</a></li>
+      <li><a href="#">Privacy &amp; Terms</a></li>
+      <li><a href="#">Contact US</a></li>
+    </ul>
+  </section>
+</div>

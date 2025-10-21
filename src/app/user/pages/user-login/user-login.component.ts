@@ -25,10 +25,10 @@ export class UserLoginComponent implements OnInit {
       const res = await  this._fireAuthService.login(user);
       this._fireAuthService.setToken(res.user.uid, res.user.Aa);//id y tokens
       //obtenido el token y el id, navega al perfil con el id del usuario del
-      this._router.navigate(['/profile',res.user.uid])
+      this._router.navigate(['/profile',res.user.uid,'list'])
     }catch(err){
       console.error(err);
-      console.log(err.message);
+      console.log((err as Error).message);
     }
   }
 

@@ -1,74 +1,78 @@
-<div class="wrapper">
-  <header id="header-main">
-    <app-header></app-header>
-    <app-menu-nav></app-menu-nav>
-  </header>
-  <div class="container-form">
-    <div class="background-register">
-      <div  class="form-register-account wrapper-register-form">
-        <h2>Registro de usuario</h2>
-        <form  [formGroup]="formGroupRegister" class="form-containt" (ngSubmit)="submitRegister()">
-            <p>
-              <mat-form-field class="box-form-field" appearance="outline">
-                  <mat-label>Name</mat-label>
-                  <input matInput type="text" placeholder="Introduce tu nombre" formControlName="name"  >
-        <!--             <mat-error *ngIf="formGroupRegister.invalid && formGroupRegister.dirty">{{getErrorform('eml')}}</mat-error>
-        -->
-                  <mat-hint align="end">Required *</mat-hint>
-              </mat-form-field>
-            </p>
-            <p>
-              <mat-form-field class="box-form-field" appearance="outline">
-                  <mat-label>Surname </mat-label>
-                  <input matInput  type="text" placeholder="Introduce tus apellidos" formControlName="surname" >
-        <!--             <mat-error *ngIf="formGroupRegister.invalid && formGroupRegister.dirty">{{getErrorform("name")}}</mat-error>-->
-                  <mat-hint align="end">Required *</mat-hint>
-              </mat-form-field>
-            </p>
-            <p>
-              <mat-form-field class="box-form-field" appearance="outline">
-                  <mat-label>Email</mat-label>
-                  <input matInput #regEmail type="email" placeholder="Introduce un email" formControlName="email" >
-                  <mat-icon matSuffix class="material-icons">email</mat-icon>
-        <!--             <mat-error *ngIf="formGroupRegister.invalid && formGroupRegister.dirty">{{getErrorform("sur")}}</mat-error>-->
-                  <mat-hint align="start">{{regEmail.value?.length || 0}}/50 letras</mat-hint>
-                  <mat-hint align="end">Required *</mat-hint>
-              </mat-form-field>
-            </p>
-            <p>
-              <mat-form-field class="box-form-field" appearance="outline">
-                <mat-label>Password</mat-label>
-                  <input type="text" matInput placeholder="Introduce un password" formControlName='password'>
-                  <!--  <mat-error *ngIf="formGroupRegister.invalid && formGroupRegister.dirty">{{getErrorform("name")}}</mat-error>-->
-                  <mat-hint align="end">Required *</mat-hint>
-              </mat-form-field>
-            </p>
-            <p>
-              <mat-form-field class="box-form-field"  appearance="outline">
-                  <mat-label>Confirm Password</mat-label>
-                  <input type="text" matInput placeholder="Repite tu password" formControlName='confirmPassword'>
-                  <mat-error *ngIf="formGroupRegister.controls['confirmPassword'].errors?.mismatch==true">password no coincide</mat-error>
-                  <mat-hint align="end">Required *</mat-hint>
-                </mat-form-field>
-            </p>
-            <div class="terms-checkbox">
-              <mat-checkbox  color="primary" type="checkbox" formControlName="terms">
-                  Aceptar terminos legales
-              </mat-checkbox>
-              <mat-error *ngIf="formGroupRegister.get('terms')?.value == false">Acepta los terminos para continuar</mat-error>
-            </div>
-            <div class="form-register-btn">
-                <div class="box-btn">
-                    <div class="container-btn">
-                        <button type="submit" mat-raised-button [disabled]="formGroupRegister.invalid "
-                                class="btn-click">
-                                <span class="txt-btn">Registrarse</span>
-                                <mat-icon>send</mat-icon>
-                        </button>
+<div class="back-svg">
+  <div class="register-background">
+    <div class="wrapper">
+      <header id="header-main">
+        <app-header></app-header>
+        <app-menu-nav></app-menu-nav>
+      </header>
+      <div class="container-form">
+        <div class="background-register">
+          <div  class="form-register-account wrapper-register-form">
+            <h2>Registro de usuario</h2>
+            <form  [formGroup]="formGroupRegister" class="form-containt" (ngSubmit)="submitRegister()">
+                <p>
+                  <mat-form-field class="box-form-field" appearance="outline">
+                      <mat-label>Name</mat-label>
+                      <input matInput type="text" placeholder="Introduce tu nombre" formControlName="name"  >
+            <!--             <mat-error *ngIf="formGroupRegister.invalid && formGroupRegister.dirty">{{getErrorform('eml')}}</mat-error>
+            -->
+                      <mat-hint align="end">Required *</mat-hint>
+                  </mat-form-field>
+                </p>
+                <p>
+                  <mat-form-field class="box-form-field" appearance="outline">
+                      <mat-label>Surname </mat-label>
+                      <input matInput  type="text" placeholder="Introduce tus apellidos" formControlName="surname" >
+            <!--             <mat-error *ngIf="formGroupRegister.invalid && formGroupRegister.dirty">{{getErrorform("name")}}</mat-error>-->
+                      <mat-hint align="end">Required *</mat-hint>
+                  </mat-form-field>
+                </p>
+                <p>
+                  <mat-form-field class="box-form-field" appearance="outline">
+                      <mat-label>Email</mat-label>
+                      <input matInput #regEmail type="email" placeholder="Introduce un email" formControlName="email" >
+                      <mat-icon matSuffix class="material-icons">email</mat-icon>
+            <!--             <mat-error *ngIf="formGroupRegister.invalid && formGroupRegister.dirty">{{getErrorform("sur")}}</mat-error>-->
+                      <mat-hint align="start">{{regEmail.value?.length || 0}}/50 letras</mat-hint>
+                      <mat-hint align="end">Required *</mat-hint>
+                  </mat-form-field>
+                </p>
+                <p>
+                  <mat-form-field class="box-form-field" appearance="outline">
+                    <mat-label>Password</mat-label>
+                      <input type="text" matInput placeholder="Introduce un password" formControlName='password'>
+                      <!--  <mat-error *ngIf="formGroupRegister.invalid && formGroupRegister.dirty">{{getErrorform("name")}}</mat-error>-->
+                      <mat-hint align="end">Required *</mat-hint>
+                  </mat-form-field>
+                </p>
+                <p>
+                  <mat-form-field class="box-form-field"  appearance="outline">
+                      <mat-label>Confirm Password</mat-label>
+                      <input type="text" matInput placeholder="Repite tu password" formControlName='confirmPassword'>
+                      <mat-error *ngIf="formGroupRegister.controls['confirmPassword'].errors?.mismatch==true">password no coincide</mat-error>
+                      <mat-hint align="end">Required *</mat-hint>
+                    </mat-form-field>
+                </p>
+                <div class="terms-checkbox">
+                  <mat-checkbox  color="primary" type="checkbox" formControlName="terms">
+                      Aceptar terminos legales
+                  </mat-checkbox>
+                  <mat-error *ngIf="formGroupRegister.get('terms')?.value == false">Acepta los terminos para continuar</mat-error>
+                </div>
+                <div class="form-register-btn">
+                    <div class="box-btn">
+                        <div class="container-btn">
+                            <button type="submit" mat-raised-button [disabled]="formGroupRegister.invalid "
+                                    class="btn-click">
+                                    <span class="txt-btn">Registrarse</span>
+                                    <mat-icon>send</mat-icon>
+                            </button>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </form>
+            </form>
+          </div>
+        </div>
       </div>
     </div>
   </div>

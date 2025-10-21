@@ -23,12 +23,12 @@ export class ProfileComponent implements OnInit {
     })
 
     this._route.paramMap.subscribe((params: Params) => {
-      console.log(params);
+      console.log(params.get('id'));
       this._fireProfileService.getUserById$(params.get('id'))
         .subscribe((data:User) => {
           console.log("data user");
-          console.log(data);
           this.dataUser = data;
+          console.log(this.dataUser);
         },
           (error:string) => {
             console.log(error);
