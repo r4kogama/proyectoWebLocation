@@ -4,6 +4,9 @@ Proyecto final de curso front-end Angular CIFO violeta, al final de todo el docu
 
 `Version beta.`
 
+Link to version web:
+[Web](https://r4kogama.github.io/proyectoWebLocation/)
+
 
 # Justificacion del proyecto
 
@@ -108,7 +111,6 @@ Todo el back-end esta gestionado con firebase
 Creado en Trello
 
 [Link to trello](https://trello.com/b/8HnYf22w/proyecto-web-angular)
-
 
 
 ## Logo de la app
