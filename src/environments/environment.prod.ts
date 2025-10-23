@@ -1,4 +1,5 @@
 //vercel
+declare const process: any;
 export const environment = {
   production: true,
   firebaseConfig : {
