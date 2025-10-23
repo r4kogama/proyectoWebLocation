@@ -2,11 +2,14 @@
   "name": "hylyf-web-app",
   "version": "1.0.1",
   "private": true,
+  "engines": {
+    "node": "18.x"
+  },
   "scripts": {
     "ng": "ng",
     "install-legacy": "npm install --legacy-peer-deps",
     "start": "set NODE_OPTIONS=--openssl-legacy-provider && node --no-deprecation ./node_modules/@angular/cli/bin/ng serve",
-    "build": "set NODE_OPTIONS=--openssl-legacy-provider && node --no-deprecation ./node_modules/@angular/cli/bin/ng build",
+    "build": "node --no-deprecation ./node_modules/@angular/cli/bin/ng build",
     "test": "set NODE_OPTIONS=--openssl-legacy-provider && node --no-deprecation ./node_modules/@angular/cli/bin/ng test",
     "watch": "ng build --watch --configuration development"
   },

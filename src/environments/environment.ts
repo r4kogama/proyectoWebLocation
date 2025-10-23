@@ -2,15 +2,17 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+//local hardcoded
 export const environment = {
   production: false,
   firebaseConfig : {
-    apiKey: "AIzaSyABg2kXoN-XhMOYwTQc4dysq9GUUffGFt8",
-    authDomain: "hylyf-app.firebaseapp.com",
-    projectId: "hylyf-app",
-    storageBucket: "hylyf-app.appspot.com",
-    messagingSenderId: "153363973138",
-    appId: "1:153363973138:web:c168c49857acbe3fcd04cb"
+    apiKey: "AIzaSyAA1Wrnku_HeBa1cXhkmjjQ_EGpVtf0T_w",
+    authDomain: "findly-v1app.firebaseapp.com",
+    projectId: "findly-v1app",
+    storageBucket: "findly-v1app.firebasestorage.app",
+    messagingSenderId: "857355157435",
+    appId: "1:857355157435:web:d889ed63dc86d6719ace9e",
+    measurementId: "G-HL9375XYZG"
   }
 };
 
