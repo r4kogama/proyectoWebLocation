@@ -33,7 +33,7 @@
                       <input matInput #regEmail type="email" placeholder="Introduce un email" formControlName="email" >
                       <mat-icon matSuffix class="material-icons">email</mat-icon>
             <!--             <mat-error *ngIf="formGroupRegister.invalid && formGroupRegister.dirty">{{getErrorform("sur")}}</mat-error>-->
-                      <mat-hint align="start">{{regEmail.value?.length || 0}}/50 letras</mat-hint>
+                      <mat-hint align="start">{{regEmail.value.length || 0}}/50 letras</mat-hint>
                       <mat-hint align="end">Required *</mat-hint>
                   </mat-form-field>
                 </p>
@@ -71,6 +71,9 @@
                     </div>
                 </div>
             </form>
+            <div *ngIf="errorMessage" class="error-message">
+              {{ errorMessage }}
+            </div>
           </div>
         </div>
       </div>

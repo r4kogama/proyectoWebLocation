@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
-import { User } from 'src/app/shared/model/user';
+import { User } from 'src/app/shared/model/user.model';
 import { FireProfileService } from 'src/app/shared/services/fire-profile.service';
 
 @Component({

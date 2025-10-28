@@ -12,6 +12,7 @@ export class FormLoginComponent implements OnInit {
   title!: string;
   @Input() formGroupLogin!: FormGroup;
   @Output() loginEvt = new EventEmitter();
+  @Input() errorMessage: string = '';
   constructor() {
     console.log(this.formGroupLogin)
    }

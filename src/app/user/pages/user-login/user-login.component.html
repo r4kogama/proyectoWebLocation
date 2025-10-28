@@ -1,3 +1,5 @@
 <form-login
 [formGroupLogin]='formlogin'
-(loginEvt)="loginUser($event)"></form-login>
+[errorMessage]="errorMessage"
+(loginEvt)="loginUser($event)"
+></form-login>

@@ -9,6 +9,7 @@ import { FormGroup } from '@angular/forms';
 export class FormRegisterComponent implements OnInit {
   @Input() formGroupRegister!: FormGroup;
   @Output() registerEvt = new EventEmitter();
+  @Input() errorMessage: string = '';
   constructor() { }
 
 
