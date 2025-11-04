@@ -1,28 +1,30 @@
-import { Injectable } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { inject, Injectable } from '@angular/core'; //Auth y Firestore ya no son clases Angular con decoradores
+import { Auth, getAuth, signInWithEmailAndPassword, signOut, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, getRedirectResult, signInWithRedirect, } from '@angular/fire/auth';
+import { Firestore, getFirestore } from '@angular/fire/firestore';
 import { User } from '../model/user.model';
 import { HttpResponseBuilder } from '../response/httpResponse.model';
 import { ResponseData } from '../model/responseData.model';
 import { AuthResponseModel } from '../response/authResponse.model';
 import { AuthErrorMessages } from '../model/errorsMessages';
-
 @Injectable({
   providedIn: 'root'
 })
 export class FireAuthService {
+  private _auth: Auth = inject(Auth);
+  private _fireStore: Firestore = inject(Firestore);
+  private _getAuth: Auth = getAuth();
 
 
   constructor(
-    private _fireAuth: AngularFireAuth,
-    private _fireStore: AngularFirestore,
     private _httpResponseBuilder: HttpResponseBuilder,
     private _authResponseModel : AuthResponseModel
     ) {}
 
+
   async signIn(user: User): Promise<ResponseData<User>> {
+
     try {
-      const credentials = await this._fireAuth.signInWithEmailAndPassword(user.email, user.password);
+      const credentials = await signInWithEmailAndPassword(this._auth, user.email, user.password);
 
       if (credentials.user) {
         const userData: User = {
@@ -40,7 +42,7 @@ export class FireAuthService {
   }
   async signOut(): Promise<ResponseData<void>> {
     try {
-      await this._fireAuth.signOut();
+      await signOut(this._auth);
       sessionStorage.removeItem('accessToken');
       return this._authResponseModel.logoutSuccess();
     } catch (error: any) {
@@ -51,7 +53,7 @@ export class FireAuthService {
 
   async register(user: User): Promise<ResponseData<User>> {
     try {
-      const credentials = await this._fireAuth.createUserWithEmailAndPassword(user.email, user.password);
+      const credentials = await createUserWithEmailAndPassword(this._auth, user.email, user.password);
 
       if (credentials.user) {
         // Opcional: actualizar perfil del usuario
@@ -74,8 +76,8 @@ export class FireAuthService {
       return this._authResponseModel.registerFailed(errorCode);
     }
   }
-  setToken(id:string,token: string):void{
-    sessionStorage.setItem(id,token);
+  setToken(id:string, token: string):void{
+    sessionStorage.setItem(id, token);
   }
   getToken():string{
     return sessionStorage.getItem('accessToken') as string;

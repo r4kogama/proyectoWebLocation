@@ -27,7 +27,7 @@ export class UserRegisterComponent implements OnInit {
   ngOnInit(): void {
     this.formRegister = this._fb.group({
       name :            ['', Validators.required],
-      surname:          ['', Validators.required],
+      surname:          ['',],
       email :           ['', [Validators.required, Validators.email]],
       password :        ['', [Validators.required]],
       confirmPassword : ['', [Validators.required,this.passwordValidator().bind(this)]],
@@ -52,7 +52,7 @@ export class UserRegisterComponent implements OnInit {
     try {
       this.newUser = {
         name : user.name.trim(),
-        surname : user.surname.trim(),
+        surname : user.surname?.trim() || '',
         email : user.email.trim().toLowerCase(),
         password : user.password.trim(),
         terms: user.terms == true ? true : false

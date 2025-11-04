@@ -9,7 +9,7 @@
     "ng": "ng",
     "install-legacy": "npm install --legacy-peer-deps",
     "start": "set NODE_OPTIONS=--openssl-legacy-provider && node --no-deprecation ./node_modules/@angular/cli/bin/ng serve",
-    "build": "node --no-deprecation ./node_modules/@angular/cli/bin/ng build",
+    "build": "set NODE_OPTIONS=--openssl-legacy-provider && node --no-deprecation ./node_modules/@angular/cli/bin/ng build",
     "test": "set NODE_OPTIONS=--openssl-legacy-provider && node --no-deprecation ./node_modules/@angular/cli/bin/ng test",
     "watch": "ng build --watch --configuration development"
   },
@@ -19,7 +19,7 @@
     "@angular/common": "~12.2.17",
     "@angular/compiler": "~12.2.17",
     "@angular/core": "~12.2.17",
-    "@angular/fire": "6.1.5",
+    "@angular/fire": "^7.6.0",
     "@angular/forms": "~12.2.17",
     "@angular/material": "^12.2.13",
     "@angular/platform-browser": "~12.2.17",
@@ -36,7 +36,7 @@
     "@ionic/angular": "^5.9.3",
     "@ionic/lab": "^3.2.13",
 
-    "firebase": "8.10.1",
+    "firebase": "^9.23.0",
     "rxjs": "~6.6.7",
     "tslib": "^2.3.1",
     "zone.js": "~0.11.8"

@@ -1,22 +1,23 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { AppComponent } from './app.component';
 
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './shared/material/material.module';
 import { HttpClientModule } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { AngularFireModule } from '@angular/fire';
-import { AngularFireAuthModule } from '@angular/fire/auth';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
-//importar modulos para que  angular lo visualize
+import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
+import { provideAuth, getAuth } from '@angular/fire/auth';
+import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { UserModule } from './user/user.module';
 import { UserProfileModule } from './user-profile/user-profile.module';
 import { GeolocationModule } from './geolocation/geolocation.module';
 import { CommonsModule } from './commons/commons.module';
 import { IonicModule } from '@ionic/angular';
 import { LayoutModule } from '@angular/cdk/layout';
+import { HttpResponseBuilder } from './shared/response/httpResponse.model';
+import { AuthResponseModel } from './shared/response/authResponse.model';
 
 @NgModule({
   declarations: [
@@ -29,9 +30,9 @@ import { LayoutModule } from '@angular/cdk/layout';
     BrowserAnimationsModule,
     MaterialModule,
     HttpClientModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireAuthModule,
-    AngularFirestoreModule,
+    provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
+    provideAuth(() => getAuth()),
+    provideFirestore(() => getFirestore()),
     CommonsModule,
     UserModule,
     UserProfileModule,
@@ -39,7 +40,10 @@ import { LayoutModule } from '@angular/cdk/layout';
     IonicModule.forRoot(),
     LayoutModule
   ],
-  providers: [],
+  providers: [
+    HttpResponseBuilder,
+    AuthResponseModel
+  ],
   bootstrap: [AppComponent],
   exports: [
 
