@@ -7,17 +7,18 @@
   },
   "scripts": {
     "ng": "ng",
-  "install-legacy": "npm install --legacy-peer-deps",
-  "start": "set NODE_OPTIONS=--openssl-legacy-provider && ng serve",
-  "build": "set NODE_OPTIONS=--openssl-legacy-provider && ng build",
-  "test": "set NODE_OPTIONS=--openssl-legacy-provider && ng test",
-  "watch": "ng build --watch --configuration development"
+    "start": "set NODE_OPTIONS=--openssl-legacy-provider && ng serve",
+    "build": "ng build --configuration production",
+    "build:dev": "set NODE_OPTIONS=--openssl-legacy-provider && ng build",
+    "postinstall": "ngcc --properties es2015 browser module main",
+    "test": "set NODE_OPTIONS=--openssl-legacy-provider && ng test",
+    "watch": "ng build --watch --configuration development"
   },
   "dependencies": {
     "@angular/animations": "12.2.17",
     "@angular/cdk": "12.2.13",
     "@angular/common": "12.2.17",
-    "@angular/compiler": "12.2.13",
+    "@angular/compiler": "12.2.17",
     "@angular/core": "12.2.17",
     "@angular/fire": "7.6.1",
     "@angular/forms": "12.2.17",
