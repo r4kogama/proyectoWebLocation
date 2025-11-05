@@ -13,13 +13,15 @@ export class FormLoginComponent implements OnInit {
   @Input() formGroupLogin!: FormGroup;
   @Output() loginEvt = new EventEmitter();
   @Input() errorMessage: string = '';
-  constructor() {
-    console.log(this.formGroupLogin)
-   }
+  constructor() {}
 
 
   submitLogin(){
-    this.loginEvt.emit(this.formGroupLogin.value);
+    if (this.formGroupLogin.valid) {
+      this.loginEvt.emit(this.formGroupLogin.value);
+    } else {
+      this.formGroupLogin.markAllAsTouched(); // muestra errores
+    }
   }
   ngOnInit(): void {
   }

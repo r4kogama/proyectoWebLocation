@@ -8,6 +8,7 @@ import { MaterialModule } from '../shared/material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { CommonsModule } from '../commons/commons.module';
+import { FooterComponent } from '../commons/footer/footer.component';
 
 
 
@@ -17,20 +18,21 @@ import { CommonsModule } from '../commons/commons.module';
     UserRegisterComponent,
     FormRegisterComponent,
     FormLoginComponent,
+
   ],
   imports: [
     CommonModule,
     MaterialModule,
     ReactiveFormsModule,
     RouterModule,
-    CommonsModule
+    CommonsModule,
   ],
   exports: [
+    FooterComponent,
     UserLoginComponent,
     UserRegisterComponent,
     FormRegisterComponent,
     FormLoginComponent,
-
   ]
 })
 export class UserModule { }

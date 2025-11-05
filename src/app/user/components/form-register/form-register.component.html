@@ -14,16 +14,16 @@
                   <mat-form-field class="box-form-field" appearance="outline">
                       <mat-label>Name</mat-label>
                       <input matInput type="text" placeholder="Introduce tu nombre" formControlName="name"  >
-            <!--             <mat-error *ngIf="formGroupRegister.invalid && formGroupRegister.dirty">{{getErrorform('eml')}}</mat-error>
-            -->
                       <mat-hint align="end">Required *</mat-hint>
+                      <mat-error *ngIf="formGroupRegister.get('name')?.touched && formGroupRegister.get('name')?.hasError('required')">Campo nombre es obligatorio</mat-error>
+                      <mat-error *ngIf="formGroupRegister.get('name')?.dirty && formGroupRegister.get('name')?.hasError('maxlength')">Maximo 15 caracteres</mat-error>
+                      <mat-error *ngIf="formGroupRegister.get('name')?.hasError('pattern')">El formato no es correcto</mat-error>
                   </mat-form-field>
                 </p>
                 <p>
                   <mat-form-field class="box-form-field" appearance="outline">
                       <mat-label>Surname </mat-label>
                       <input matInput  type="text" placeholder="Introduce tus apellidos" formControlName="surname" >
-            <!--             <mat-error *ngIf="formGroupRegister.invalid && formGroupRegister.dirty">{{getErrorform("name")}}</mat-error>-->
                   </mat-form-field>
                 </p>
                 <p>
@@ -31,25 +31,34 @@
                       <mat-label>Email</mat-label>
                       <input matInput #regEmail type="email" placeholder="Introduce un email" formControlName="email" >
                       <mat-icon matSuffix class="material-icons">email</mat-icon>
-            <!--             <mat-error *ngIf="formGroupRegister.invalid && formGroupRegister.dirty">{{getErrorform("sur")}}</mat-error>-->
                       <mat-hint align="start">{{regEmail.value.length || 0}}/50 letras</mat-hint>
                       <mat-hint align="end">Required *</mat-hint>
+                      <mat-error *ngIf="formGroupRegister.get('email')?.touched && formGroupRegister.get('email')?.hasError('required')">Campo email es obligatorio</mat-error>
+                      <mat-error *ngIf="formGroupRegister.get('email')?.dirty && formGroupRegister.get('email')?.hasError('email')">Formato email no válido</mat-error>
                   </mat-form-field>
                 </p>
                 <p>
                   <mat-form-field class="box-form-field" appearance="outline">
                     <mat-label>Password</mat-label>
-                      <input type="text" matInput placeholder="Introduce un password" formControlName='password'>
-                      <!--  <mat-error *ngIf="formGroupRegister.invalid && formGroupRegister.dirty">{{getErrorform("name")}}</mat-error>-->
+                      <input matInput [type]=" hide ? 'password' : 'text' " matInput placeholder="Introduce un password" formControlName='password'>
+                      <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                      </button>
                       <mat-hint align="end">Required *</mat-hint>
-                  </mat-form-field>
-                </p>
-                <p>
-                  <mat-form-field class="box-form-field"  appearance="outline">
+                      <mat-error *ngIf="formGroupRegister.get('password')?.touched && formGroupRegister.get('password')?.hasError('required')">Campo password es obligatorio</mat-error>
+                      <mat-error *ngIf="formGroupRegister.get('password')?.dirty && formGroupRegister.get('password')?.hasError('minlength')">Minimo 6 caracteres</mat-error>
+                    </mat-form-field>
+                  </p>
+                  <p>
+                    <mat-form-field class="box-form-field"  appearance="outline">
                       <mat-label>Confirm Password</mat-label>
-                      <input type="text" matInput placeholder="Repite tu password" formControlName='confirmPassword'>
-                      <mat-error *ngIf="formGroupRegister.controls['confirmPassword'].errors?.mismatch==true">password no coincide</mat-error>
+                      <input matInput [type]=" hidePass ? 'password' : 'text' "  matInput placeholder="Repite tu password" formControlName='confirmPassword'>
+                      <button type="button" mat-icon-button matSuffix (click)="hidePass = !hidePass" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePass">
+                        <mat-icon>{{hidePass ? 'visibility_off' : 'visibility'}}</mat-icon>
+                      </button>
                       <mat-hint align="end">Required *</mat-hint>
+                      <mat-error *ngIf="formGroupRegister.get('password')?.dirty && formGroupRegister.get('password')?.hasError('required')">Repite el password</mat-error>
+                      <mat-error *ngIf="formGroupRegister.get('confirmPassword').errors?.mismatch==true">Password no coincide</mat-error>
                     </mat-form-field>
                 </p>
                 <div class="terms-checkbox">
@@ -76,6 +85,9 @@
           </div>
         </div>
       </div>
+      <footer>
+        <app-footer></app-footer>
+      </footer>
     </div>
   </div>
 </div>

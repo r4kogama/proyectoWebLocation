@@ -14,6 +14,11 @@ export class FormEditComponent implements OnInit {
   ngOnInit(): void {
   }
   submitUpdate(){
-    this.updatePersonalEvt.emit(this.formGroupUpdate.value);
+    if(this.formGroupUpdate.valid){
+      this.updatePersonalEvt.emit(this.formGroupUpdate.value);
+      this.formGroupUpdate.reset();
+    }else{
+      this.formGroupUpdate.markAllAsTouched();
+    }
   }
 }

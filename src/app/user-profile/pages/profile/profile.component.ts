@@ -13,13 +13,17 @@ export class ProfileComponent implements OnInit {
   error!: any;
   updateFormPersonal!: FormGroup;
   dataUser!:User;
-  constructor(private _route: ActivatedRoute, private _fireProfileService: FireProfileService, private _fb: FormBuilder) { }
+  constructor(
+     private _route: ActivatedRoute,
+     private _fireProfileService: FireProfileService,
+     private _fb: FormBuilder
+  ){}
 
   ngOnInit(): void {
     this.updateFormPersonal = this._fb.group({
-      name:     [''],
-      surname:  [''],
-      email:    ['', [Validators.email]]
+      name:     ['',[Validators.pattern(/^[A-Za-z\s]+$/),Validators.maxLength(15)]],
+      surname:  ['',[Validators.maxLength(50)]],
+      email:    ['',[Validators.email]]
     })
 
     this._route.paramMap.subscribe((params: Params) => {

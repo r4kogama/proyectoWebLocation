@@ -14,13 +14,15 @@
                   <mat-form-field appearance="outline">
                       <mat-label>Email</mat-label>
                       <input type="email" matInput   formControlName="email" placeholder="Introduce tu email">
+                      <mat-error *ngIf="formGroupLogin.get('email')?.touched && formGroupLogin.get('email')?.hasError('required')">Campo email es obligatorio</mat-error>
+                      <mat-error *ngIf="formGroupLogin.get('email')?.dirty && formGroupLogin.get('email')?.hasError('email')">Formato email no válido</mat-error>
                   </mat-form-field>
                 </p>
                 <p>
                   <mat-form-field appearance="outline">
                     <mat-label>Password</mat-label>
-                    <input matInput [type]=" hide ? 'password' : 'text' " formControlName="password" placeholder="Introduce tu password"  ngModel   [(ngModel)]='pass'>
-                    <mat-error *ngIf="formGroupLogin.controls.password.untouched && formGroupLogin.controls.password.errors?.required">Error en el password</mat-error>
+                    <input matInput [type]=" hide ? 'password' : 'text' " formControlName="password" placeholder="Introduce tu password">
+                    <mat-error *ngIf="formGroupLogin.get('password')?.touched  && formGroupLogin.get('password')?.hasError('required')">Campo password es obligatorio</mat-error>
                     <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                       <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                     </button>
@@ -44,7 +46,7 @@
           <div class="box-section-form">
             <div class="info-register title-info">
               <h2>Crear una cuenta</h2>
-              <p>Registrate y accede a tu perfil. Donde podrás crear grupos, ver tus locations y geolocalizarte a ti y a tus amigos.</p>
+              <p>Registrate y accede a tu perfil. Donde podrás crear grupos, ver tus ubicaciones y geolocalizarte a ti y a tus amigos.</p>
             </div>
             <div class="box-btn-register">
               <a [routerLink]="['/registro']">
@@ -57,4 +59,3 @@
     </div>
   </div>
 </div>
-<!-- [disabled]="formGroupLogin.untouched || formGroupLogin.controls.email.invalid" -->

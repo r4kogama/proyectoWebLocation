@@ -26,10 +26,10 @@ export class UserRegisterComponent implements OnInit {
 
   ngOnInit(): void {
     this.formRegister = this._fb.group({
-      name :            ['', Validators.required],
+      name :            ['', [Validators.required, Validators.pattern(/^[A-Za-z\s]+$/), Validators.maxLength(15)]],
       surname:          ['',],
       email :           ['', [Validators.required, Validators.email]],
-      password :        ['', [Validators.required]],
+      password :        ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword : ['', [Validators.required,this.passwordValidator().bind(this)]],
       terms:            [false, [Validators.required,Validators.requiredTrue]],
     })

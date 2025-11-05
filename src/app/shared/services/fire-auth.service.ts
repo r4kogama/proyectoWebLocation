@@ -15,6 +15,7 @@ export class FireAuthService {
   private _getAuth: Auth = getAuth();
 
 
+
   constructor(
     private _httpResponseBuilder: HttpResponseBuilder,
     private _authResponseModel : AuthResponseModel

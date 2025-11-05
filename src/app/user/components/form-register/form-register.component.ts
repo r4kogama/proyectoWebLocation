@@ -10,6 +10,8 @@ export class FormRegisterComponent implements OnInit {
   @Input() formGroupRegister!: FormGroup;
   @Output() registerEvt = new EventEmitter();
   @Input() errorMessage: string = '';
+  hide: boolean = true;
+  hidePass: boolean = true;
   constructor() { }
 
 
@@ -18,7 +20,11 @@ export class FormRegisterComponent implements OnInit {
   }
 
   submitRegister(){
-    this.registerEvt.emit(this.formGroupRegister.value);
-    this.formGroupRegister.reset();
+    if(this.formGroupRegister.valid){
+      this.registerEvt.emit(this.formGroupRegister.value);
+      this.formGroupRegister.reset();
+    }else{
+      this.formGroupRegister.markAllAsTouched();
+    }
   }
 }

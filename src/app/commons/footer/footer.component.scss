@@ -75,13 +75,19 @@
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    padding: 20px 10px;
-    font-size: .8em;
+    align-items: center;
+    padding: 10px 10px;
+    font-size: .7em;
     color: white;
     background: $rosado;
     .copyright{
       display: flex;
+      flex-wrap: wrap;
       align-items: center;
+      justify-content: center;
+      p{
+        margin: 0px;
+      }
       p:last-child{
         padding-left: 40px;
       }
