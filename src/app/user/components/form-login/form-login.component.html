@@ -40,6 +40,12 @@
             <div *ngIf="errorMessage" class="error-message">
               {{ errorMessage }}
             </div>
+            <div id="box-btn-google"class="box-btn-login">
+              <button type="button" class="btn-google btn-animation" (click)="submitLoginGoogle()" mat-raised-button>
+                <img src="../../../../assets/google-logo.svg" alt="logo singin">
+                <span>Continuar con Google</span>
+              </button>
+            </div>
           </div>
         </div>
         <div class="content-btn-regist">

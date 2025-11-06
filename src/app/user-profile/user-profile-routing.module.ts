@@ -14,6 +14,7 @@ const routes: Routes = [
     {path:'locations', component:HistoryLocationComponent},
      ]
   },
+  { path: 'login', component: UserLoginComponent },
   {path:'**',component:UserLoginComponent},
   {path:'', redirectTo:'login',pathMatch:'full'},
 ];

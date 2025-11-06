@@ -1,8 +1,8 @@
-import { AuthErrorMessages } from "../model/errorsMessages";
-import { SuccessMessages } from "../model/successMessages";
-import { FirebaseAuthErrorMap } from "../model/fbAuthErrorMap";
-import { HttpStatus } from "../model/httpStatusCode.model";
-import { ResponseData } from "../model/responseData.model";
+import { AuthErrorMessages } from "../../shared/model/errorsMessages";
+import { SuccessMessages } from "../../shared/model/successMessages";
+import { FirebaseAuthErrorMap } from "../../shared/model/fbAuthErrorMap";
+import { HttpStatus } from "../../shared/model/httpStatusCode.model";
+import { ResponseData } from "../../shared/model/responseData.model";
 
 export class AuthResponseModel {
 
@@ -22,6 +22,18 @@ export class AuthResponseModel {
 
     return {
       status: HttpStatus.UNAUTHORIZED,
+      message: message,
+      success: false,
+      error: {
+        code: errorCode,
+        message: message
+      }
+    };
+  }
+   signInProviderFailed(errorCode: string): ResponseData<never> {
+    const message = FirebaseAuthErrorMap[errorCode] || AuthErrorMessages.LOGIN_PROVIDER_ERROR;
+    return {
+      status: HttpStatus.BAD_REQUEST,
       message: message,
       success: false,
       error: {
@@ -68,6 +80,7 @@ export class AuthResponseModel {
     };
   }
 
+
   logoutSuccess(): ResponseData<void> {
     return {
       status: HttpStatus.OK,
@@ -87,5 +100,15 @@ export class AuthResponseModel {
       }
     };
   }
-
+  authNoToken(): ResponseData<never> {
+    return {
+      status: HttpStatus.UNAUTHORIZED,
+      message: AuthErrorMessages.AUTH_NO_TOKEN,
+      success: false,
+      error: {
+        code: 'AUTH_NO_TOKEN',
+        message: AuthErrorMessages.AUTH_NO_TOKEN
+      }
+    };
+  }
 }

@@ -12,6 +12,7 @@ export class FormLoginComponent implements OnInit {
   title!: string;
   @Input() formGroupLogin!: FormGroup;
   @Output() loginEvt = new EventEmitter();
+  @Output() googleEvt = new EventEmitter<void>();
   @Input() errorMessage: string = '';
   constructor() {}
 
@@ -22,6 +23,9 @@ export class FormLoginComponent implements OnInit {
     } else {
       this.formGroupLogin.markAllAsTouched(); // muestra errores
     }
+  }
+  submitLoginGoogle(){
+      this.googleEvt.emit();
   }
   ngOnInit(): void {
   }

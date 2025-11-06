@@ -1,8 +1,8 @@
-import { HttpStatus } from '../model/httpStatusCode.model';
-import { StatusResponse } from '../model/responseStatusManager.model';
-import { ResponseData } from '../model/responseData.model';
-import { SuccessMessages } from '../model/successMessages';
-import { AuthErrorMessages } from '../model/errorsMessages';
+import { HttpStatus } from '../../shared/model/httpStatusCode.model';
+import { StatusResponse } from '../../shared/model/responseStatusManager.model';
+import { ResponseData } from '../../shared/model/responseData.model';
+import { SuccessMessages } from '../../shared/model/successMessages';
+import { AuthErrorMessages } from '../../shared/model/errorsMessages';
 
 export class HttpResponseBuilder implements StatusResponse {
 

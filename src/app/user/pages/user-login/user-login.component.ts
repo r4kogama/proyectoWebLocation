@@ -59,5 +59,8 @@ export class UserLoginComponent implements OnInit {
     }
   }
 
+  loginGoogle(){
+    this._fireAuthService.signInGoogle();
+  }
 
 }

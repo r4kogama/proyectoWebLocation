@@ -4,6 +4,7 @@ $azul : #1ad5ff;
 $rosado : #FF0063;
 $amarillo: #FFEA19;
 $carbon: #323036;
+$google: #0285f8!important;
 
 /************
 *** body ***
@@ -77,6 +78,14 @@ img{
     width: 100%;
     padding: 0px 10px;
     margin: 20px 0px;
+  }
+  .btn-google{
+    background: $google;
+    box-shadow: 7px 7px 0px #0285f847!important;
+    outline-color: white!important;
+    &:hover{
+      box-shadow: 8px 8px 0px #0285f882!important;
+    }
   }
   .btn-animation{
     width: 100%;

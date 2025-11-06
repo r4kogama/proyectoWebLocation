@@ -15,8 +15,9 @@ export enum AuthErrorMessages {
   WRONG_PASSWORD = 'Contraseña incorrecta',
   USER_DISABLED = 'El usuario correspondiente a la credencial proporcionada ha sido deshabilitado',
   INVALID_EMAIL = 'La dirección de correo electrónico no es válida',
-  INVALID_CREDENTIAL = 'La credencial ha caducado o está mal formada',
+  INVALID_CREDENTIAL = 'Las credencials son incorrectas',
   TOO_MANY_REQUESTS = 'Las solicitudes se bloquearon debido a una actividad inusual. Vuelva a intentarlo después de un tiempo',
+  AUTH_ERROR = 'Error inesperado durante la autenticación.',
 
   // Errores de registro
   EMAIL_ALREADY_IN_USE = 'Ya tenía una cuenta con la dirección de correo electrónico proporcionada',
@@ -41,6 +42,7 @@ export enum AuthErrorMessages {
   INVALID_CUSTOM_TOKEN = 'El token proporcionado no es válido',
   REQUIRES_RECENT_LOGIN = 'El último tiempo de acceso del usuario no cumple con el límite de seguridad',
   SESSION_COOKIE_REVOKED = 'La sesión COOKIE ha expirado',
+  AUTH_NO_TOKEN = 'Error al obtener el token de acceso. Es posible que la autenticación del proveedor haya fallado.',
 
   // Errores de red
   NETWORK_REQUEST_FAILED = 'Error al conectarse a la red',
@@ -137,6 +139,7 @@ export enum AuthErrorMessages {
   LOGIN_ERROR = 'Error de inicio de sesión, verifica credenciales',
   LOGOUT_ERROR = 'Error de cierre de sesión',
   REGISTER_ERROR = 'Error registro de nuevo usuario, revisa tu conexión e inténtalo de nuevo.',
+  LOGIN_PROVIDER_ERROR = 'Erroe en el inicio de sesión con el proveedor seleccionado',
   NO_CONTENT = 'Success without content',
   BAD_REQUEST = 'Bad request',
   UNAUTHORIZED = 'Unauthorized',

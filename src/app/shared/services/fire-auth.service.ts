@@ -1,11 +1,12 @@
 import { inject, Injectable } from '@angular/core'; //Auth y Firestore ya no son clases Angular con decoradores
-import { Auth, getAuth, signInWithEmailAndPassword, signOut, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, getRedirectResult, signInWithRedirect, } from '@angular/fire/auth';
+import { Auth, getAuth, signInWithEmailAndPassword, signOut, createUserWithEmailAndPassword, GoogleAuthProvider, getRedirectResult, signInWithRedirect, OAuthCredential } from '@angular/fire/auth';
 import { Firestore, getFirestore } from '@angular/fire/firestore';
 import { User } from '../model/user.model';
 import { HttpResponseBuilder } from '../response/httpResponse.model';
 import { ResponseData } from '../model/responseData.model';
 import { AuthResponseModel } from '../response/authResponse.model';
 import { AuthErrorMessages } from '../model/errorsMessages';
+import { mapFireBaseUserToUser} from '../helpers/mapperUser.helper';
 @Injectable({
   providedIn: 'root'
 })
@@ -15,14 +16,12 @@ export class FireAuthService {
   private _getAuth: Auth = getAuth();
 
 
-
   constructor(
     private _httpResponseBuilder: HttpResponseBuilder,
-    private _authResponseModel : AuthResponseModel
+    private _authResponseModel : AuthResponseModel,
     ) {}
 
-
-  async signIn(user: User): Promise<ResponseData<User>> {
+    async signIn(user: User): Promise<ResponseData<User>> {
 
     try {
       const credentials = await signInWithEmailAndPassword(this._auth, user.email, user.password);
@@ -77,11 +76,57 @@ export class FireAuthService {
       return this._authResponseModel.registerFailed(errorCode);
     }
   }
-  setToken(id:string, token: string):void{
+
+  //iniciar redirect
+  async signInGoogle():Promise<void>{
+    try {
+      const provider = new GoogleAuthProvider();
+      provider.addScope('profile');
+      provider.addScope('email');
+      this.setToken('auth_redirect_provider', 'google');//rediret en proceso
+      //redirige a google
+      await signInWithRedirect(this._auth, provider);
+    }catch(error : any){
+      console.error('Error al redigirigir:', error)
+    }
+  }
+
+  //resultado de la redireccion
+  async checkRedirectResult():Promise<ResponseData<User> | null>{
+    try {
+      const result = await getRedirectResult(this._auth);
+
+      if(!result || !result.user){return null;}
+      this.removeToken('auth_redirect_provider');//borra flag de redireccion
+      const credentials: OAuthCredential = GoogleAuthProvider.credentialFromResult(result);
+
+      if(!credentials?.accessToken){
+        return this._authResponseModel.authNoToken();
+      }
+
+      this.setToken('accessToken', credentials.accessToken);//guarda token
+      const mapperUser = mapFireBaseUserToUser(result.user, 'google');
+      return this._authResponseModel.signInSuccess(mapperUser);
+    }catch(error : any){
+      const errorCode = error?.code || AuthErrorMessages.LOGIN_PROVIDER_ERROR;
+      return this._authResponseModel.signInProviderFailed(errorCode);
+    }
+  };
+
+
+
+
+  setToken(id:string, token: string) :void{
     sessionStorage.setItem(id, token);
   }
-  getToken():string{
+  getToken() :string{
     return sessionStorage.getItem('accessToken') as string;
+  }
+  hasToken() :boolean{
+    return !!sessionStorage.getItem('accessToken');
+  }
+  removeToken(id: string) :void{
+    sessionStorage.removeItem(id);
   }
 
 }

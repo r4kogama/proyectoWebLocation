@@ -4,6 +4,10 @@ export interface User {
   surname?: string;
   email: string;
   password: string;
-  terms?: boolean;
+  provider?: 'email' | 'google';
+  photoUrl?: string;
+  emailVerified?: boolean
+  createdAt?: Date;
+  terms: boolean;
 }
 
