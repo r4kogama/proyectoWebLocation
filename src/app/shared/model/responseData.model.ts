@@ -1,7 +1,5 @@
-import { User } from "./user.model";
 
 export interface ResponseData<T = unknown> {
-  user: User;
   status: number;
   message: string;
   data?: T;

@@ -17,8 +17,9 @@ export class AppComponent implements OnInit {
     //redireccion a cuentagoogle
      const result = await this._fireAuth.checkRedirectResult();
 
-    if (result?.success && result.user?.id) {
-      this._router.navigate([`/profile/${result.user.id}`]);
+    if (result?.success && result.data?.id) {
+      this._router.navigate([`/profile/${result.data.id}`]);
+      state: { user: result.data }
     }
   }
 }

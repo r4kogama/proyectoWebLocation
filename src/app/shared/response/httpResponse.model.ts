@@ -8,83 +8,83 @@ export class HttpResponseBuilder implements StatusResponse {
 
   // ========== Métodos Genéricos ==========
   //status: code, message: context, data: info
-  statusOk<T = unknown>(datas?: T, message?: string): ResponseData<T> {
+  statusOk<T = unknown>(dataUser?: T, message?: string): ResponseData<T> {
     return {
       status: HttpStatus.OK,
       message: message || SuccessMessages.SUCCESS,
-      data: datas,
+      data: dataUser,
       success: true
     };
   }
 
-  statusNoContent<T = unknown>(datas?: T, message?: string): ResponseData<T> {
+  statusNoContent<T = unknown>(dataUser?: T, message?: string): ResponseData<T> {
     return {
       status: HttpStatus.NO_CONTENT,
       message: message || AuthErrorMessages.NO_CONTENT,
-      data : datas,
+      data : dataUser,
       success: true
     }
   }
 
-  statusCreated<T = unknown>(datas?: T, message?: string): ResponseData<T> {
+  statusCreated<T = unknown>(dataUser?: T, message?: string): ResponseData<T> {
     return {
       status: HttpStatus.CREATED,
       message : message || SuccessMessages.CREATED,
-      data: datas,
+      data: dataUser,
       success: true
     }
   }
 
-  statusBadRequest<T = unknown>(datas?: T, message?: string): ResponseData<T> {
+  statusBadRequest<T = unknown>(dataUser?: T, message?: string): ResponseData<T> {
     return {
       status: HttpStatus.BAD_REQUEST,
       message: message || AuthErrorMessages.BAD_REQUEST,
-      data: datas,
+      data: dataUser,
       success: false
     }
   }
 
-  statusNotFound<T = unknown>(datas?: T, message?: string): ResponseData<T> {
+  statusNotFound<T = unknown>(dataUser?: T, message?: string): ResponseData<T> {
     return {
       status: HttpStatus.NOT_FOUND,
       message: message || AuthErrorMessages.NOT_FOUND,
-      data: datas,
+      data: dataUser,
       success: false
     }
   }
 
-  statusServerError<T = unknown>(datas?: T, message?: string): ResponseData<T> {
+  statusServerError<T = unknown>(dataUser?: T, message?: string): ResponseData<T> {
     return {
       status: HttpStatus.INTERNAL_SERVER_ERROR,
       message: message || AuthErrorMessages.INTERNAL_SERVER_ERROR,
-      data: datas,
+      data: dataUser,
       success: false
     }
   }
 
-  statusUnauthorized<T = unknown>(datas?: T, message?: string): ResponseData<T> {
+  statusUnauthorized<T = unknown>(dataUser?: T, message?: string): ResponseData<T> {
     return {
       status: HttpStatus.UNAUTHORIZED,
       message: message || AuthErrorMessages.UNAUTHORIZED,
-      data: datas,
+      data: dataUser,
       success: false
     }
   }
 
-  statusForbidden<T = unknown>(datas?: T, message?: string): ResponseData<T> {
+  statusForbidden<T = unknown>(dataUser?: T, message?: string): ResponseData<T> {
     return {
       status: HttpStatus.FORBIDDEN,
       message: message || AuthErrorMessages.FORBIDDEN,
-      data: datas,
+      data: dataUser,
       success: false
     }
   }
 
-  statusInvalidData<T = unknown>(datas?: T, message?: string): ResponseData<T> {
+  statusInvalidData<T = unknown>(dataUser?: T, message?: string): ResponseData<T> {
     return {
       status: HttpStatus.BAD_REQUEST,
       message: message || AuthErrorMessages.INVALID_DATA,
-      data: datas,
+      data: dataUser,
       success: false
     }
   }

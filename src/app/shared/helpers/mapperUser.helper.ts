@@ -1,7 +1,7 @@
 import { User } from "../model/user.model";
 
 // Convierte el User de Firebase en User personalizado
-export const mapFireBaseUserToUser = (firebaseUser: any, provider: 'email' | 'google'): User => {
+export const mapFireBaseUserToUser = (firebaseUser: any, provider: 'email' | 'google' = 'email'): User => {
     const fullName = firebaseUser.displayName || '';
     const nameParts = fullName.split(' ');
     const name = nameParts[0] || '';

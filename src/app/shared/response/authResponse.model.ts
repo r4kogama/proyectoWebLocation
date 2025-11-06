@@ -8,15 +8,22 @@ export class AuthResponseModel {
 
   // ========== Métodos Específicos de Autenticación ==========
 
-  signInSuccess<T>(userData: T): ResponseData<T> {
+  signInSuccess<T>(mapperUser: T): ResponseData<T> {
     return {
       status: HttpStatus.OK,
       message: SuccessMessages.LOGIN_SUCCESS,
-      data: userData,
+      data: mapperUser,
       success: true
     };
   }
-
+  registerSuccess<T>(mapperUser: T): ResponseData<T> {
+    return {
+      status: HttpStatus.CREATED,
+      message: SuccessMessages.REGISTER_SUCCESS,
+      data: mapperUser,
+      success: true
+    };
+  }
   signInFailed(errorCode: string): ResponseData<never> {
     const message = FirebaseAuthErrorMap[errorCode] || AuthErrorMessages.LOGIN_ERROR;
 
@@ -56,16 +63,6 @@ export class AuthResponseModel {
       }
     };
   }
-
-  registerSuccess<T>(userData: T): ResponseData<T> {
-    return {
-      status: HttpStatus.CREATED,
-      message: SuccessMessages.REGISTER_SUCCESS,
-      data: userData,
-      success: true
-    };
-  }
-
   registerFailed(errorCode: string): ResponseData<never> {
     const message = FirebaseAuthErrorMap[errorCode] || AuthErrorMessages.REGISTER_ERROR;
 
@@ -79,8 +76,6 @@ export class AuthResponseModel {
       }
     };
   }
-
-
   logoutSuccess(): ResponseData<void> {
     return {
       status: HttpStatus.OK,
@@ -88,7 +83,6 @@ export class AuthResponseModel {
       success: true
     };
   }
-
   authNoUser(): ResponseData<never> {
     return {
       status: HttpStatus.INTERNAL_SERVER_ERROR,
