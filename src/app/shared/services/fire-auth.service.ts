@@ -36,7 +36,7 @@ export class FireAuthService {
 
       return this._authResponseModel.authNoUser();
     } catch (error: any) {
-      const errorCode = error?.code || AuthErrorMessages.LOGIN_ERROR;
+      const errorCode: string = error?.code || AuthErrorMessages.LOGIN_ERROR;
       return this._authResponseModel.signInFailed(errorCode);
     }
   }
@@ -46,7 +46,7 @@ export class FireAuthService {
       sessionStorage.removeItem('accessToken');
       return this._authResponseModel.logoutSuccess();
     } catch (error: any) {
-      const errorCode = error?.code || AuthErrorMessages.LOGOUT_ERROR;
+      const errorCode: string = error?.code || AuthErrorMessages.LOGOUT_ERROR;
       return this._authResponseModel.signOutFailed(errorCode);
     }
   }
@@ -72,7 +72,7 @@ export class FireAuthService {
 
       return this._authResponseModel.authNoUser();
     } catch (error: any) {
-      const errorCode = error?.code || AuthErrorMessages.REGISTER_ERROR;
+      const errorCode: string = error?.code || AuthErrorMessages.REGISTER_ERROR;
       return this._authResponseModel.registerFailed(errorCode);
     }
   }
@@ -83,10 +83,17 @@ export class FireAuthService {
       const provider = new GoogleAuthProvider();
       provider.addScope('profile');
       provider.addScope('email');
+      provider.setCustomParameters({
+        'prompt': 'select_account',
+        'access_type': 'offline',
+        'response_type': 'code'
+      });
       this.setToken('auth_redirect_provider', 'google');//rediret en proceso
       //redirige a google
       await signInWithRedirect(this._auth, provider);
     }catch(error : any){
+      const errorCode: string = error?.code || AuthErrorMessages.ERROR_REDIRECT;
+      this._authResponseModel.signInProviderFailed(errorCode);
       console.error('Error al redigirigir:', error)
     }
   }
@@ -108,7 +115,8 @@ export class FireAuthService {
       const mapperUser = mapFireBaseUserToUser(result.user, 'google');
       return this._authResponseModel.signInSuccess(mapperUser);
     }catch(error : any){
-      const errorCode = error?.code || AuthErrorMessages.LOGIN_PROVIDER_ERROR;
+      console.error('checkRedirectResult:', error)
+      const errorCode :string = error?.code || AuthErrorMessages.LOGIN_PROVIDER_ERROR;
       return this._authResponseModel.signInProviderFailed(errorCode);
     }
   };

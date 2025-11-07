@@ -25,7 +25,7 @@ export class AuthResponseModel {
     };
   }
   signInFailed(errorCode: string): ResponseData<never> {
-    const message = FirebaseAuthErrorMap[errorCode] || AuthErrorMessages.LOGIN_ERROR;
+    const message: string = FirebaseAuthErrorMap[errorCode] || AuthErrorMessages.LOGIN_ERROR;
 
     return {
       status: HttpStatus.UNAUTHORIZED,
@@ -38,7 +38,7 @@ export class AuthResponseModel {
     };
   }
    signInProviderFailed(errorCode: string): ResponseData<never> {
-    const message = FirebaseAuthErrorMap[errorCode] || AuthErrorMessages.LOGIN_PROVIDER_ERROR;
+    const message: string = FirebaseAuthErrorMap[errorCode] || AuthErrorMessages.LOGIN_PROVIDER_ERROR;
     return {
       status: HttpStatus.BAD_REQUEST,
       message: message,
@@ -51,7 +51,7 @@ export class AuthResponseModel {
   }
 
   signOutFailed(errorCode: string): ResponseData<never> {
-    const message = FirebaseAuthErrorMap[errorCode] || AuthErrorMessages.LOGOUT_ERROR;
+    const message: string = FirebaseAuthErrorMap[errorCode] || AuthErrorMessages.LOGOUT_ERROR;
 
     return {
       status: HttpStatus.BAD_REQUEST,
@@ -64,7 +64,7 @@ export class AuthResponseModel {
     };
   }
   registerFailed(errorCode: string): ResponseData<never> {
-    const message = FirebaseAuthErrorMap[errorCode] || AuthErrorMessages.REGISTER_ERROR;
+    const message: string = FirebaseAuthErrorMap[errorCode] || AuthErrorMessages.REGISTER_ERROR;
 
     return {
       status: HttpStatus.BAD_REQUEST,

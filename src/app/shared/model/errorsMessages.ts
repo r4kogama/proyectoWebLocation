@@ -9,7 +9,7 @@ export enum AuthErrorMessages {
   OPERATION_NOT_SUPPORTED_IN_THIS_ENVIRONMENT = 'Esta operación no se admite en el entorno que se realiza. Asegúrese de que debe ser http o https',
   INVALID_API_KEY = 'La clave API proporcionada no es válida',
   APP_NOT_AUTHORIZED = 'Aplicación no autorizada para autenticarse con la clave dada',
-
+  ERROR_REDIRECT = 'Error desconocido al redirigir a la cuenta del proveedor seleccionado',
   // Errores de autenticación - Login
   USER_NOT_FOUND = 'Usuario no existente',
   WRONG_PASSWORD = 'Contraseña incorrecta',
@@ -45,7 +45,7 @@ export enum AuthErrorMessages {
   AUTH_NO_TOKEN = 'Error al obtener el token de acceso. Es posible que la autenticación del proveedor haya fallado.',
 
   // Errores de red
-  NETWORK_REQUEST_FAILED = 'Error al conectarse a la red',
+  NETWORK_REQUEST_FAILED = 'Fallo de red por mala conexión',
   TIMEOUT = 'Tiempo de respuesta excedido. Es posible que el dominio no esté autorizado para realizar operaciones',
 
   // Errores de reCAPTCHA
@@ -54,10 +54,10 @@ export enum AuthErrorMessages {
   // Errores de popup/ventana emergente
   CANCELLED_POPUP_REQUEST = 'Solo se permite una solicitud de ventana emergente a la vez',
   POPUP_BLOCKED = 'El navegador ha bloqueado la ventana emergente',
-  POPUP_CLOSED_BY_USER = 'El usuario cerró la ventana emergente sin completar el inicio de sesión en el proveedor',
+  POPUP_CLOSED_BY_USER = 'El usuario cerró la ventana antes de completar',
 
   // Errores de dominio
-  UNAUTHORIZED_DOMAIN = 'El dominio de la aplicación no está autorizado para realizar operaciones',
+  UNAUTHORIZED_DOMAIN = 'El dominio no está autorizado en Firebase',
   INVALID_DYNAMIC_LINK_DOMAIN = 'El dominio de enlace dinámico proporcionado, no está autorizado o configurado en el proyecto actual',
   UNAUTHORIZED_CONTINUE_URI = 'El dominio de la siguiente URL no está en la lista blanca',
 
@@ -65,7 +65,7 @@ export enum AuthErrorMessages {
   INVALID_CONTINUE_URI = 'La siguiente URL proporcionada en la solicitud no es válida',
   MISSING_CONTINUE_URI = 'La siguiente URL debe proporcionarse en la solicitud',
   INVALID_PAGE_TOKEN = 'La siguiente URL proporcionada en la solicitud no es válida',
-
+  INVALID_REDIRECT_URI= 'La URI de redirección no está bien configurada',
   // Errores de teléfono
   INVALID_PHONE_NUMBER = 'El número de teléfono está en un formato no válido (estándar E.164)',
   MISSING_PHONE_NUMBER = 'El número de teléfono es obligatorio',
@@ -139,7 +139,7 @@ export enum AuthErrorMessages {
   LOGIN_ERROR = 'Error de inicio de sesión, verifica credenciales',
   LOGOUT_ERROR = 'Error de cierre de sesión',
   REGISTER_ERROR = 'Error registro de nuevo usuario, revisa tu conexión e inténtalo de nuevo.',
-  LOGIN_PROVIDER_ERROR = 'Erroe en el inicio de sesión con el proveedor seleccionado',
+  LOGIN_PROVIDER_ERROR = 'Error en el inicio de sesión con el proveedor seleccionado',
   NO_CONTENT = 'Success without content',
   BAD_REQUEST = 'Bad request',
   UNAUTHORIZED = 'Unauthorized',

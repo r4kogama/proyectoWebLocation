@@ -65,6 +65,7 @@ export const FirebaseAuthErrorMap: Record<string, string> = {
   'auth/invalid-continue-uri': AuthErrorMessages.INVALID_CONTINUE_URI,
   'auth/missing-continue-uri': AuthErrorMessages.MISSING_CONTINUE_URI,
   'auth/invalid-page-token': AuthErrorMessages.INVALID_PAGE_TOKEN,
+  'auth/invalid-redirect-uri': AuthErrorMessages.INVALID_REDIRECT_URI,
 
   // Errores de teléfono
   'auth/invalid-phone-number': AuthErrorMessages.INVALID_PHONE_NUMBER,
