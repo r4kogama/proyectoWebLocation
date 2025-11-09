@@ -1,6 +1,9 @@
 @import '../../../scss/colors';
 
-
+.logo{
+  filter: drop-shadow(2px 1px 0px #dedcdc);
+  transition: all 250ms ease-in;
+}
 #wrapper-footer{
   display: flex;
   justify-content: space-between;

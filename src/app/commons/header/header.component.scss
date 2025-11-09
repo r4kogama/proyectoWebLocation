@@ -1,5 +1,9 @@
-
 .logo{
-  display: block;
-  cursor: pointer;
+  filter: drop-shadow(2px 1px 0px #b6b6bd);
+  transition: all 250ms ease-in;
+  &:hover{
+    filter: drop-shadow(3px 3px 2px #dddde3);
+    transition: all 250ms ease-out;
+  }
 }
+
