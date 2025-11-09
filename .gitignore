@@ -47,3 +47,5 @@ Thumbs.db
 # Environment files with secrets
 src/environments/environment.ts
 src/app/shared/docs
+
+.vercel
