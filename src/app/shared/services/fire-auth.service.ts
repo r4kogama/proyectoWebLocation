@@ -1,5 +1,6 @@
 import { inject, Injectable } from '@angular/core'; //Auth y Firestore ya no son clases Angular con decoradores
 import { Auth, getAuth, signInWithEmailAndPassword, signOut, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, OAuthCredential } from '@angular/fire/auth';
+import { Router } from '@angular/router';
 import { Firestore, getFirestore } from '@angular/fire/firestore';
 import { User } from '../model/user.model';
 import { HttpResponseBuilder } from '../response/httpResponse.model';
@@ -19,6 +20,7 @@ export class FireAuthService {
   constructor(
     private _httpResponseBuilder: HttpResponseBuilder,
     private _authResponseModel : AuthResponseModel,
+    private _router: Router
     ) {}
 
     async signIn(user: User): Promise<ResponseData<User>> {
@@ -89,20 +91,36 @@ export class FireAuthService {
         'response_type': 'code'
       });
       this.setToken('auth_popup_provider', 'google');
-      await signInWithPopup(this._auth, provider);
+      const result = await signInWithPopup(this._auth, provider);
+
+      // Procesar resultado del popup
+      if (!result || !result.user) {
+        this._authResponseModel.signInProviderFailed(AuthErrorMessages.LOGIN_PROVIDER_ERROR);
+        return;
+      }
+
+      const credentials: OAuthCredential | null = GoogleAuthProvider.credentialFromResult(result);
+      if (!credentials?.accessToken) {
+        this._authResponseModel.authNoToken();
+        return;
+      }
+
+      this.setToken('accessToken', credentials.accessToken);
+      const mapperUser = mapFireBaseUserToUser(result.user, 'google');
+      this._authResponseModel.signInSuccess(mapperUser);
+
+      // Navegar al perfil
+      try {
+        await this._router.navigate([`/profile/${mapperUser.id}`], { state: { user: mapperUser } });
+      } catch (navErr) {
+        console.error('Error en la navegación al perfil', navErr);
+      }
     }catch(error : any){
       const errorCode: string = error?.code || AuthErrorMessages.ERROR_REDIRECT;
       this._authResponseModel.signInProviderFailed(errorCode);
       console.error('Error al iniciar popup:', error)
     }
   }
-
-  //resultado del popup (no necesario en popup, pero se puede adaptar si quieres manejar el usuario aquí)
-  // async checkPopupResult():Promise<ResponseData<User> | null>{
-  //   // Implementación opcional si necesitas manejar el resultado del popup
-  // }
-
-
 
 
   setToken(id:string, token: string) :void{
