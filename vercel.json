@@ -14,11 +14,7 @@
     }
   ],
   "outputDirectory": "dist/HylyfWebApp",
-  "redirects": [
-    { "source": "/__/auth/:path*", "destination": "https://findly-v1app.firebaseapp.com/__/auth/:path*", "permanent": false }
-  ],
   "rewrites": [
-    { "source": "/__/auth/handler", "destination": "/__/auth/handler.html" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
