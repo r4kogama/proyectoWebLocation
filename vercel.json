@@ -15,13 +15,13 @@
       ]
     },
     {
-      "source": "/*.js",
+      "source": "/:path*.js",
       "headers": [
         { "key": "Content-Type", "value": "application/javascript" }
       ]
     },
     {
-      "source": "/*.css",
+      "source": "/:path*.css",
       "headers": [
         { "key": "Content-Type", "value": "text/css" }
       ]
