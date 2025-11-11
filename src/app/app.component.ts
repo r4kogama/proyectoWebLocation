@@ -17,19 +17,7 @@ export class AppComponent implements OnInit {
     private _authResponseModel: AuthResponseModel
   ) {}
   async ngOnInit(): Promise<void> {
-    try {
-      //redireccion a cuentagoogle
-      const result = await this._fireAuth.checkRedirectResult();
-
-      if (result?.success && result.data?.id) {
-        await this._router.navigate([`/profile/${result.data.id}`], {
-          state: { user: result.data }
-        });
-      }
-    } catch (error) {
-      console.error('Error en la redirección de Google:', error);
-      const errorCode: string = error?.code || AuthErrorMessages.ERROR_REDIRECT;
-      this._authResponseModel.signInProviderFailed(errorCode);
-    }
+    // Con signInWithPopup ya no usamos el handler de redirect.
+    // Si necesitas manejar un resultado del popup, hacerlo mediante observables de Auth en otro servicio.
   }
 }
