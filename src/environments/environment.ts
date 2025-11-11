@@ -7,7 +7,7 @@ export const environment = {
   production: false,
   firebaseConfig : {
     apiKey: "AIzaSyAA1Wrnku_HeBa1cXhkmjjQ_EGpVtf0T_w",
-    authDomain: "findly-v1app.firebaseapp.com",
+    authDomain: "findlyapp.vercel.app",
     projectId: "findly-v1app",
     storageBucket: "findly-v1app.firebasestorage.app",
     messagingSenderId: "857355157435",
