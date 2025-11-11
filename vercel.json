@@ -15,6 +15,7 @@
   ],
   "outputDirectory": "dist/HylyfWebApp",
   "rewrites": [
+    { "source": "/__/auth/handler", "destination": "/__/auth/handler.html" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
