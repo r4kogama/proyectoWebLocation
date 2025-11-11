@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core'; //Auth y Firestore ya no son clases Angular con decoradores
-import { Auth, getAuth, signInWithEmailAndPassword, signOut, createUserWithEmailAndPassword, GoogleAuthProvider, getRedirectResult, signInWithRedirect, OAuthCredential } from '@angular/fire/auth';
+import { Auth, getAuth, signInWithEmailAndPassword, signOut, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, OAuthCredential } from '@angular/fire/auth';
 import { Firestore, getFirestore } from '@angular/fire/firestore';
 import { User } from '../model/user.model';
 import { HttpResponseBuilder } from '../response/httpResponse.model';
@@ -77,7 +77,7 @@ export class FireAuthService {
     }
   }
 
-  //iniciar redirect
+  //iniciar popup
   async signInGoogle():Promise<void>{
     try {
       const provider = new GoogleAuthProvider();
@@ -88,38 +88,19 @@ export class FireAuthService {
         'access_type': 'offline',
         'response_type': 'code'
       });
-      this.setToken('auth_redirect_provider', 'google');//rediret en proceso
-      //redirige a google
-      await signInWithRedirect(this._auth, provider);
+      this.setToken('auth_popup_provider', 'google');
+      await signInWithPopup(this._auth, provider);
     }catch(error : any){
       const errorCode: string = error?.code || AuthErrorMessages.ERROR_REDIRECT;
       this._authResponseModel.signInProviderFailed(errorCode);
-      console.error('Error al redigirigir:', error)
+      console.error('Error al iniciar popup:', error)
     }
   }
 
-  //resultado de la redireccion
-  async checkRedirectResult():Promise<ResponseData<User> | null>{
-    try {
-      const result = await getRedirectResult(this._auth);
-
-      if(!result || !result.user){return null;}
-      this.removeToken('auth_redirect_provider');//borra flag de redireccion
-      const credentials: OAuthCredential = GoogleAuthProvider.credentialFromResult(result);
-
-      if(!credentials?.accessToken){
-        return this._authResponseModel.authNoToken();
-      }
-
-      this.setToken('accessToken', credentials.accessToken);//guarda token
-      const mapperUser = mapFireBaseUserToUser(result.user, 'google');
-      return this._authResponseModel.signInSuccess(mapperUser);
-    }catch(error : any){
-      console.error('checkRedirectResult:', error)
-      const errorCode :string = error?.code || AuthErrorMessages.LOGIN_PROVIDER_ERROR;
-      return this._authResponseModel.signInProviderFailed(errorCode);
-    }
-  };
+  //resultado del popup (no necesario en popup, pero se puede adaptar si quieres manejar el usuario aquí)
+  // async checkPopupResult():Promise<ResponseData<User> | null>{
+  //   // Implementación opcional si necesitas manejar el resultado del popup
+  // }
 
 
 
