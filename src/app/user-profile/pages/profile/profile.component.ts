@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
 import { User } from 'src/app/shared/model/user.model';
+import { FireAuthService } from 'src/app/shared/services/fire-auth.service';
 import { FireProfileService } from 'src/app/shared/services/fire-profile.service';
 
 @Component({
@@ -16,6 +17,7 @@ export class ProfileComponent implements OnInit {
   constructor(
      private _route: ActivatedRoute,
      private _fireProfileService: FireProfileService,
+     private _fireAuthService: FireAuthService,
      private _fb: FormBuilder
   ){}
 
@@ -41,7 +43,9 @@ export class ProfileComponent implements OnInit {
     })
   }
 
-
+ logOutProfile(){
+  this._fireAuthService.signOut();
+ }
 
 /* if(data.Aa !==''){
               this.formGroup = this.fb.group(

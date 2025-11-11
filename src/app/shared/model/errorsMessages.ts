@@ -95,7 +95,7 @@ export enum AuthErrorMessages {
   INVALID_PASSWORD = 'La contraseña no es válida, debe tener al menos 6 caracteres de longitud',
   INVALID_PHOTO_URL = 'La URL de la foto del usuario no es válida',
   INVALID_UID = 'El identificador proporcionado debe tener un máximo de 128 caracteres',
-  NULL_USER = 'El usuario actual es nulo',
+  NULL_USER = 'No se encontró un usuario actual. Por favor, inicie sesión para continuar',
   RESERVED_CLAIMS = 'Una o más propiedades personalizadas proporcionaron palabras reservadas usadas',
 
   // Errores de hash (importación de usuarios)

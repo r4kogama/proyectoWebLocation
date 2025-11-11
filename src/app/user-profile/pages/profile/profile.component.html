@@ -1,5 +1,5 @@
 
-<nav-dashboard [dataPersonal]='dataUser'></nav-dashboard>
+<nav-dashboard [dataPersonal]='dataUser' (logOutEvt)="logOutProfile()"></nav-dashboard>
 <!-- <form-edit
 [formGroupUpdate]='updateFormPersonal'
 (updatePersonalEvt)='updateProfile($event)'

@@ -10,8 +10,8 @@ import { User } from 'src/app/shared/model/user.model';
   styleUrls: ['./nav-dashboard.component.scss']
 })
 export class NavDashboardComponent implements OnInit {
-  @Input() dataPersonal!:User;
-
+  @Input() dataPersonal!: User;
+  @Output() logOutEvt: EventEmitter<any> = new EventEmitter();
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches),
@@ -25,7 +25,7 @@ export class NavDashboardComponent implements OnInit {
     console.log(this.dataPersonal);
   }
   logOut(){
-
+    this.logOutEvt.emit();
   }
 
 }

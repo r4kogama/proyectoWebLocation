@@ -76,7 +76,7 @@ export class AuthResponseModel {
       }
     };
   }
-  logoutSuccess(): ResponseData<void> {
+  logOutSuccess(): ResponseData<void> {
     return {
       status: HttpStatus.OK,
       message: SuccessMessages.LOGOUT_SUCCESS,
@@ -102,6 +102,18 @@ export class AuthResponseModel {
       error: {
         code: 'AUTH_NO_TOKEN',
         message: AuthErrorMessages.AUTH_NO_TOKEN
+      }
+    };
+  }
+  handleNullUser(errorCode: string): ResponseData<never> {
+    const message: string = FirebaseAuthErrorMap[errorCode] || AuthErrorMessages.NULL_USER;
+    return {
+      status: HttpStatus.UNAUTHORIZED,
+      message: message,
+      success: false,
+      error: {
+        code: 'NULL_USER',
+        message: message
       }
     };
   }

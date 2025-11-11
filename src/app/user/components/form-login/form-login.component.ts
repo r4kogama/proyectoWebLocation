@@ -11,8 +11,8 @@ export class FormLoginComponent implements OnInit {
   pass!: string;
   title!: string;
   @Input() formGroupLogin!: FormGroup;
-  @Output() loginEvt = new EventEmitter();
-  @Output() googleEvt = new EventEmitter<void>();
+  @Output() loginEvt: EventEmitter<any> = new EventEmitter();
+  @Output() googleEvt: EventEmitter<any> = new EventEmitter<void>();
   @Input() errorMessage: string = '';
   constructor() {}
 

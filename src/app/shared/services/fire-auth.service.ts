@@ -46,7 +46,7 @@ export class FireAuthService {
     try {
       await signOut(this._auth);
       sessionStorage.removeItem('accessToken');
-      return this._authResponseModel.logoutSuccess();
+      return this._authResponseModel.logOutSuccess();
     } catch (error: any) {
       const errorCode: string = error?.code || AuthErrorMessages.LOGOUT_ERROR;
       return this._authResponseModel.signOutFailed(errorCode);
