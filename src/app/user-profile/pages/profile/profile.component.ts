@@ -12,7 +12,9 @@ import { FireProfileService } from 'src/app/shared/services/fire-profile.service
 })
 export class ProfileComponent implements OnInit {
   error!: any;
-  updateFormPersonal!: FormGroup;
+  formUpdateProfile!: FormGroup;
+  formAuthProfile!: FormGroup;
+  formDeleteProfile!: FormGroup;
   dataUser!:User;
   constructor(
      private _route: ActivatedRoute,
@@ -22,10 +24,16 @@ export class ProfileComponent implements OnInit {
   ){}
 
   ngOnInit(): void {
-    this.updateFormPersonal = this._fb.group({
+    this.formUpdateProfile = this._fb.group({
       name:     ['',[Validators.pattern(/^[A-Za-z\s]+$/),Validators.maxLength(15)]],
       surname:  ['',[Validators.maxLength(50)]],
       email:    ['',[Validators.email]]
+    })
+    this.formAuthProfile = this._fb.group({
+      password : ['', [Validators.required, Validators.minLength(6)]],
+    })
+    this.formDeleteProfile = this._fb.group({
+      password : ['', [Validators.required, Validators.minLength(6)]],
     })
 
     this._route.paramMap.subscribe((params: Params) => {
@@ -43,24 +51,20 @@ export class ProfileComponent implements OnInit {
     })
   }
 
- logOutProfile(){
+  logOutProfile(){
   this._fireAuthService.signOut();
- }
+  }
 
-/* if(data.Aa !==''){
-              this.formGroup = this.fb.group(
-                {
-                  name: data.displayName,
-                  surname: data.displayName,
-                  email: data.email,
-                }
-              )
-            }else{
-              this.router.navigate(['/login']);
-            } */
-
-  updateProfile(user: User){
+  updateProfile(user:User){
 
   }
+
+  updatePassword(user: User){
+      console.log('Eliminar perfil:', user);
+  }
+  deleteProfile(user: User){
+    console.log('Actualizar contraseña:', user);
+  }
+
 
 }

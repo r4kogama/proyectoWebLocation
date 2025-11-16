@@ -1,0 +1,61 @@
+<div class="background-section">
+  <mat-card class="dashboard-card">
+    <mat-card-header>
+      <mat-card-title>
+        <h2>Authentication</h2>
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="dashboard-card-content">
+      <h3>Cambiar contraseña</h3>
+      <div  class="form-update-account wrapper-update-form">
+        <form  [formGroup]="formGroupAuth" class="form-containt" (ngSubmit)="submitPassword()">
+            <mat-form-field appearance="outline">
+              <mat-label>Password</mat-label>
+              <input matInput [type]=" hide ? 'password' : 'text' " formControlName="password" placeholder="Introduce tu password">
+              <mat-error *ngIf="formGroupAuth.get('password')?.touched  && formGroupAuth.get('password')?.hasError('required')">Campo password es obligatorio</mat-error>
+              <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
+            </mat-form-field>
+            <div class="form-update-btn">
+                <div class="container-btn">
+                    <button type="submit" mat-raised-button
+                            class="btn-click">
+                            <span class="txt-btn">Save</span>
+                            <mat-icon>save</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </form>
+      </div>
+    </mat-card-content>
+    <mat-card-content class="dashboard-card-content">
+      <h3>Eliminar cuenta</h3>
+      <div  class="form-update-account wrapper-update-form">
+        <p>Tu cuenta personal y todo su contenido se eliminarán permanentemente de la plataforma Findly.</p>
+        <p>Esta acción es irreversible, así que procede con precaución.</p>
+        <form  [formGroup]="formGroupDelete" class="form-containt" (ngSubmit)="submitDelete()">
+            <mat-toolbar>
+              <span>Introduce tu email para eliminar la cuenta</span>
+            </mat-toolbar>
+              <mat-form-field appearance="outline">
+                <mat-label>Email</mat-label>
+                <input type="email" matInput   formControlName="email" placeholder="Introduce tu email">
+                <mat-error *ngIf="formGroupDelete.get('email')?.touched && formGroupDelete.get('email')?.hasError('required')">Campo email es obligatorio</mat-error>
+                <mat-error *ngIf="formGroupDelete.get('email')?.dirty && formGroupDelete.get('email')?.hasError('email')">Formato email no válido</mat-error>
+              </mat-form-field>
+            <div class="form-update-btn">
+                <div class="container-btn">
+                    <button type="submit" mat-raised-button
+                            class="btn-click">
+                            <span class="txt-btn">Delete</span>
+                            <mat-icon>delete_forever</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </form>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+

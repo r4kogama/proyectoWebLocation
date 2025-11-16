@@ -3,9 +3,12 @@ import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn,
 import { Router } from '@angular/router';
 import { ResponseData } from 'src/app/shared/model/responseData.model';
 import { User } from 'src/app/shared/model/user.model';
-import { AuthResponseModel } from 'src/app/shared/response/authResponse.model';
 import { FireAuthService } from 'src/app/shared/services/fire-auth.service';
 import { FireProfileService } from 'src/app/shared/services/fire-profile.service';
+import { FirebaseAuthErrorMap } from 'src/app/shared/model/fbAuthErrorMap';
+import { AuthErrorMessages } from 'src/app/shared/model/errorsMessages';
+import { FormNormalizePipe } from 'src/app/shared/pipes/form-normalize.pipe';
+import { NormalizeService } from 'src/app/shared/services/normalize.service';
 
 @Component({
   selector: 'app-user-register',
@@ -21,7 +24,7 @@ export class UserRegisterComponent implements OnInit {
     private _router:Router,
     private _fireAuthService: FireAuthService,
     private _fireProfileService: FireProfileService,
-    private _AuthResponseModel: AuthResponseModel
+    private _formalize: NormalizeService
   ) { }
 
   ngOnInit(): void {
@@ -41,31 +44,22 @@ export class UserRegisterComponent implements OnInit {
   }
 
 
-  async registerUser(user:User){
+  async registerUser(user: User) {
     // Validar formulario antes de enviar
     if (this.formRegister.invalid) {
       this.errorMessage = 'Por favor, rellena todos los campos correctamente';
       return;
     }
     this.errorMessage = '';
-
     try {
-      this.newUser = {
-        name : user.name.trim(),
-        surname : user.surname?.trim() || '',
-        email : user.email.trim().toLowerCase(),
-        password : user.password.trim(),
-        terms: user.terms == true ? true : false
-      }
+      const normalizeUser = this._formalize.normalizeForm(user);
+      const response: ResponseData<User> = await this._fireAuthService.signUp(normalizeUser);
 
-      const response:ResponseData<User> = await this._fireAuthService.register(this.newUser);
-
-      if(response.success && response.data?.id){
+      if (response.success && response.data?.id) {
         try {
-          // Crear perfil en Firestore
-          await this._fireProfileService.createUser(this.newUser, response.data.id);
-
-          // Navegar al login
+          // Eliminar password
+          const { password, ...userWithoutPassword } = response.data;
+          await this._fireProfileService.saveUser(userWithoutPassword, response.data.id);
           const navigationSuccess = await this._router.navigate(['/login']);
 
           if (!navigationSuccess) {
@@ -74,20 +68,25 @@ export class UserRegisterComponent implements OnInit {
           }
         } catch (error: any) {
           // Error al crear perfil en Firestore
-          const errorResponse = this._AuthResponseModel.registerFailed(error?.code || 'PROFILE_CREATION_ERROR');
-          this.errorMessage = errorResponse?.error?.message || 'Error al crear el perfil en la servidor';
+          if (error?.code && FirebaseAuthErrorMap[error.code]) {
+            this.errorMessage = FirebaseAuthErrorMap[error.code];
+          }else{
+            this.errorMessage = AuthErrorMessages.REGISTER_ERROR;
+          }
           console.error('Error al crear perfil:', error);
         }
       } else {
-        // Error del service de firebase
-        this.errorMessage = response.error?.message || response.message;
+        // Error del servicio de Firebase
+        this.errorMessage = response.error?.message;
         console.error('Error en registro:', this.errorMessage);
       }
     } catch (error: any) {
-      // manejo personalizado errores
-      const errorResponse = this._AuthResponseModel.registerFailed(error?.code || 'REGISTER_ERROR');
-      this.errorMessage = errorResponse?.error?.message || 'Error al registrar. Verifica los datos e intenta nuevamente.';
-      console.error('Error inesperado en registerUser:', error);
+      // Manejo personalizado de errores
+      if (error?.code && FirebaseAuthErrorMap[error.code]) {
+        this.errorMessage = FirebaseAuthErrorMap[error.code];
+      }else{
+        this.errorMessage = AuthErrorMessages.UNKNOWN_ERROR;
+      }
     }
   }
 }

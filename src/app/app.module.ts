@@ -10,7 +10,6 @@ import { environment } from 'src/environments/environment';
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
-import { UserModule } from './user/user.module';
 import { UserProfileModule } from './user-profile/user-profile.module';
 import { GeolocationModule } from './geolocation/geolocation.module';
 import { CommonsModule } from './commons/commons.module';
@@ -18,11 +17,11 @@ import { IonicModule } from '@ionic/angular';
 import { LayoutModule } from '@angular/cdk/layout';
 import { HttpResponseBuilder } from './shared/response/httpResponse.model';
 import { AuthResponseModel } from './shared/response/authResponse.model';
+import { FormNormalizePipe } from './shared/pipes/form-normalize.pipe';
 
 @NgModule({
   declarations: [
-    AppComponent,
-
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +30,6 @@ import { AuthResponseModel } from './shared/response/authResponse.model';
     MaterialModule,
     HttpClientModule,
     CommonsModule,
-    UserModule,
     UserProfileModule,
     GeolocationModule,
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
@@ -46,7 +44,7 @@ import { AuthResponseModel } from './shared/response/authResponse.model';
   ],
   bootstrap: [AppComponent],
   exports: [
-
+    AppComponent
   ]
 })
 export class AppModule { }

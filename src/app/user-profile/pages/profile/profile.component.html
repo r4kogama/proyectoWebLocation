@@ -1,6 +1,15 @@
 
-<nav-dashboard [dataPersonal]='dataUser' (logOutEvt)="logOutProfile()"></nav-dashboard>
-<!-- <form-edit
-[formGroupUpdate]='updateFormPersonal'
+<nav-dashboard
+[dataPersonal]='dataUser'
+(logOutEvt)="logOutProfile()"
+></nav-dashboard>
+<!-- <profile-edit-form
+[formGroupUpdate]='formUpdateProfile'
 (updatePersonalEvt)='updateProfile($event)'
-></form-edit> -->
+></profile-edit-form> -->
+<profile-security-form
+[formGroupAuth]= 'formAuthProfile'
+[formGroupDelete]= 'formDeleteProfile'
+(updateAuthEvt)= 'updatePassword($event)'
+(deleteAccountEvt)= 'deleteProfile($event)'
+></profile-security-form>

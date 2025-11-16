@@ -2,11 +2,11 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 @Component({
-  selector: 'form-edit',
-  templateUrl: './form-edit.component.html',
-  styleUrls: ['./form-edit.component.scss']
+  selector: 'profile-edit-form',
+  templateUrl: './profile-edit-form.component.html',
+  styleUrls: ['./profile-edit-form.component.scss']
 })
-export class FormEditComponent implements OnInit {
+export class ProfileEditFormComponent implements OnInit {
   @Input() formGroupUpdate!:FormGroup;
   @Output() updatePersonalEvt = new EventEmitter();
   constructor() { }

@@ -1,13 +1,14 @@
 import { inject, Injectable } from '@angular/core'; //Auth y Firestore ya no son clases Angular con decoradores
 import { Auth, getAuth, signInWithEmailAndPassword, signOut, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, OAuthCredential } from '@angular/fire/auth';
 import { Router } from '@angular/router';
-import { Firestore, getFirestore } from '@angular/fire/firestore';
+import { Firestore, getFirestore, Timestamp, serverTimestamp } from '@angular/fire/firestore';
 import { User } from '../model/user.model';
 import { HttpResponseBuilder } from '../response/httpResponse.model';
 import { ResponseData } from '../model/responseData.model';
 import { AuthResponseModel } from '../response/authResponse.model';
 import { AuthErrorMessages } from '../model/errorsMessages';
 import { mapFireBaseUserToUser} from '../helpers/mapperUser.helper';
+import { UserWithoutPassword } from '../types/global.types';
 @Injectable({
   providedIn: 'root'
 })
@@ -23,17 +24,17 @@ export class FireAuthService {
     private _router: Router
     ) {}
 
-    async signIn(user: User): Promise<ResponseData<User>> {
-
+  async signIn(user: User): Promise<ResponseData<UserWithoutPassword>> {
     try {
       const credentials = await signInWithEmailAndPassword(this._auth, user.email, user.password);
 
       if (credentials.user) {
-        const userData: User = {
-          ...user,
+        const { password, ...userWithoutPassword } = user;
+        const userCopy: UserWithoutPassword = {
+          ...userWithoutPassword,
           id: credentials.user.uid
         };
-        return this._authResponseModel.signInSuccess(userData);
+        return this._authResponseModel.signInSuccess(userCopy);
       }
 
       return this._authResponseModel.authNoUser();
@@ -53,23 +54,21 @@ export class FireAuthService {
     }
   }
 
-  async register(user: User): Promise<ResponseData<User>> {
+
+  async signUp(user: User): Promise<ResponseData<User>> {
     try {
       const credentials = await createUserWithEmailAndPassword(this._auth, user.email, user.password);
 
       if (credentials.user) {
-        // Opcional: actualizar perfil del usuario
-        // await credentials.user.updateProfile({
-        //  displayName: user.name + ' ' + user.surname,
-        //  photoURL: 'http://mifoto.com'
-        //});
-
-        const userData: User = {
+        // Crear una copia del objeto user para evitar mutaciones
+        const userCopy: User = {
           ...user,
-          id: credentials.user.uid
+          id: credentials.user.uid,
+          provider: 'email',
+          createdAt: serverTimestamp() // Asignar fecha formato firebase
         };
 
-        return this._authResponseModel.registerSuccess(userData);
+        return this._authResponseModel.registerSuccess(userCopy);
       }
 
       return this._authResponseModel.authNoUser();

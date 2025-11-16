@@ -8,19 +8,19 @@ export class AuthResponseModel {
 
   // ========== Métodos Específicos de Autenticación ==========
 
-  signInSuccess<T>(mapperUser: T): ResponseData<T> {
+  signInSuccess<T>(datas: T): ResponseData<T> {
     return {
       status: HttpStatus.OK,
       message: SuccessMessages.LOGIN_SUCCESS,
-      data: mapperUser,
+      data: datas,
       success: true
     };
   }
-  registerSuccess<T>(mapperUser: T): ResponseData<T> {
+  registerSuccess<T>(datas: T): ResponseData<T> {
     return {
       status: HttpStatus.CREATED,
       message: SuccessMessages.REGISTER_SUCCESS,
-      data: mapperUser,
+      data: datas,
       success: true
     };
   }
@@ -29,7 +29,7 @@ export class AuthResponseModel {
 
     return {
       status: HttpStatus.UNAUTHORIZED,
-      message: message,
+      message: 'LOGIN_ERROR',
       success: false,
       error: {
         code: errorCode,
@@ -37,11 +37,12 @@ export class AuthResponseModel {
       }
     };
   }
+
    signInProviderFailed(errorCode: string): ResponseData<never> {
     const message: string = FirebaseAuthErrorMap[errorCode] || AuthErrorMessages.LOGIN_PROVIDER_ERROR;
     return {
       status: HttpStatus.BAD_REQUEST,
-      message: message,
+      message: 'LOGIN_PROVIDER_ERROR',
       success: false,
       error: {
         code: errorCode,
@@ -55,7 +56,7 @@ export class AuthResponseModel {
 
     return {
       status: HttpStatus.BAD_REQUEST,
-      message: message,
+      message: 'LOGOUT_ERROR',
       success: false,
       error: {
         code: errorCode,
@@ -68,7 +69,7 @@ export class AuthResponseModel {
 
     return {
       status: HttpStatus.BAD_REQUEST,
-      message: message,
+      message: 'REGISTER_ERROR',
       success: false,
       error: {
         code: errorCode,
@@ -86,7 +87,7 @@ export class AuthResponseModel {
   authNoUser(): ResponseData<never> {
     return {
       status: HttpStatus.INTERNAL_SERVER_ERROR,
-      message: AuthErrorMessages.AUTH_NO_USER,
+      message: 'AUTH_NO_USER',
       success: false,
       error: {
         code: 'AUTH_NO_USER',
@@ -97,7 +98,7 @@ export class AuthResponseModel {
   authNoToken(): ResponseData<never> {
     return {
       status: HttpStatus.UNAUTHORIZED,
-      message: AuthErrorMessages.AUTH_NO_TOKEN,
+      message: 'AUTH_NO_TOKEN',
       success: false,
       error: {
         code: 'AUTH_NO_TOKEN',
@@ -109,10 +110,10 @@ export class AuthResponseModel {
     const message: string = FirebaseAuthErrorMap[errorCode] || AuthErrorMessages.NULL_USER;
     return {
       status: HttpStatus.UNAUTHORIZED,
-      message: message,
+      message: 'NULL_USER',
       success: false,
       error: {
-        code: 'NULL_USER',
+        code: errorCode,
         message: message
       }
     };

@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './commons/home/home.component';
 import { LocationComponent } from './geolocation/pages/location/location.component';
-import { FormEditComponent } from './user-profile/components/form-edit/form-edit.component';
 import { HistoryLocationComponent } from './user-profile/components/history-location/history-location.component';
 import { ListProfileComponent } from './user-profile/components/list-profile/list-profile.component';
 import { ProfileComponent } from './user-profile/pages/profile/profile.component';

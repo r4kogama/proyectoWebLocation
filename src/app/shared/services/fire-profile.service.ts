@@ -4,8 +4,9 @@ import { Observable } from 'rxjs';
 import { first } from 'rxjs/operators';
 import { User } from '../model/user.model';
 import { FireAuthService } from './fire-auth.service';
+import { UserWithoutPassword } from '../types/global.types';
 
-const USERS_COLLECTION: string = 'geousers';
+const USERS_COLLECTION: string = 'users';
 
 @Injectable({
   providedIn: 'root'
@@ -14,9 +15,9 @@ export class FireProfileService {
   private _fireStore : Firestore = inject(Firestore);
   constructor( private _authFireService: FireAuthService) { }
 
-  createUser(user:User, id_user:string): Promise<void>{
-    const userRef = doc(collection(this._fireStore, USERS_COLLECTION), id_user);// doc() referencia al documento
-    return setDoc(userRef, user);//setdoc() save/write
+  saveUser(user: UserWithoutPassword, id_user: string): Promise<void> {
+    const userRef = doc(collection(this._fireStore, USERS_COLLECTION), id_user);
+    return setDoc(userRef, user); // Guardar el usuario sin el campo password
   }
 
   getUserById$(id_user:string):Observable<any>{

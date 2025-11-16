@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { NormalizeService } from 'src/app/shared/services/normalize.service';
 
 @Component({
   selector: 'form-register',

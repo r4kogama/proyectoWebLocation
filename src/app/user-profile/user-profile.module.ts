@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProfileComponent } from './pages/profile/profile.component';
-import { FormEditComponent } from './components/form-edit/form-edit.component';
+import { ProfileEditFormComponent } from './components/profile-edit-form/profile-edit-form.component';
 import { MaterialModule } from '../shared/material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -14,17 +14,19 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { UserProfileRoutingModule } from './user-profile-routing.module';
+import { ProfileSecurityFormComponent } from './components/profile-security-form/profile-security-form.component';
 
 
 
 @NgModule({
   declarations: [
     ProfileComponent,
-    FormEditComponent,
+    ProfileEditFormComponent,
     HistoryLocationComponent,
     ListProfileComponent,
     DashboardComponent,
     NavDashboardComponent,
+    ProfileSecurityFormComponent,
 
   ],
   imports: [
@@ -36,11 +38,12 @@ import { UserProfileRoutingModule } from './user-profile-routing.module';
   ],
   exports: [
     ProfileComponent,
-    FormEditComponent,
+    ProfileEditFormComponent,
     HistoryLocationComponent,
     ListProfileComponent,
     DashboardComponent,
     NavDashboardComponent,
+    ProfileSecurityFormComponent,
 
   ]
 })

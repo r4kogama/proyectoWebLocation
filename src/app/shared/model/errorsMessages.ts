@@ -134,7 +134,7 @@ export enum AuthErrorMessages {
   INTERNAL_ERROR = 'El servidor de autenticación encontró un error inesperado al intentar procesar la solicitud',
 
   // Errores de genericos
-  UNKNOWN_ERROR = 'Error desconocido',
+  UNKNOWN_ERROR = 'Error desconocido, intenta nuevamente.',
   AUTH_NO_USER = 'No se pudo obtener la información del usuario',
   LOGIN_ERROR = 'Error de inicio de sesión, verifica credenciales',
   LOGOUT_ERROR = 'Error de cierre de sesión',

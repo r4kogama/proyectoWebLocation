@@ -1,4 +1,5 @@
 import { User } from "../model/user.model";
+import { Timestamp } from "@angular/fire/firestore";
 
 // Convierte el User de Firebase en User personalizado
 export const mapFireBaseUserToUser = (firebaseUser: any, provider: 'email' | 'google' = 'email'): User => {
@@ -15,9 +16,11 @@ export const mapFireBaseUserToUser = (firebaseUser: any, provider: 'email' | 'go
       provider: provider,
       photoUrl: firebaseUser.photoURL || '',
       emailVerified: firebaseUser.emailVerified || false,
-      createdAt: firebaseUser.metadata.creationTime
-      ? new Date(firebaseUser.metadata.creationTime)
-      : new Date(),
+      createdAt: Timestamp.fromDate(
+        firebaseUser.metadata.creationTime
+          ? new Date(firebaseUser.metadata.creationTime)
+          : new Date()
+      ),
       terms: true
     };
 }

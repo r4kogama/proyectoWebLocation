@@ -9,6 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { CommonsModule } from '../commons/commons.module';
 import { FooterComponent } from '../commons/footer/footer.component';
+import { FormNormalizePipe } from '../shared/pipes/form-normalize.pipe';
 
 
 
@@ -18,7 +19,7 @@ import { FooterComponent } from '../commons/footer/footer.component';
     UserRegisterComponent,
     FormRegisterComponent,
     FormLoginComponent,
-
+    FormNormalizePipe
   ],
   imports: [
     CommonModule,
@@ -26,6 +27,7 @@ import { FooterComponent } from '../commons/footer/footer.component';
     ReactiveFormsModule,
     RouterModule,
     CommonsModule,
+
   ],
   exports: [
     FooterComponent,

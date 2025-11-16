@@ -1,3 +1,5 @@
+import { Timestamp, FieldValue } from '@angular/fire/firestore';
+
 export interface User {
   id?: string;
   name: string;
@@ -6,8 +8,9 @@ export interface User {
   password: string;
   provider?: 'email' | 'google';
   photoUrl?: string;
-  emailVerified?: boolean
-  createdAt?: Date;
+  emailVerified?: boolean;
+  createdAt?: Timestamp | FieldValue; // Permitir FieldValue para serverTimestamp
   terms: boolean;
 }
+
 
