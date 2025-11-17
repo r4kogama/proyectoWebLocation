@@ -7,7 +7,6 @@ import { FireAuthService } from 'src/app/shared/services/fire-auth.service';
 import { FireProfileService } from 'src/app/shared/services/fire-profile.service';
 import { FirebaseAuthErrorMap } from 'src/app/shared/model/fbAuthErrorMap';
 import { AuthErrorMessages } from 'src/app/shared/model/errorsMessages';
-import { FormNormalizePipe } from 'src/app/shared/pipes/form-normalize.pipe';
 import { NormalizeService } from 'src/app/shared/services/normalize.service';
 
 @Component({

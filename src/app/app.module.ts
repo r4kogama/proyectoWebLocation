@@ -18,6 +18,7 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { HttpResponseBuilder } from './shared/response/httpResponse.model';
 import { AuthResponseModel } from './shared/response/authResponse.model';
 import { FormNormalizePipe } from './shared/pipes/form-normalize.pipe';
+import { UserModule } from './user/user.module';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { FormNormalizePipe } from './shared/pipes/form-normalize.pipe';
     CommonsModule,
     UserProfileModule,
     GeolocationModule,
+    UserModule,
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
