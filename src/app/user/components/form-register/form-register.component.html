@@ -13,7 +13,7 @@
                 <p>
                   <mat-form-field class="box-form-field" appearance="outline">
                       <mat-label>Name</mat-label>
-                      <input matInput type="text" placeholder="Introduce tu nombre" formControlName="name"  [value]="formGroupRegister.get('name')?.value | formNormalize:'capitalize'" >
+                      <input matInput type="text" placeholder="Introduce tu nombre" formControlName="name"  [value]="formGroupRegister.get('name')?.value || '' | formNormalize:'capitalize'" >
                       <mat-hint align="end">Required *</mat-hint>
                       <mat-error *ngIf="formGroupRegister.get('name')?.touched && formGroupRegister.get('name')?.hasError('required')">Campo nombre es obligatorio</mat-error>
                       <mat-error *ngIf="formGroupRegister.get('name')?.dirty && formGroupRegister.get('name')?.hasError('maxlength')">Maximo 15 caracteres</mat-error>
@@ -23,13 +23,13 @@
                 <p>
                   <mat-form-field class="box-form-field" appearance="outline">
                       <mat-label>Surname </mat-label>
-                      <input matInput  type="text" placeholder="Introduce tus apellidos" formControlName="surname" [value]="formGroupRegister.get('surname')?.value | formNormalize:'capitalize'" >
+                      <input matInput  type="text" placeholder="Introduce tus apellidos" formControlName="surname" [value]="formGroupRegister.get('surname')?.value || '' | formNormalize:'capitalize'" >
                   </mat-form-field>
                 </p>
                 <p>
                   <mat-form-field class="box-form-field" appearance="outline">
                       <mat-label>Email</mat-label>
-                      <input matInput #regEmail type="email" placeholder="Introduce un email" formControlName="email" [value]="formGroupRegister.get('email')?.value | formNormalize:'lowerCaseTrim'" >
+                      <input matInput #regEmail type="email" placeholder="Introduce un email" formControlName="email" [value]="formGroupRegister.get('email')?.value || '' | formNormalize:'lowerCaseTrim'" >
                       <mat-icon matSuffix class="material-icons">email</mat-icon>
                       <mat-hint align="start">{{regEmail.value.length || 0}}/50 letras</mat-hint>
                       <mat-hint align="end">Required *</mat-hint>
@@ -40,7 +40,7 @@
                 <p>
                   <mat-form-field class="box-form-field" appearance="outline">
                     <mat-label>Password</mat-label>
-                      <input matInput [type]=" hide ? 'password' : 'text' " matInput placeholder="Introduce un password" formControlName='password' [value]="formGroupRegister.get('password')?.value | formNormalize:'trim'">
+                      <input matInput [type]=" hide ? 'password' : 'text' " matInput placeholder="Introduce un password" formControlName='password' [value]="formGroupRegister.get('password')?.value || '' | formNormalize:'trim'">
                       <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                         <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                       </button>
@@ -52,7 +52,7 @@
                   <p>
                     <mat-form-field class="box-form-field"  appearance="outline">
                       <mat-label>Confirm Password</mat-label>
-                      <input matInput [type]=" hidePass ? 'password' : 'text' "  matInput placeholder="Repite tu password" formControlName='confirmPassword' [value]="formGroupRegister.get('confirmPassword')?.value | formNormalize:'trim'">
+                      <input matInput [type]=" hidePass ? 'password' : 'text' "  matInput placeholder="Repite tu password" formControlName='confirmPassword' [value]="formGroupRegister.get('confirmPassword')?.value || '' | formNormalize:'trim'">
                       <button type="button" mat-icon-button matSuffix (click)="hidePass = !hidePass" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePass">
                         <mat-icon>{{hidePass ? 'visibility_off' : 'visibility'}}</mat-icon>
                       </button>
@@ -79,8 +79,8 @@
                     </div>
                 </div>
             </form>
-            <div *ngIf="errorMessage" class="error-message">
-              {{ errorMessage }}
+            <div *ngIf="statusMessage"  [ngClass]="statusStyle === 'error' ? 'error' : 'success'">
+              {{ statusMessage }}
             </div>
           </div>
         </div>

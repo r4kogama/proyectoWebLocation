@@ -8,6 +8,7 @@ import { Args } from '../types/global.types';
 export class FormNormalizePipe implements PipeTransform {
 
   transform<T>(value: T, ...args: Args<string>): any {
+      if (value == null) return value;
       const [option]: Args<string> = args;
       switch (option) {
         case 'lowercase':

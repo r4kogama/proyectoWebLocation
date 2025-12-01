@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
+import { Card } from 'src/app/shared/model/card.model';
+
 
 @Component({
   selector: 'dashboard',
@@ -10,25 +12,22 @@ import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 export class DashboardComponent {
   constructor(private breakpointObserver: BreakpointObserver) {}
 
+  private readonly handsetLayout: Card[] = [
+    { title: 'Card 1', cols: 1, rows: 1 },
+    { title: 'Card 2', cols: 1, rows: 1 },
+    { title: 'Card 3', cols: 1, rows: 1 },
+    { title: 'Card 4', cols: 1, rows: 1 }
+  ];
+
+  private readonly defaultLayout: Card[] = [
+    { title: 'Card 1', cols: 2, rows: 1 },
+    { title: 'Card 2', cols: 1, rows: 1 },
+    { title: 'Card 3', cols: 1, rows: 2 },
+    { title: 'Card 4', cols: 1, rows: 1 }
+  ];
+
   /** Based on the screen size, switch from standard to one column per row */
   cards = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
-    map(({ matches }) => {
-      if (matches) {
-        return [
-          { title: 'Card 1', cols: 1, rows: 1 },
-          { title: 'Card 2', cols: 1, rows: 1 },
-          { title: 'Card 3', cols: 1, rows: 1 },
-          { title: 'Card 4', cols: 1, rows: 1 }
-        ];
-      }
-
-      return [
-        { title: 'Card 1', cols: 2, rows: 1 },
-        { title: 'Card 2', cols: 1, rows: 1 },
-        { title: 'Card 3', cols: 1, rows: 2 },
-        { title: 'Card 4', cols: 1, rows: 1 }
-      ];
-    })
+    map(({ matches }) => (matches ? this.handsetLayout : this.defaultLayout))
   );
-
 }

@@ -8,6 +8,8 @@ import { FireProfileService } from 'src/app/shared/services/fire-profile.service
 import { FirebaseAuthErrorMap } from 'src/app/shared/model/fbAuthErrorMap';
 import { AuthErrorMessages } from 'src/app/shared/model/errorsMessages';
 import { NormalizeService } from 'src/app/shared/services/normalize.service';
+import { StateMessageService } from 'src/app/shared/services/state-message.service';
+import { SuccessMessages } from 'src/app/shared/model/successMessages';
 
 @Component({
   selector: 'app-user-register',
@@ -16,14 +18,16 @@ import { NormalizeService } from 'src/app/shared/services/normalize.service';
 })
 export class UserRegisterComponent implements OnInit {
   formRegister! : FormGroup;
-  errorMessage: string = '';
+  statusMessage: string = '';
+  statusStyle: string = '';
   newUser!:User;
   constructor(
     private _fb:FormBuilder,
     private _router:Router,
     private _fireAuthService: FireAuthService,
     private _fireProfileService: FireProfileService,
-    private _formalize: NormalizeService
+    private _formalize: NormalizeService,
+    private _stateMessageNavigation : StateMessageService
   ) { }
 
   ngOnInit(): void {
@@ -43,49 +47,60 @@ export class UserRegisterComponent implements OnInit {
   }
 
 
-  async registerUser(user: User) {
+  async registerUser(user: User): Promise<void> {
     // Validar formulario antes de enviar
     if (this.formRegister.invalid) {
-      this.errorMessage = 'Por favor, rellena todos los campos correctamente';
+      this.statusMessage = 'Por favor, rellena todos los campos correctamente';
+      this.statusStyle = 'error';
       return;
     }
-    this.errorMessage = '';
+    this.statusMessage = '';
+    this.statusStyle = '';
     try {
-      const normalizeUser = this._formalize.normalizeForm(user);
+      const normalizeUser: User = this._formalize.normalizeForm(user);
+      //si existe el email cancela el registro
+      const userExists: User[] = await this._fireProfileService.userByEmail(normalizeUser.email);
+      if (userExists.length > 0) {
+        this.statusMessage = AuthErrorMessages.EMAIL_ALREADY_EXISTS;
+        this.statusStyle = 'error';
+        return;
+      }
       const response: ResponseData<User> = await this._fireAuthService.signUp(normalizeUser);
-
       if (response.success && response.data?.id) {
         try {
-          // Eliminar password
-          const { password, ...userWithoutPassword } = response.data;
+          // Eliminar password y confirmar password
+          const { password, confirmPassword, ...userWithoutPassword } = response.data;
           await this._fireProfileService.saveUser(userWithoutPassword, response.data.id);
-          const navigationSuccess = await this._router.navigate(['/login']);
+          //mensaje guardado en session para la redireccion
+          this._stateMessageNavigation.setMessage(SuccessMessages.REGISTER_SUCCESS, 'success');
+          const navigationSuccess: boolean = await this._router.navigate(['/login']);
 
           if (!navigationSuccess) {
-            this.errorMessage = 'Registro exitoso, pero hubo un error al redirigir.';
-            console.error('Error en la navegación después del registro');
+            this.statusMessage = 'Registro exitoso, pero hubo un error al redirigir.';
+            this.statusStyle = 'success';
           }
         } catch (error: any) {
           // Error al crear perfil en Firestore
           if (error?.code && FirebaseAuthErrorMap[error.code]) {
-            this.errorMessage = FirebaseAuthErrorMap[error.code];
+            this.statusMessage = FirebaseAuthErrorMap[error.code];
           }else{
-            this.errorMessage = AuthErrorMessages.REGISTER_ERROR;
+            this.statusMessage = AuthErrorMessages.REGISTER_ERROR;
           }
-          console.error('Error al crear perfil:', error);
+          this.statusStyle = 'error';
         }
       } else {
         // Error del servicio de Firebase
-        this.errorMessage = response.error?.message;
-        console.error('Error en registro:', this.errorMessage);
+        this.statusMessage = response.error?.message;
+        this.statusStyle = 'error';
       }
     } catch (error: any) {
       // Manejo personalizado de errores
       if (error?.code && FirebaseAuthErrorMap[error.code]) {
-        this.errorMessage = FirebaseAuthErrorMap[error.code];
+        this.statusMessage = FirebaseAuthErrorMap[error.code];
       }else{
-        this.errorMessage = AuthErrorMessages.UNKNOWN_ERROR;
+        this.statusMessage = AuthErrorMessages.UNKNOWN_ERROR;
       }
+      this.statusStyle = 'error';
     }
   }
 }

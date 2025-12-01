@@ -38,7 +38,7 @@ export class ProfileComponent implements OnInit {
 
     this._route.paramMap.subscribe((params: Params) => {
       console.log(params.get('id'));
-      this._fireProfileService.getUserById$(params.get('id'))
+      this._fireProfileService.userById$(params.get('id'))
         .subscribe((data:User) => {
           console.log("data user");
           this.dataUser = data;

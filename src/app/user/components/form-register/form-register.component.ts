@@ -10,7 +10,8 @@ import { NormalizeService } from 'src/app/shared/services/normalize.service';
 export class FormRegisterComponent implements OnInit {
   @Input() formGroupRegister!: FormGroup;
   @Output() registerEvt = new EventEmitter();
-  @Input() errorMessage: string = '';
+  @Input() statusMessage: string = '';
+  @Input() statusStyle: string = '';
   hide: boolean = true;
   hidePass: boolean = true;
   constructor() { }

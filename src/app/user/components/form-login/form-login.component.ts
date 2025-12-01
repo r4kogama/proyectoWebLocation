@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 @Component({
@@ -9,11 +9,16 @@ import { FormGroup } from '@angular/forms';
 export class FormLoginComponent implements OnInit {
   hide:boolean = true;
   pass!: string;
-  title!: string;
   @Input() formGroupLogin!: FormGroup;
+  @Input() formGroupDialog!: FormGroup;
   @Output() loginEvt: EventEmitter<any> = new EventEmitter();
+  @Output() recoveryEvt : EventEmitter<any> = new EventEmitter();
   @Output() googleEvt: EventEmitter<any> = new EventEmitter<void>();
-  @Input() errorMessage: string = '';
+  @Input() statusMessage: string = '';
+  @Input() statusStyle: string = '';
+  @Input() messageNavigation?: Record<string, string>;
+  @Output() statusEvt: EventEmitter<any> = new EventEmitter();
+  @ViewChild('elementStatus', { static: false }) elementStatus! : ElementRef;
   constructor() {}
 
 
@@ -24,10 +29,19 @@ export class FormLoginComponent implements OnInit {
       this.formGroupLogin.markAllAsTouched(); // muestra errores
     }
   }
+  recoveryPass(){
+    this.recoveryEvt.emit();
+  }
   submitLoginGoogle(){
       this.googleEvt.emit();
   }
   ngOnInit(): void {
-  }
 
+  }
+  ngAfterViewInit(): void {
+    console.log(this.elementStatus);
+    if (this.elementStatus) {
+      this.statusEvt.emit(this.elementStatus);
+    }
+  }
 }

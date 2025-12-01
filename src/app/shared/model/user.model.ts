@@ -6,6 +6,7 @@ export interface User {
   surname?: string;
   email: string;
   password: string;
+  confirmPassword?: string,
   provider?: 'email' | 'google';
   photoUrl?: string;
   emailVerified?: boolean;

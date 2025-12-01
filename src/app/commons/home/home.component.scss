@@ -32,6 +32,7 @@
       .title-page{
         width: 100%;
         max-width: 460px;
+        transform: translateY(90px);
         position: sticky;
         top: 0;
         display: flex;
@@ -39,12 +40,16 @@
         justify-content: flex-start;
         align-items: center;
         text-align: justify;
-        padding: 100px 5% 66px 5%;
+        padding: 125px 5% 35px 5%;
+        background: #ffffff9c;
+        clip-path: polygon(94% 0, 94% 20%, 100% 20%, 100% 100%, 0 100%, 0 20%, 77% 20%);
         h1{
+          position: relative;
+          top: 10px;
           font-size: 3.5em;
           font-weight: 800;
           letter-spacing: 3px;
-          padding-bottom: 35px;
+          padding-bottom: 25px;
           color: $rosado;
           text-shadow: 2px 1px 0px $azul,
            4px 2px 0px $amarillo,
@@ -61,6 +66,7 @@
           line-height: 35px;
           font-weight: 500;
           margin-top: 20px;
+          margin: 0px;
           text-shadow: 1px 1px 0px white;
         }
       }

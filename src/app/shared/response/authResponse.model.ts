@@ -24,6 +24,14 @@ export class AuthResponseModel {
       success: true
     };
   }
+  passwordResetSuccess<T>(datas: T): ResponseData<T> {
+    return {
+      status: HttpStatus.OK,
+      message: SuccessMessages.SEND_LINK_SUCCESS,
+      data: datas,
+      success: true
+    };
+  }
   signInFailed(errorCode: string): ResponseData<never> {
     const message: string = FirebaseAuthErrorMap[errorCode] || AuthErrorMessages.LOGIN_ERROR;
 
@@ -86,12 +94,23 @@ export class AuthResponseModel {
   }
   authNoUser(): ResponseData<never> {
     return {
-      status: HttpStatus.INTERNAL_SERVER_ERROR,
+      status: HttpStatus.UNAUTHORIZED,
       message: 'AUTH_NO_USER',
       success: false,
       error: {
         code: 'AUTH_NO_USER',
         message: AuthErrorMessages.AUTH_NO_USER
+      }
+    };
+  }
+  authNoEmail(): ResponseData<never> {
+    return {
+      status: HttpStatus.UNAUTHORIZED,
+      message: 'INVALID_CURRENT_EMAIL',
+      success: false,
+      error: {
+        code: 'INVALID_CURRENT_EMAIL',
+        message: AuthErrorMessages.INVALID_CURRENT_EMAIL
       }
     };
   }

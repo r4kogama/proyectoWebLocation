@@ -10,6 +10,7 @@ import { RouterModule } from '@angular/router';
 import { CommonsModule } from '../commons/commons.module';
 import { FooterComponent } from '../commons/footer/footer.component';
 import { FormNormalizePipe } from '../shared/pipes/form-normalize.pipe';
+import { RecoveryPasswordDialogComponent } from './components/recovery-password-dialog/recovery-password-dialog.component';
 
 
 
@@ -19,7 +20,8 @@ import { FormNormalizePipe } from '../shared/pipes/form-normalize.pipe';
     UserRegisterComponent,
     FormRegisterComponent,
     FormLoginComponent,
-    FormNormalizePipe
+    FormNormalizePipe,
+    RecoveryPasswordDialogComponent
   ],
   imports: [
     CommonModule,
@@ -35,6 +37,8 @@ import { FormNormalizePipe } from '../shared/pipes/form-normalize.pipe';
     UserRegisterComponent,
     FormRegisterComponent,
     FormLoginComponent,
+    RecoveryPasswordDialogComponent,
+    FormNormalizePipe
   ]
 })
 export class UserModule { }

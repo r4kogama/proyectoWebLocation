@@ -19,6 +19,7 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      position: relative;
       padding: 50px 0px 70px 0px;
         form{
           width: 100%;
@@ -30,6 +31,21 @@
             font-size: 0.7em;
             position: relative;
             top: -10px;
+            .recovery{
+              font-weight: 500;
+              font-size: 1.1em;
+              text-decoration: underline;
+              cursor: pointer;
+                a{
+                  color: black;
+                }&:hover{
+                  color:$rosado!important;
+                  transition: 250ms ease-in-out;
+                }
+              }
+            a:active {
+              color: $azul!important;
+            }
           }
         }
         #box-btn-google{
@@ -78,11 +94,18 @@
           padding: 12px 0px;
           background: $amarillo;
           border-radius: 5px;
-          color: white;
+          color: black;
           border: 2px solid #fafafa;
           text-align: center;
           cursor: pointer;
+          transition: 250ms ease-in;
           text-transform: uppercase;
+          text-shadow: 1px 1px 0px white;
+            &:hover{
+              color: white;
+              transition: 250ms ease-in-out;
+              text-shadow: 1px 1px 0px black;
+            }
          }
         }
     }
@@ -98,6 +121,7 @@
     width: 300px;
     height: 292px;
     display: flex;
+    position: relative;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
@@ -110,4 +134,22 @@
   background-origin: border-box;
   height: 100%;
   width: 100%;
+}
+
+#separator{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    position: relative;
+    align-items: center;
+    top: 15px;
+    span{
+      text-align: center;
+      font-weight: 500;
+      font-size: 1.2em;
+    }
+    hr{
+      background: grey;
+      width: 40%;
+    }
 }

@@ -13,7 +13,7 @@
                 <p>
                   <mat-form-field appearance="outline">
                       <mat-label>Email</mat-label>
-                      <input type="email" matInput   formControlName="email" placeholder="Introduce tu email">
+                      <input type="email" matInput #regEmail  formControlName="email" placeholder="Introduce tu email" >
                       <mat-error *ngIf="formGroupLogin.get('email')?.touched && formGroupLogin.get('email')?.hasError('required')">Campo email es obligatorio</mat-error>
                       <mat-error *ngIf="formGroupLogin.get('email')?.dirty && formGroupLogin.get('email')?.hasError('email')">Formato email no válido</mat-error>
                   </mat-form-field>
@@ -30,21 +30,25 @@
                 </p>
                 <span class="lost-pass">
                     <mat-hint>
-                        Has olvidado la contraseña? Haz click <span><a [routerLink]="['/login']">aquí</a></span>
+                        Has olvidado la contraseña? Haz click <span class="recovery"><a (click)="recoveryPass()">aquí</a></span>
                     </mat-hint>
                 </span>
                 <div class="box-btn-login">
                   <button type="submit" class="btn-animation" mat-raised-button>Login</button>
                 </div>
             </form>
-            <div *ngIf="errorMessage" class="error-message">
-              {{ errorMessage }}
+            <div id="separator">
+              <hr><span>o</span><hr>
             </div>
             <div id="box-btn-google"class="box-btn-login">
               <button type="button" class="btn-google btn-animation" (click)="submitLoginGoogle()" mat-raised-button>
                 <img src="../../../../assets/google-logo.svg" alt="logo singin">
                 <span>Continuar con Google</span>
               </button>
+            </div>
+            <div class="status-message" *ngIf="statusMessage"
+               box-section-form [ngClass]="statusStyle === 'error' ? 'error' : 'success'">
+              {{ statusMessage}}
             </div>
           </div>
         </div>
@@ -56,8 +60,16 @@
             </div>
             <div class="box-btn-register">
               <a [routerLink]="['/registro']">
-                 Registrarse
+                Registrarse
               </a>
+            </div>
+            <div #elementStatus class="status-message"
+              [hidden]="!messageNavigation?.message"
+              [ngClass]="{
+                'error': messageNavigation?.style === 'error',
+                'success': messageNavigation?.style === 'success'
+              }">
+              {{ messageNavigation?.message }}
             </div>
           </div>
         </div>

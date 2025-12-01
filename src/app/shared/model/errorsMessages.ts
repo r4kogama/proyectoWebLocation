@@ -14,16 +14,16 @@ export enum AuthErrorMessages {
   USER_NOT_FOUND = 'Usuario no existente',
   WRONG_PASSWORD = 'Contraseña incorrecta',
   USER_DISABLED = 'El usuario correspondiente a la credencial proporcionada ha sido deshabilitado',
-  INVALID_EMAIL = 'La dirección de correo electrónico no es válida',
+  INVALID_EMAIL = 'La dirección de email no es válida',
   INVALID_CREDENTIAL = 'Las credencials son incorrectas',
   TOO_MANY_REQUESTS = 'Las solicitudes se bloquearon debido a una actividad inusual. Vuelva a intentarlo después de un tiempo',
   AUTH_ERROR = 'Error inesperado durante la autenticación.',
 
   // Errores de registro
-  EMAIL_ALREADY_IN_USE = 'Ya tenía una cuenta con la dirección de correo electrónico proporcionada',
+  EMAIL_ALREADY_IN_USE = 'Este email ya está en uso',
   WEAK_PASSWORD = 'La contraseña es demasiado débil',
   OPERATION_NOT_ALLOWED = 'El tipo de cuenta correspondiente a esta credencial aún no está activado',
-  ACCOUNT_EXISTS_WITH_DIFFERENT_CREDENTIAL = 'Correo electrónico ya asociado con otra cuenta',
+  ACCOUNT_EXISTS_WITH_DIFFERENT_CREDENTIAL = 'Email ya asociado con otra cuenta',
   CREDENTIAL_ALREADY_IN_USE = 'Ya existe una cuenta para esta credencial',
 
   // Errores de verificación
@@ -66,6 +66,7 @@ export enum AuthErrorMessages {
   MISSING_CONTINUE_URI = 'La siguiente URL debe proporcionarse en la solicitud',
   INVALID_PAGE_TOKEN = 'La siguiente URL proporcionada en la solicitud no es válida',
   INVALID_REDIRECT_URI= 'La URI de redirección no está bien configurada',
+  SEND_LINK_ERROR = 'El envio del enlace de recuperación de contraseña ha fallado',
   // Errores de teléfono
   INVALID_PHONE_NUMBER = 'El número de teléfono está en un formato no válido (estándar E.164)',
   MISSING_PHONE_NUMBER = 'El número de teléfono es obligatorio',
@@ -90,7 +91,8 @@ export enum AuthErrorMessages {
   INVALID_CREATION_TIME = 'La hora de creación debe ser una fecha UTC válida',
   INVALID_DISABLED_FIELD = 'La propiedad para el usuario deshabilitado no es válida',
   INVALID_DISPLAY_NAME = 'El nombre de usuario no es válido',
-  INVALID_EMAIL_VERIFIED = 'El correo electrónico no es válido',
+  INVALID_EMAIL_VERIFIED = 'El email no es válido',
+  INVALID_CURRENT_EMAIL = 'El email proporcionado no es válido para el usuario actual',
   INVALID_LAST_SIGN_IN_TIME = 'La última hora de inicio de sesión debe ser una fecha UTC válida',
   INVALID_PASSWORD = 'La contraseña no es válida, debe tener al menos 6 caracteres de longitud',
   INVALID_PHOTO_URL = 'La URL de la foto del usuario no es válida',
@@ -123,7 +125,7 @@ export enum AuthErrorMessages {
 
   // Errores de duplicados
   UID_ALREADY_EXISTS = 'El identificador proporcionado ya está en uso',
-  EMAIL_ALREADY_EXISTS = 'El correo electrónico proporcionado ya está en uso',
+  EMAIL_ALREADY_EXISTS = 'El email proporcionado ya está en uso',
   PHONE_NUMBER_ALREADY_EXISTS = 'El teléfono proporcionado ya está en uso',
 
   // Errores de permisos
@@ -140,12 +142,13 @@ export enum AuthErrorMessages {
   LOGOUT_ERROR = 'Error de cierre de sesión',
   REGISTER_ERROR = 'Error registro de nuevo usuario, revisa tu conexión e inténtalo de nuevo.',
   LOGIN_PROVIDER_ERROR = 'Error en el inicio de sesión con el proveedor seleccionado',
-  NO_CONTENT = 'Success without content',
-  BAD_REQUEST = 'Bad request',
-  UNAUTHORIZED = 'Unauthorized',
-  FORBIDDEN = 'Forbidden',
-  NOT_FOUND = 'Not found',
-  INTERNAL_SERVER_ERROR = 'Internal error in server',
-  INVALID_DATA = 'Invalid data',
+  NO_CONTENT = "La operación se realizó correctamente, pero no hay datos que mostrar.",
+  BAD_REQUEST = "La solicitud enviada es incorrecta o está mal formada.",
+  UNAUTHORIZED = "Acceso no autorizado. Debes iniciar sesión o proporcionar credenciales válidas.",
+  FORBIDDEN = "Acceso prohibido. Aunque estás identificado, no tienes permisos suficientes para este recurso.",
+  NOT_FOUND = "El recurso solicitado no existe o la dirección es incorrecta.",
+  INTERNAL_SERVER_ERROR = "Error interno del servidor. Ha ocurrido un problema inesperado al procesar la solicitud.",
+  INVALID_DATA = "Los datos enviados son inválidos o no cumplen las reglas requeridas."
+
 }
 
