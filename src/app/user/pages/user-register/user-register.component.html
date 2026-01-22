@@ -1,7 +1,9 @@
-<form-register
-[formGroupRegister]='formRegister'
+ <form-register
+[formGroupRegister]="formRegister"
 [statusMessage]="statusMessage"
 [statusStyle]="statusStyle"
+[particlesOptions] = "particlesOptions"
 (registerEvt)='registerUser($event)'
-></form-register>
+(particlesLoaded)="onParticlesLoaded($event)">
+</form-register>
 

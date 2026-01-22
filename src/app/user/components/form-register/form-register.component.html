@@ -83,6 +83,7 @@
               {{ statusMessage }}
             </div>
           </div>
+          <ngx-particles [id]="id" [options]="particlesOptions" (particlesLoaded)="onParticlesLoaded($event)"></ngx-particles>
         </div>
       </div>
       <footer>

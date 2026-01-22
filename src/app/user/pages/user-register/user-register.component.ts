@@ -10,6 +10,9 @@ import { AuthErrorMessages } from 'src/app/shared/model/errorsMessages';
 import { NormalizeService } from 'src/app/shared/services/normalize.service';
 import { StateMessageService } from 'src/app/shared/services/state-message.service';
 import { SuccessMessages } from 'src/app/shared/model/successMessages';
+import { ParticulesConfigService } from '@/app/shared/services/particules-config.service';
+import { Container } from '@tsparticles/engine';
+
 
 @Component({
   selector: 'app-user-register',
@@ -21,14 +24,19 @@ export class UserRegisterComponent implements OnInit {
   statusMessage: string = '';
   statusStyle: string = '';
   newUser!:User;
+  particlesOptions : any ;
+
   constructor(
-    private _fb:FormBuilder,
-    private _router:Router,
-    private _fireAuthService: FireAuthService,
-    private _fireProfileService: FireProfileService,
-    private _formalize: NormalizeService,
-    private _stateMessageNavigation : StateMessageService
-  ) { }
+    private readonly _fb:FormBuilder,
+    private readonly _router:Router,
+    private readonly _fireAuthService: FireAuthService,
+    private readonly _fireProfileService: FireProfileService,
+    private readonly _formalize: NormalizeService,
+    private readonly _stateMessageNavigation : StateMessageService,
+    private readonly _particulesConfigService : ParticulesConfigService,
+  ) {
+    this.particlesOptions = this._particulesConfigService.getMultipleCannonConfig();
+  }
 
   ngOnInit(): void {
     this.formRegister = this._fb.group({
@@ -38,12 +46,18 @@ export class UserRegisterComponent implements OnInit {
       password :        ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword : ['', [Validators.required,this.passwordValidator().bind(this)]],
       terms:            [false, [Validators.required,Validators.requiredTrue]],
-    })
+    });
+
+  }
+
+  onParticlesLoaded(container: Container): void {
+    container.play(); // Activar animación
+    this._particulesConfigService.getInitParticles();
   }
 
   passwordValidator(): ValidatorFn {
     return (ctrl: AbstractControl): ValidationErrors | null =>
-       this.formRegister?.get('password')?.value !== ctrl?.value?{mismatch: true}:null;
+       this.formRegister?.get('password')?.value === ctrl?.value?null:{mismatch: true};
   }
 
 
@@ -73,12 +87,12 @@ export class UserRegisterComponent implements OnInit {
           await this._fireProfileService.saveUser(userWithoutPassword, response.data.id);
           //mensaje guardado en session para la redireccion
           this._stateMessageNavigation.setMessage(SuccessMessages.REGISTER_SUCCESS, 'success');
-          const navigationSuccess: boolean = await this._router.navigate(['/login']);
+          /* const navigationSuccess: boolean = await this._router.navigate(['/login']);
 
           if (!navigationSuccess) {
             this.statusMessage = 'Registro exitoso, pero hubo un error al redirigir.';
             this.statusStyle = 'success';
-          }
+          } */
         } catch (error: any) {
           // Error al crear perfil en Firestore
           if (error?.code && FirebaseAuthErrorMap[error.code]) {

@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './shared/material/material.module';
 import { HttpClientModule } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
+import { environment } from '@/environments/environment';
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
@@ -16,8 +16,8 @@ import { IonicModule } from '@ionic/angular';
 import { LayoutModule } from '@angular/cdk/layout';
 import { HttpResponseBuilder } from './shared/response/httpResponse.model';
 import { AuthResponseModel } from './shared/response/authResponse.model';
-import { FormNormalizePipe } from './shared/pipes/form-normalize.pipe';
 import { UserModule } from './user/user.module';
+import { NgxParticlesModule } from '@tsparticles/angular';
 
 @NgModule({
   declarations: [
@@ -37,7 +37,8 @@ import { UserModule } from './user/user.module';
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
     IonicModule.forRoot(),
-    LayoutModule
+    LayoutModule,
+    NgxParticlesModule
   ],
   providers: [
     HttpResponseBuilder,

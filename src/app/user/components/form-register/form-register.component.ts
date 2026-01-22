@@ -1,30 +1,43 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { NormalizeService } from 'src/app/shared/services/normalize.service';
+import { Container } from '@tsparticles/engine';
 
 @Component({
   selector: 'form-register',
   templateUrl: './form-register.component.html',
   styleUrls: ['./form-register.component.scss']
 })
-export class FormRegisterComponent implements OnInit {
+
+export class FormRegisterComponent {
   @Input() formGroupRegister!: FormGroup;
   @Output() registerEvt = new EventEmitter();
   @Input() statusMessage: string = '';
   @Input() statusStyle: string = '';
+  @Input() particlesId: string = 'particles-default';
+  @Input() particlesOptions: any;
+  @Output() particlesLoaded = new EventEmitter<any>();
   hide: boolean = true;
   hidePass: boolean = true;
-  constructor() { }
+  particlesContainer : Container;
+  id: string = 'particles-default'; // Propiedad id agregada
 
+  constructor() {}
 
-  ngOnInit(): void {
-
+  onParticlesLoaded(container: Container): void {
+    if (!this.particlesContainer) {
+      this.particlesContainer = container;
+    }
   }
 
   submitRegister(){
     if(this.formGroupRegister.valid){
-      this.registerEvt.emit(this.formGroupRegister.value);
+      if (this.particlesContainer) {
+        this.particlesLoaded.emit(this.particlesContainer);
+      }
+      //this.registerEvt.emit(this.formGroupRegister.value);
       this.formGroupRegister.reset();
+
+      // Activar animación de partículas
     }else{
       this.formGroupRegister.markAllAsTouched();
     }
