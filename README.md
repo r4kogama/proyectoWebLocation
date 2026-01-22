@@ -12,7 +12,7 @@ Link to version web:
 
 ## De que trata?
 
-HYlyf que son las siglas de `Have you lost you friends?` la idea surge sobre la necesidad de solucionar un problema habitual de localizacion entre usuarios, en este caso entre grupo de usuarios cercanos entre si. 
+Findly que son las siglas de `Have you lost you friends?` la idea surge sobre la necesidad de solucionar un problema habitual de localizacion entre usuarios, en este caso entre grupo de usuarios cercanos entre si. 
 
 Dicha idea trata de proporcionar una aplicacion web donde los usuarios puedan geolocalizarse entre ellos. Es decir, generando un grupo cerrado de amigos, cada uno de ellos pueda mostrar su localizacion en el mapa, en un pequeño radio en el mapa, no se trata que sea global sino cercano.
 Como resultado muestre todas las ubicaciones de los usuarios a la vez en el mapa.
@@ -93,7 +93,7 @@ Pagina de geolocalizacion
 
 ## Tecnologias usadas para el proyecto
 
-- Framework Angular
+- Framework Angular 12
 - Material design
 - Ionic
 
@@ -101,10 +101,15 @@ Pagina de geolocalizacion
 
 ## Plataforma Firebase
 
-Todo el back-end esta gestionado con firebase
-[link to firebase](https://firebase.google.com/)
+El proyecto utiliza Firebase como plataforma para gestionar el back-end. Los servicios de Firebase implementados son:
 
+- **Firebase Authentication**: Permite la gestión de usuarios, incluyendo el registro, inicio de sesión y recuperación de contraseñas.
+- **Cloud Firestore**: Se utiliza para almacenar y gestionar los datos de los usuarios, como perfiles y ubicaciones.
+- **Firebase Hosting**: Aloja recursos estáticos y maneja configuraciones específicas del proyecto.
 
+## Deploy en Vercel
+
+La aplicación está desplegada en **Vercel**, donde se redirige todo el tráfico. Los dominios de la página están configurados en Vercel, lo que garantiza un rendimiento óptimo y una experiencia de usuario fluida.
 
 ## Kanban de Historias de Usuario
 
@@ -131,6 +136,34 @@ Consta de un solo de desarrollador que se encarga tanto del diseño, el desarrol
 ### Prodas encontrar la apk atraves de este link
 
 [link to 4shared](https://www.4shared.com/mobile/lyNqzuCyiq/app-Hylyf.html)
+
+## Arquitectura del Proyecto
+
+El proyecto está diseñado siguiendo el patrón **MVVM (Model-View-ViewModel)**, que organiza la aplicación en tres capas principales:
+
+### **MVVM**
+- **Modelo (Model)**: Gestiona la lógica de negocio y los datos. En este proyecto, los servicios como `FireAuthService` y `StateMessageService` representan el modelo.
+- **Vista (View)**: Es la interfaz de usuario, implementada con HTML y CSS, que interactúa directamente con el usuario.
+- **ViewModel**: Los componentes de Angular (como `UserLoginComponent` y `UserRegisterComponent`) actúan como intermediarios entre la Vista y el Modelo. Manejan la lógica de presentación y exponen datos y métodos a la Vista.
+
+### **Smart Components**
+- Los **Smart Components** son responsables de manejar la lógica de presentación y la interacción con los servicios (Modelo).
+- Ejemplos: `UserLoginComponent`, `UserRegisterComponent`.
+
+### **Dumb Components**
+- Los **Dumb Components** son componentes reutilizables que solo muestran datos y emiten eventos.
+- No contienen lógica de negocio ni interactúan directamente con servicios.
+- Ejemplos: `FormLoginComponent`, `FormRegisterComponent`.
+
+### **Ventajas de esta Arquitectura**
+- **Modularidad**: Los **Dumb Components** son reutilizables y fáciles de probar.
+- **Separación de responsabilidades**: La lógica de negocio está en los servicios, la lógica de presentación en los **Smart Components**, y la vista solo muestra datos y maneja eventos.
+- **Compatibilidad con Angular**: Este enfoque sigue los estándares de Angular y aprovecha herramientas como el data binding y los servicios.
+- **Escalabilidad**: Permite agregar nuevas funcionalidades sin afectar la arquitectura existente.
+
+### **Compatibilidad con Ionic**
+- Este patrón es compatible con Ionic, lo que facilita la integración de componentes de UI como `ion-button` e `ion-input`.
+- La arquitectura asegura un rendimiento óptimo en dispositivos móviles y una experiencia de usuario fluida.
 
 
 
