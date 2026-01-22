@@ -1,0 +1,49 @@
+@keyframes tostarAnimation {
+  0%{
+    transform: translateY(80%);
+    opacity: 1;
+  }
+  99%{
+    transform: translateY(150%);
+    opacity: 0.1;
+  }
+  100%{
+    transform: translateY(150%);
+    opacity: 0;
+  }
+}
+
+.success{
+  display: block;
+  color: #3aff33;
+  background-color: #d0ffd9;
+  border: 1px solid #3cf636e2;
+}
+
+.error{
+  display: block;
+  color: #ff3939;
+  background-color: #ffcfd6;
+  border: 1px solid #f04033e4;
+}
+
+.status-message{
+  display: none;
+  width: 100%;
+  max-width: 300px;
+  animation: tostarAnimation 2500ms ease-in;
+  animation-fill-mode: both;
+  animation-delay: 2s;
+  position: absolute;
+  bottom: 0;
+  opacity: 0;
+  transform: translateY(80%);
+  z-index: 9999;
+  border-radius: 4px;
+  padding: 12px 16px;
+  margin-top: 16px;
+  font-size: 0.9em;
+  font-weight: 500;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(54, 244, 57, 0.1);
+}

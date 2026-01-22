@@ -7,6 +7,7 @@ import { MenuNavComponent } from './menu-nav/menu-nav.component';
 import { MaterialModule } from '../shared/material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { PushNotificationComponent } from './push-notification/push-notification.component';
 
 
 
@@ -15,7 +16,8 @@ import { RouterModule } from '@angular/router';
     HeaderComponent,
     HomeComponent,
     FooterComponent,
-    MenuNavComponent
+    MenuNavComponent,
+    PushNotificationComponent
   ],
   imports: [
     CommonModule,
@@ -27,7 +29,8 @@ import { RouterModule } from '@angular/router';
     HeaderComponent,
     HomeComponent,
     FooterComponent,
-    MenuNavComponent
+    MenuNavComponent,
+    PushNotificationComponent
   ]
 })
 export class CommonsModule { }

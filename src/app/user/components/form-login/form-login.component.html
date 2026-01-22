@@ -63,14 +63,9 @@
                 Registrarse
               </a>
             </div>
-            <div #elementStatus class="status-message"
-              [hidden]="!messageNavigation?.message"
-              [ngClass]="{
-                'error': messageNavigation?.style === 'error',
-                'success': messageNavigation?.style === 'success'
-              }">
-              {{ messageNavigation?.message }}
-            </div>
+            <app-push-notification
+              [messageNavigation]="{ message: statusMessage, style: statusStyle }">
+            </app-push-notification>
           </div>
         </div>
       </div>

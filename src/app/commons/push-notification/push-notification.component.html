@@ -1,0 +1,8 @@
+<div #elementStatus class="status-message"
+  [hidden]="!messageNavigation?.message"
+  [ngClass]="{
+    'error': messageNavigation?.style === 'error',
+    'success': messageNavigation?.style === 'success'
+  }">
+  {{ messageNavigation?.message }}
+</div>

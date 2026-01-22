@@ -32,7 +32,7 @@
       .title-page{
         width: 100%;
         max-width: 460px;
-        transform: translateY(90px);
+        transform: translateY(10px);
         position: sticky;
         top: 0;
         display: flex;
@@ -40,9 +40,9 @@
         justify-content: flex-start;
         align-items: center;
         text-align: justify;
-        padding: 125px 5% 35px 5%;
-        background: #ffffff9c;
-        clip-path: polygon(94% 0, 94% 20%, 100% 20%, 100% 100%, 0 100%, 0 20%, 77% 20%);
+        padding: 120px 5% 35px;
+        background: #ffffff96;
+        clip-path: polygon(95% 12%, 95% 25%, 100% 25%, 100% 95%, 0% 95%, 0% 25%, 86% 25%);
         h1{
           position: relative;
           top: 10px;

@@ -1,5 +1,5 @@
 import { StateMessageService } from './../../../shared/services/state-message.service';
-import { AfterViewInit, ChangeDetectorRef, Component, inject, OnChanges, OnInit, Renderer2, ElementRef, SimpleChanges, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, OnInit, Renderer2, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -30,16 +30,16 @@ export class UserLoginComponent implements OnInit, AfterViewInit {
   title: string = 'Olvidó la contraseña';
   elementMessage! : ElementRef;
   constructor(
-    private _fb:FormBuilder,
-    private _router:Router,
-    private _fireAuthService : FireAuthService,
-    private _AuthResponseModel: AuthResponseModel,
-    private _formalize: NormalizeService,
-    private _fireProfileService: FireProfileService,
-    private _dialog: MatDialog,
-    private _stateMessageNavigation: StateMessageService,
-    private _cdr: ChangeDetectorRef,
-    private _renderer: Renderer2,
+    private readonly _fb:FormBuilder,
+    private readonly _router:Router,
+    private readonly _fireAuthService : FireAuthService,
+    private readonly _AuthResponseModel: AuthResponseModel,
+    private readonly _formalize: NormalizeService,
+    private readonly _fireProfileService: FireProfileService,
+    private readonly _dialog: MatDialog,
+    private readonly _stateMessageNavigation: StateMessageService,
+    private readonly _cdr: ChangeDetectorRef,
+    private readonly _renderer: Renderer2,
   ) {}
 
   ngOnInit(): void {
@@ -50,15 +50,10 @@ export class UserLoginComponent implements OnInit, AfterViewInit {
     this.formDialog = this._fb.group({
       email:     ['',[Validators.required,Validators.email]],
     });
-    //muestra mensajes entre navegacion
-    //this.messageNavigation = this._stateMessageNavigation.getMessage();
-    //this.statusStyle = '';
   }
   ngAfterViewInit(): void {
     if(this.elementMessage){
-      applyAnimationDisplay(this._renderer, this.elementMessage,  () => {
-        console.log('animated finish');
-      });
+      applyAnimationDisplay(this._renderer, this.elementMessage,  () => {});
     }
     this.messageNavigation = this._stateMessageNavigation.getMessage();
     this._cdr.detectChanges();
@@ -84,12 +79,12 @@ export class UserLoginComponent implements OnInit, AfterViewInit {
         await this._fireAuthService.getTokenFirebase(); // Token real de Firebase
         const navigationSuccess = await this._router.navigate(['/profile', res.data.id, 'list']);
 
-        if (!navigationSuccess) {
-          this.statusMessage = 'Error de navegación al perfil. Verifica la conexión';
-          this.statusStyle = 'error';
-        } else {
+        if (navigationSuccess) {
           this.statusMessage = 'Inicio de sesión exitoso';
           this.statusStyle = 'success';
+        } else {
+          this.statusMessage = 'Error de navegación al perfil. Verifica la conexión';
+          this.statusStyle = 'error';
         }
       } else {
         this.statusMessage = res.error?.message || res.message;

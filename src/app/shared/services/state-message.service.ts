@@ -11,21 +11,30 @@ export class StateMessageService {
     success: 'success',
     error: 'error',
   };
+
   setMessage(message: string, style: string): void {
     const resultStyle: string = this.stylesMap[style] || 'pending';
-    sessionStorage.setItem(this.STORAGEMSG, message);
-    sessionStorage.setItem(this.STORAGESTYLE, resultStyle);
+    localStorage.setItem(this.STORAGEMSG, message);
+    localStorage.setItem(this.STORAGESTYLE, resultStyle);
   }
 
   getMessage(): Record<string, string> {
-    const message = sessionStorage.getItem(this.STORAGEMSG) || '';
+    const message = localStorage.getItem(this.STORAGEMSG) || '';
+    if (message) {
+      const style = localStorage.getItem(this.STORAGESTYLE) || '';
+      localStorage.removeItem(this.STORAGEMSG);
+      localStorage.removeItem(this.STORAGESTYLE);
+      return { message: message, style: style };
+    } else {
+      return { message: '', style: '' };
+    }
+  }
+
+  clearMessage(): void{
+    const message = localStorage.getItem(this.STORAGEMSG) || '';
     if(message){
-      const style = sessionStorage.getItem(this.STORAGESTYLE) || '';
-      sessionStorage.removeItem(this.STORAGEMSG);
-      sessionStorage.removeItem(this.STORAGESTYLE);
-      return {message : message, style: style};
-    }else{
-      return {message : '', style: ''}
+      localStorage.removeItem(this.STORAGEMSG);
+      localStorage.removeItem(this.STORAGESTYLE);
     }
   }
 }
