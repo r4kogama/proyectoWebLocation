@@ -106,7 +106,7 @@ img{
     outline-color: #e60059;
     outline-style: outset;
     text-shadow: 1px 1px 0px white;
-    &:after{
+    &::after{
       content: '';
       width: 100%;
       height: 100%;
@@ -117,26 +117,27 @@ img{
       z-index: -1;
       transform: skew(-30deg);
       transition: all 500ms cubic-bezier(0.68, -0.32, 0.4, 1.63);
-
     }
-     &:hover:after{
+     &:hover::after{
       left: -58%;
       transition: all 500ms cubic-bezier(0.84, -0.49, 0.22, 1.5);  }
-    &::before{
+    &::before {
       content: '';
       width: 100%;
       height: 100%;
       background: $amarillo;
+      position: absolute;
+      top: 5px!important;
+      display: block!important;
+      right: -105%;
       z-index: -1;
       transform: skew(-30deg);
-      position: absolute;
-      top: 0 ;
-      right: -105%;
       transition: all 500ms cubic-bezier(0.68, -0.32, 0.4, 1.63);
     }
-     &:hover:before{
-      right: -55%;
-      transition: all 500ms cubic-bezier(0.84, -0.49, 0.22, 1.5);  }
+    &:hover::before {
+      right: -55%!important;
+      transition: all 500ms cubic-bezier(0.84, -0.49, 0.22, 1.5);
+    }
     &:hover{
       transition: all 600ms ease-in-out;
       color: white;
@@ -147,6 +148,9 @@ img{
       outline-color: #cc0551;
       outline-style: outset;
     }
+  }
+  .mat-focus-indicator::before {
+  left: auto;
   }
 }
 
@@ -184,6 +188,7 @@ img{
 .mat-card {
   opacity: 0.9;
 }
+
 /************
 *** RESET ***
 ************/
@@ -255,3 +260,4 @@ a{
 }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+

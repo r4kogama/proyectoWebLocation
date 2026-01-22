@@ -34,10 +34,8 @@ export class FormRegisterComponent {
       if (this.particlesContainer) {
         this.particlesLoaded.emit(this.particlesContainer);
       }
-      //this.registerEvt.emit(this.formGroupRegister.value);
+      this.registerEvt.emit(this.formGroupRegister.value);
       this.formGroupRegister.reset();
-
-      // Activar animación de partículas
     }else{
       this.formGroupRegister.markAllAsTouched();
     }
