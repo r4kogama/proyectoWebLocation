@@ -9,15 +9,12 @@ import { AuthResponseModel } from './shared/response/authResponse.model';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent  {
+export class AppComponent {
   title = 'FindlyWebApp';
   constructor(
     private readonly _router: Router,
     private readonly _fireAuth: FireAuthService,
     private readonly _authResponseModel: AuthResponseModel,
   ) {}
-
-
-
 
 }
