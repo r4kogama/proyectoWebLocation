@@ -1,0 +1,6 @@
+ignoredBuiltDependencies:
+  - '@tsparticles/engine'
+  - es5-ext
+  - esbuild
+  - protobufjs
+  - re2
