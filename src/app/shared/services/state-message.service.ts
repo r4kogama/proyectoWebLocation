@@ -12,10 +12,11 @@ export class StateMessageService {
     error: 'error',
   };
 
-  setMessage(message: string, style: string): void {
+  isSetMessage(message: string, style: string): boolean {
     const resultStyle: string = this.stylesMap[style] || 'pending';
     localStorage.setItem(this.STORAGEMSG, message);
     localStorage.setItem(this.STORAGESTYLE, resultStyle);
+    return true;
   }
 
   getMessage(): Record<string, string> {

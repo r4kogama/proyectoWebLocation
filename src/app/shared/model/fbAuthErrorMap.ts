@@ -16,6 +16,7 @@ export const FirebaseAuthErrorMap: Record<string, string> = {
   'auth/user-not-found': AuthErrorMessages.USER_NOT_FOUND,
   'auth/wrong-password': AuthErrorMessages.WRONG_PASSWORD,
   'auth/user-disabled': AuthErrorMessages.USER_DISABLED,
+  'auth/password-does-not-meet-requirements': AuthErrorMessages.REQUERIMENTS_PASSWORD,
   'auth/invalid-email': AuthErrorMessages.INVALID_EMAIL,
   'auth/invalid-credential': AuthErrorMessages.INVALID_CREDENTIAL,
   'auth/too-many-requests': AuthErrorMessages.TOO_MANY_REQUESTS,
@@ -140,11 +141,17 @@ export const FirebaseAuthErrorMap: Record<string, string> = {
  * @param error - Error de Firebase con propiedad 'code'
  * @returns Mensaje de error traducido o mensaje genérico
  */
-export const getFirebaseErrorMessage = (error: any): string => {
-  if (!error) {
-    return 'Ocurrió un error inesperado';
-  }
-
-  const errorCode = error.code || error.message;
-  return FirebaseAuthErrorMap[errorCode] || error.message || 'Ocurrió un error inesperado';
+export const getFirebaseErrorMessage = (error: any, delay = 100 ): Promise<string> => {
+  return new Promise((resolve) => {
+    let result: string;
+    if (!error) {
+      result = 'Ocurrió un error inesperado, intenta nuevamente.';
+    } else if (typeof error === 'string') {
+      result = error;
+    } else {
+      const errorCode = error.code || error.message;
+      result = FirebaseAuthErrorMap[errorCode] || error.message || 'Error desconocido, intenta nuevamente.';
+    }
+    setTimeout(() => resolve(result), delay);
+  });
 };

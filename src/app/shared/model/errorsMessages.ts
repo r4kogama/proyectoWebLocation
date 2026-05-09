@@ -13,17 +13,20 @@ export enum AuthErrorMessages {
   // Errores de autenticación - Login
   USER_NOT_FOUND = 'Usuario no existente',
   WRONG_PASSWORD = 'Contraseña incorrecta',
+  REQUERIMENTS_PASSWORD = 'La contraseña debe contener mínimo 6 carácteres, un número y una mayúscula',
   USER_DISABLED = 'El usuario correspondiente a la credencial proporcionada ha sido deshabilitado',
   INVALID_EMAIL = 'La dirección de email no es válida',
+  CURRENT_EMAIL = 'Introduzca su email actual',
+  EMAIL_PROVIDER_IN_USE = 'El método de login elegido con este email ya está en uso, pruebe con otro',
   INVALID_CREDENTIAL = 'Las credencials son incorrectas',
   TOO_MANY_REQUESTS = 'Las solicitudes se bloquearon debido a una actividad inusual. Vuelva a intentarlo después de un tiempo',
-  AUTH_ERROR = 'Error inesperado durante la autenticación.',
+  AUTH_ERROR = 'Error inesperado durante la autenticación',
 
   // Errores de registro
   EMAIL_ALREADY_IN_USE = 'Este email ya está en uso',
   WEAK_PASSWORD = 'La contraseña es demasiado débil',
   OPERATION_NOT_ALLOWED = 'El tipo de cuenta correspondiente a esta credencial aún no está activado',
-  ACCOUNT_EXISTS_WITH_DIFFERENT_CREDENTIAL = 'Email ya asociado con otra cuenta',
+  ACCOUNT_EXISTS_WITH_DIFFERENT_CREDENTIAL = 'Email ya está asociado con otra cuenta',
   CREDENTIAL_ALREADY_IN_USE = 'Ya existe una cuenta para esta credencial',
 
   // Errores de verificación
@@ -55,6 +58,7 @@ export enum AuthErrorMessages {
   CANCELLED_POPUP_REQUEST = 'Solo se permite una solicitud de ventana emergente a la vez',
   POPUP_BLOCKED = 'El navegador ha bloqueado la ventana emergente',
   POPUP_CLOSED_BY_USER = 'El usuario cerró la ventana antes de completar',
+  POPUP_CLOSED_ERROR = 'La ventana emergente se cerró sin enviar datos.',
 
   // Errores de dominio
   UNAUTHORIZED_DOMAIN = 'El dominio no está autorizado en Firebase',
@@ -148,7 +152,7 @@ export enum AuthErrorMessages {
   FORBIDDEN = "Acceso prohibido. Aunque estás identificado, no tienes permisos suficientes para este recurso.",
   NOT_FOUND = "El recurso solicitado no existe o la dirección es incorrecta.",
   INTERNAL_SERVER_ERROR = "Error interno del servidor. Ha ocurrido un problema inesperado al procesar la solicitud.",
-  INVALID_DATA = "Los datos enviados son inválidos o no cumplen las reglas requeridas."
-
+  INVALID_DATA = "Los datos enviados son inválidos o no cumplen las reglas requeridas.",
+  EMPTY_INPUT = "Por favor, rellene todos los campos correctamente."
 }
 

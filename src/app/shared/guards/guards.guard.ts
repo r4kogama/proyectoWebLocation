@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
 import {  CanLoad, Router, UrlTree, UrlSegment, Route, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { FireAuthService } from '../services/fire-auth.service';
-import { Observable } from 'rxjs';
+import { firstValueFrom, Observable } from 'rxjs';
 import { AuthErrorMessages } from '../model/errorsMessages';
 import { AuthResponseModel } from '../response/authResponse.model';
 import { take, map } from 'rxjs/operators';
+import { getFirebaseErrorMessage } from '../model/fbAuthErrorMap';
+import { StateMessageService } from '../services/state-message.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,22 +14,26 @@ import { take, map } from 'rxjs/operators';
 
 export class GuardsGuard implements CanLoad, CanActivate {
   constructor(
-    private _fireAauthService: FireAuthService,
-    private _authResponseModel : AuthResponseModel,
-    private _router: Router
+    private readonly _fireAauthService: FireAuthService,
+    private readonly _router: Router,
+    private readonly _stateMessageNavigation : StateMessageService,
   ) { }
-  canLoad(route: Route, segments: UrlSegment[]): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
+
+  async canLoad(route: Route, segments: UrlSegment[]): Promise<boolean | UrlTree> {
     try {
-      if (this._fireAauthService.getTokenFirebase()) {
+      const observerToken$: Observable<string> = this._fireAauthService.getTokenFirebase$();
+      const currentUserAuth = await firstValueFrom(observerToken$);
+      if (currentUserAuth) {
         return true;
       } else {
         return this._router.createUrlTree(['/login']);
       }
     }
      catch (error) {
-      console.error('Error in GuardsGuard:', error);
-      const codeError: string = error?.code || AuthErrorMessages.NULL_USER;
-      this._authResponseModel.handleNullUser(codeError);
+      const result = await getFirebaseErrorMessage(error);
+      if(!this._stateMessageNavigation.isSetMessage(result,'error')){
+        console.log('Mensaje de navegacion no salvado.');
+      };
       return this._router.createUrlTree(['/login']);
     }
   }
@@ -36,7 +42,7 @@ export class GuardsGuard implements CanLoad, CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> {
-    return this._fireAauthService.getCurrentUser().pipe(
+    return this._fireAauthService.getCurrentUser$().pipe(
       take(1),
       map(user => {
         if (user) {
@@ -50,4 +56,5 @@ export class GuardsGuard implements CanLoad, CanActivate {
       })
     );
   }
+
 }
