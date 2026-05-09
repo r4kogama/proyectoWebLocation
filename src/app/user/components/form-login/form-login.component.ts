@@ -11,12 +11,11 @@ export class FormLoginComponent implements OnInit {
   pass!: string;
   @Input() formGroupLogin!: FormGroup;
   @Input() formGroupDialog!: FormGroup;
+  @Input() notificationPush?: Record<string, string>;
+  @Input() messageError?: Record<string, string>;
   @Output() loginEvt: EventEmitter<any> = new EventEmitter();
   @Output() recoveryEvt : EventEmitter<any> = new EventEmitter();
   @Output() googleEvt: EventEmitter<any> = new EventEmitter<void>();
-  @Input() statusMessage: string = '';
-  @Input() statusStyle: string = '';
-  @Input() messageNavigation?: Record<string, string>;
   @Output() statusEvt: EventEmitter<any> = new EventEmitter();
   @ViewChild('elementStatus', { static: false }) elementStatus! : ElementRef;
   constructor() {}
@@ -39,7 +38,6 @@ export class FormLoginComponent implements OnInit {
 
   }
   ngAfterViewInit(): void {
-    console.log(this.elementStatus);
     if (this.elementStatus) {
       this.statusEvt.emit(this.elementStatus);
     }

@@ -3,17 +3,20 @@ import { AfterViewInit, ChangeDetectorRef, Component, OnInit, Renderer2, Element
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { AuthErrorMessages } from 'src/app/shared/model/errorsMessages';
-import { FirebaseAuthErrorMap } from 'src/app/shared/model/fbAuthErrorMap';
-import { ResponseData } from 'src/app/shared/model/responseData.model';
-import { User } from 'src/app/shared/model/user.model';
-import { AuthResponseModel } from 'src/app/shared/response/authResponse.model';
-import { FireAuthService } from 'src/app/shared/services/fire-auth.service';
-import { FireProfileService } from 'src/app/shared/services/fire-profile.service';
-import { NormalizeService } from 'src/app/shared/services/normalize.service';
-import { UserWithoutPassword } from 'src/app/shared/types/global.types';
+import { AuthErrorMessages } from '@/shared/model/errorsMessages';
+import { getFirebaseErrorMessage } from '@/shared/model/fbAuthErrorMap';
+import { ResponseData } from '@/shared/model/responseData.model';
+import { User } from '@/shared/model/user.model';
+import { AuthResponseModel } from '@/shared/response/authResponse.model';
+import { FireAuthService } from '@/shared/services/fire-auth.service';
+import { FireProfileService } from '@/shared/services/fire-profile.service';
+import { NormalizeService } from '@/shared/services/normalize.service';
+import { UserWithoutPassword } from '@/shared/types/global.types';
 import { RecoveryPasswordDialogComponent } from '../../components/recovery-password-dialog/recovery-password-dialog.component';
-import { applyAnimationDisplay } from 'src/app/shared/helpers/applyAnimationDisplay';
+import { applyAnimationDisplay } from '@/shared/helpers/applyAnimationDisplay';
+import { setNote } from '@/shared/helpers/notification.helper';
+import { SuccessMessages } from '@/shared/model/successMessages';
+import { Observable, firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-user-login',
@@ -22,12 +25,9 @@ import { applyAnimationDisplay } from 'src/app/shared/helpers/applyAnimationDisp
 })
 export class UserLoginComponent implements OnInit, AfterViewInit {
   formlogin!: FormGroup;
-  statusMessage: string = '';
-  statusStyle: string = '';
-  msgDialog: string = '';
   formDialog!: FormGroup;
-  messageNavigation?: Record<string, string>;
-  title: string = 'Olvidó la contraseña';
+  noteError?: Record<string, string>;
+  noteSuccess?: Record<string, string>;
   elementMessage! : ElementRef;
   constructor(
     private readonly _fb:FormBuilder,
@@ -55,51 +55,37 @@ export class UserLoginComponent implements OnInit, AfterViewInit {
     if(this.elementMessage){
       applyAnimationDisplay(this._renderer, this.elementMessage,  () => {});
     }
-    this.messageNavigation = this._stateMessageNavigation.getMessage();
+    this.noteSuccess = this._stateMessageNavigation.getMessage();
     this._cdr.detectChanges();
-    console.log('Mensaje de navegación (después de la vista):', this.messageNavigation);
   }
 
-  getElementStatus(ele: ElementRef){
+  getNotificactionStatus(ele: ElementRef){
     this.elementMessage = ele;
-    console.log(this.elementMessage)
   }
-  async loginUser(user: User): Promise<void> {
-    if (this.formlogin.invalid) {
-      this.statusMessage = 'Por favor, rellena todos los campos correctamente';
-      this.statusStyle = 'error';
-      return;
-    }
-    this.statusMessage = '';
-    this.statusStyle = '';
 
+  async loginUser(user: User): Promise<void> {
+    if (!this.isFormLoginValid) { return; }
     try {
       const res: ResponseData<UserWithoutPassword> = await this._fireAuthService.signIn(user);
       if (res.success && res.data) {
-        await this._fireAuthService.getTokenFirebase(); // Token real de Firebase
-        const navigationSuccess = await this._router.navigate(['/profile', res.data.id, 'list']);
-
-        if (navigationSuccess) {
-          this.statusMessage = 'Inicio de sesión exitoso';
-          this.statusStyle = 'success';
-        } else {
-          this.statusMessage = 'Error de navegación al perfil. Verifica la conexión';
-          this.statusStyle = 'error';
+        try {
+          const token$: Observable<string> = this._fireAuthService.getTokenFirebase$(); // Token real de Firebase
+          const token: string = await firstValueFrom(token$);
+          this._fireAuthService.setTokenProvider('accessToken', token);
+          this._stateMessageNavigation.isSetMessage(SuccessMessages.LOGIN_SUCCESS, 'success');
+          await this._router.navigate(['/profile', res.data.id, 'list']);
+        } catch (error: any) {
+          this.showError(error);
         }
       } else {
-        this.statusMessage = res.error?.message || res.message;
-        this.statusStyle = 'error';
-        console.error('Error en login:', this.statusMessage);
+        this.showError(res.error);
       }
     } catch (error: any) {
-      if (error?.code && FirebaseAuthErrorMap[error.code]) {
-        this.statusMessage = FirebaseAuthErrorMap[error.code];
-      } else {
-        this.statusMessage = AuthErrorMessages.AUTH_ERROR;
-      }
-      this.statusStyle = 'error';
-      console.error('Error inesperado en login:', error);
+      this.showError(error);
     }
+  }
+  setTokenProvider() {
+    throw new Error('Method not implemented.');
   }
 
   async dialogRecoveryPassOpen(user: User):Promise<void>{
@@ -107,59 +93,64 @@ export class UserLoginComponent implements OnInit, AfterViewInit {
       width: '400px',
       data:{
         formGroupDialog: this.formDialog,
-        msgDialog : this.msgDialog,
-        statusStyle: this.statusStyle
+        notificationPush : this.noteSuccess,
+        messageError : this.noteError,
       }});
-
-    if (this.formDialog.invalid) {
-      this.msgDialog = 'Por favor, rellena todos los campos correctamente';
-      this.statusStyle = 'error';
-    }
-    this.msgDialog = '';
-    this.statusStyle = '';
+    this.noteSuccess = {};
+    if(!this.isFormRecoveryValid(user)){ return; }
     try {
       const normalizeUser: User = this._formalize.normalizeForm(user);
       const res: ResponseData = await this._fireAuthService.generateNewPasswordWithMail(normalizeUser.email);
       if(res.success && res.data){
-        this.statusMessage = res.data as string;
-        this.statusStyle = 'success';
-        dialogRef.afterClosed().subscribe(result => {
-          if (result) {
+        this.noteSuccess = setNote(res.data as string, 'success')
+        dialogRef.afterClosed().subscribe((result) => {
+          if(result === 'success'){
+            this.noteSuccess = setNote( SuccessMessages.EMAIL_RECOVERY, 'success')
             console.log('Recuperación de contraseña enviada:', result);
-            this.statusMessage = res.data as string;
-            this.statusStyle = 'success';
-          } else {
-            console.log('El diálogo se cerró sin enviar datos.');
           }
         });
-
       } else {
-        this.msgDialog = res.error?.message || res.message;
-        this.statusStyle = 'error';
-        console.error('Error en recuperacion de cuenta:', this.statusMessage);
+        this.showError(res.error);
       }
-    } catch (error) {
-      if (error?.code && FirebaseAuthErrorMap[error.code]) {
-        this.msgDialog = FirebaseAuthErrorMap[error.code];
-      }else{
-        this.msgDialog = error.message;
-      }
-      this.statusStyle = 'error';
+    }catch (error: any) {
+      this.showError(error);
     }
   }
+
+
+
   async loginGoogle(): Promise<void> {
-    this.statusMessage = '';
     try {
       await this._fireAuthService.signInGoogle();
     } catch (error: any) {
-      if (error?.code && FirebaseAuthErrorMap[error.code]) {
-        this.statusMessage = FirebaseAuthErrorMap[error.code];
-      } else {
-        this.statusMessage = AuthErrorMessages.AUTH_ERROR;
-      }
-      this.statusStyle = 'error';
-      console.error('Error inesperado en login con Google:', error);
+      this.showError(error || 'Error desconocido en login con Google')
+      console.error('Error en login con Google:', error);
     }
   }
 
+
+  private isFormRecoveryValid(user: User): boolean {
+    this.noteError = null;
+    if (this.formDialog.invalid || !user.email) {
+      this.showError(AuthErrorMessages.CURRENT_EMAIL);
+      return false;
+    }
+    return true;
+  }
+
+
+  private isFormLoginValid(user: User): boolean {
+    this.noteError = null;
+    if (this.formlogin.invalid ||  !user.email || !user.password) {
+      this.showError(AuthErrorMessages.EMPTY_INPUT);
+      return false;
+    }
+    return true;
+  }
+
+  private async showError(error: any): Promise<void> {
+    this.noteError = null;
+    const result = await getFirebaseErrorMessage(error);
+    this.noteError = setNote(result, 'error');
+  }
 }

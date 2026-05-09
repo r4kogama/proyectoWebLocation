@@ -46,10 +46,12 @@
                 <span>Continuar con Google</span>
               </button>
             </div>
-            <div class="status-message" *ngIf="statusMessage"
-               box-section-form [ngClass]="statusStyle === 'error' ? 'error' : 'success'">
-              {{ statusMessage}}
-            </div>
+            <ng-container *ngIf="messageError && messageError.style === 'error'">
+              <div class="status-message"
+                [ngClass]="{'error': messageError?.style === 'error'}">
+                {{ messageError.message }}
+              </div>
+            </ng-container>
           </div>
         </div>
         <div class="content-btn-regist">
@@ -63,8 +65,8 @@
                 Registrarse
               </a>
             </div>
-            <app-push-notification
-              [messageNavigation]="{ message: statusMessage, style: statusStyle }">
+            <app-push-notification *ngIf="notificationPush && notificationPush.style === 'success'"
+              [notification]="notificationPush">
             </app-push-notification>
           </div>
         </div>

@@ -10,11 +10,11 @@ import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dial
 export class RecoveryPasswordDialogComponent implements OnInit {
   @Output() formRecoveryEvt: EventEmitter<any> = new EventEmitter<void>();
   constructor(
-    private _dialogRef: MatDialogRef<RecoveryPasswordDialogComponent>,
+    private readonly _dialogRef: MatDialogRef<RecoveryPasswordDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: {
       formGroupDialog: FormGroup,
-      statusMessage?: string,
-      statusStyle?: string
+      notificationPush?: Record<string, string>;
+      messageError?: Record<string, string>;
     }
   ) {}
 

@@ -78,12 +78,18 @@
                         </div>
                     </div>
                 </div>
+                <app-push-notification *ngIf="notificationPush && notificationPush.style === 'success'"
+                [notification]="notificationPush">
+                </app-push-notification>
+                <ng-container *ngIf="messageError && messageError.style === 'error'">
+                  <div class="status-message"
+                    [ngClass]="{'error': messageError?.style === 'error'}">
+                    {{ messageError.message }}
+                  </div>
+                </ng-container>
             </form>
-            <div *ngIf="statusMessage"  [ngClass]="statusStyle === 'error' ? 'error' : 'success'">
-              {{ statusMessage }}
-            </div>
           </div>
-          <ngx-particles [id]="id" [options]="particlesOptions" (particlesLoaded)="onParticlesLoaded($event)"></ngx-particles>
+          <ngx-particles [id]="particlesId" [options]="particlesOptions" (particlesLoaded)="onParticlesLoaded($event)"></ngx-particles>
         </div>
       </div>
       <footer>

@@ -8,36 +8,33 @@ import { Container } from '@tsparticles/engine';
   styleUrls: ['./form-register.component.scss']
 })
 
+// DUMB COMPONENT: Solo presenta UI y emite eventos al padre
 export class FormRegisterComponent {
   @Input() formGroupRegister!: FormGroup;
-  @Output() registerEvt = new EventEmitter();
-  @Input() statusMessage: string = '';
-  @Input() statusStyle: string = '';
   @Input() particlesId: string = 'particles-default';
   @Input() particlesOptions: any;
-  @Output() particlesLoaded = new EventEmitter<any>();
+  @Input() notificationPush?: Record<string, string> | null;
+  @Input() messageError?: Record<string, string> | null;
+  @Output() registerEvt = new EventEmitter();
+  @Output() particlesLoaded = new EventEmitter<Container>();
   hide: boolean = true;
   hidePass: boolean = true;
-  particlesContainer : Container;
-  id: string = 'particles-default'; // Propiedad id agregada
 
   constructor() {}
 
   onParticlesLoaded(container: Container): void {
-    if (!this.particlesContainer) {
-      this.particlesContainer = container;
+    if (container) {
+      this.particlesLoaded.emit(container);
     }
   }
 
   submitRegister(){
     if(this.formGroupRegister.valid){
-      if (this.particlesContainer) {
-        this.particlesLoaded.emit(this.particlesContainer);
-      }
       this.registerEvt.emit(this.formGroupRegister.value);
       this.formGroupRegister.reset();
     }else{
       this.formGroupRegister.markAllAsTouched();
     }
   }
+
 }

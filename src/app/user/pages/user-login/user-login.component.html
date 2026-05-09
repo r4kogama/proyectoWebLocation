@@ -1,11 +1,10 @@
 <form-login
 [formGroupLogin]='formlogin'
 [formGroupDialog]='formDialog'
-[statusMessage]="statusMessage"
-[statusStyle]="statusStyle"
-[messageNavigation]="messageNavigation"
+[notificationPush]="noteSuccess"
+[messageError]="noteError"
 (loginEvt)="loginUser($event)"
-(statusEvt)="getElementStatus($event)"
+(statusEvt)="getNotificactionStatus($event)"
 (googleEvt)="loginGoogle()"
 (recoveryEvt)="dialogRecoveryPassOpen($event)"
 ></form-login>
