@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
-import { Card } from 'src/app/shared/model/card.model';
+import { Card } from '@/shared/model/card.model';
 
 
 @Component({

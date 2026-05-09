@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { User } from 'src/app/shared/model/user.model';
+import { User } from '@/shared/model/user.model';
 
 @Component({
   selector: 'list-profile',

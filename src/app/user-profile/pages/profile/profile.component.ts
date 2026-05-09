@@ -1,9 +1,11 @@
+import { setNote } from '@/shared/helpers/notification.helper';
+import { getFirebaseErrorMessage } from '@/shared/model/fbAuthErrorMap';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
-import { User } from 'src/app/shared/model/user.model';
-import { FireAuthService } from 'src/app/shared/services/fire-auth.service';
-import { FireProfileService } from 'src/app/shared/services/fire-profile.service';
+import { User } from '@/shared/model/user.model';
+import { FireAuthService } from '@/shared/services/fire-auth.service';
+import { FireProfileService } from '@/shared/services/fire-profile.service';
 
 @Component({
   selector: 'app-profile',
@@ -11,16 +13,16 @@ import { FireProfileService } from 'src/app/shared/services/fire-profile.service
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
-  error!: any;
   formUpdateProfile!: FormGroup;
   formAuthProfile!: FormGroup;
   formDeleteProfile!: FormGroup;
   dataUser!:User;
+  noteError?: Record<string, string>;
   constructor(
-     private _route: ActivatedRoute,
-     private _fireProfileService: FireProfileService,
-     private _fireAuthService: FireAuthService,
-     private _fb: FormBuilder
+     private readonly _route: ActivatedRoute,
+     private readonly _fireProfileService: FireProfileService,
+     private readonly _fireAuthService: FireAuthService,
+     private readonly _fb: FormBuilder
   ){}
 
   ngOnInit(): void {
@@ -51,8 +53,12 @@ export class ProfileComponent implements OnInit {
     })
   }
 
-  logOutProfile(){
-  this._fireAuthService.signOut();
+  async logOutProfile(){
+    try {
+      await this._fireAuthService.signOut();
+    } catch (error: any) {
+      this.showError(error);
+    }
   }
 
   updateProfile(user:User){
@@ -66,5 +72,9 @@ export class ProfileComponent implements OnInit {
     console.log('Actualizar contraseña:', user);
   }
 
-
+  private async showError(error: any): Promise<void> {
+    this.noteError = null;
+    const result = await getFirebaseErrorMessage(error);
+    this.noteError = setNote(result, 'error');
+  }
 }

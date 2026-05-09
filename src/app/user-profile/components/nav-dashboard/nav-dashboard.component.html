@@ -18,6 +18,12 @@
       <a mat-list-item [routerLink]="['./home']" routerLinkActive="active-link"><mat-icon aria-label="icon">lock_open</mat-icon>Autenticación</a>
       <a mat-list-item ><mat-icon aria-label="icon" (click)="logOut()">logout</mat-icon>Log out</a>
     </mat-nav-list>
+   <ng-container *ngIf="messageError && messageError.style === 'error'">
+      <div class="status-message"
+        [ngClass]="{'error': messageError?.style === 'error'}">
+        {{ messageError.message }}
+      </div>
+    </ng-container>
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar color="primary">
