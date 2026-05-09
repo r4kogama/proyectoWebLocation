@@ -4,13 +4,23 @@
 /dist
 /tmp
 /out-tsc
+/docs
+/vscode
 # Only exists if Bazel was run
 /bazel-out
 .angular/
+
 # dependencies
 /node_modules
+
+# Capacitor builds
 /android
+/ios
 /www
+
+# Lock files (usando pnpm, ignorar npm lock)
+package-lock.json
+
 # profiling files
 chrome-profiler-events*.json
 
@@ -44,8 +54,23 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
-# Environment files with secrets
+
+# Environment files with secrets (local dev)
+# NOTA: environment.prod.ts SÍ se versiona porque las API keys
+# están restringidas por dominio en Google Cloud Console
 src/environments/environment.ts
 src/app/shared/docs
 
+# Vercel
 .vercel
+
+# Firebase (opcional - debug logs)
+firebase-debug.log
+firebase-debug.*.log
+.firebase/
+
+# Capacitor local config
+/android/local.properties
+/android/.gradle/
+/android/app/build/
+/android/build/
