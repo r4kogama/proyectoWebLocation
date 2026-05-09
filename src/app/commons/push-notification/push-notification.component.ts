@@ -1,14 +1,15 @@
-import { Component, Input, Output, ViewChild, ElementRef, EventEmitter } from '@angular/core';
+import { Component, Input, Output, ViewChild, ElementRef, EventEmitter, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-push-notification',
   templateUrl: './push-notification.component.html',
-  styleUrls: ['./push-notification.component.scss']
+  styleUrls: ['./push-notification.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class PushNotificationComponent {
   @ViewChild('elementStatus', { static: false }) elementStatus! : ElementRef;
   //@Output() statusEvt: EventEmitter<any> = new EventEmitter();
-  @Input() messageNavigation?: Record<string, string>;
+  @Input() notification?: Record<string, string>;
 
   constructor() { }
 
